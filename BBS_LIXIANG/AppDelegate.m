@@ -7,13 +7,30 @@
 //
 
 #import "AppDelegate.h"
+#import "REFrostedViewController.h"
+#import "CustomNavigationViewController.h"
+#import "HomeViewController.h"
+#import "MenuViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+    CustomNavigationViewController *navigationController = [[CustomNavigationViewController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+    MenuViewController *menuController = [[MenuViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    // Create frosted view controller
+    //
+    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+    frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+    frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+    
+    // Make it a root controller
+    //
+    self.window.rootViewController = frostedViewController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
