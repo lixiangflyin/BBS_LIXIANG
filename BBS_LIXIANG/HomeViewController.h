@@ -11,7 +11,8 @@
 #import "AllSectionTopViewController.h"
 #import "SectionsViewController.h"
 
-@interface HomeViewController : UIViewController<TopTenTopicsDelegate,UIScrollViewDelegate>
+
+@interface HomeViewController : UIViewController<TopTenTopicsDelegate,SectionsDelegate,AllSectionsTopicsDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) TopTenViewController *toptenViewContrller;
 @property (nonatomic, strong) AllSectionTopViewController *allSectionViewController;

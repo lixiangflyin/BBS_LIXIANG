@@ -87,17 +87,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
-    //
-    //    if (indexPath.section == 0 && indexPath.row == 0) {
-    //        DEMOHomeViewController *homeViewController = [[DEMOHomeViewController alloc] init];
-    //        navigationController.viewControllers = @[homeViewController];
-    //    } else {
-    //        DEMOSecondViewController *secondViewController = [[DEMOSecondViewController alloc] init];
-    //        navigationController.viewControllers = @[secondViewController];
-    //    }
-    //
-    //    [self.frostedViewController hideMenuViewController];
+        //UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
+    
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            
+            //navigationController.viewControllers = self.frostedViewController.contentViewController;
+        }
+    
+//        else {
+//           DEMOSecondViewController *secondViewController = [[DEMOSecondViewController alloc] init];
+//            navigationController.viewControllers = @[secondViewController];
+//        }
+    
+        [self.frostedViewController hideMenuViewController];
 }
 
 #pragma mark -
@@ -137,7 +139,7 @@
         NSLog(@"%ld",(long)indexPath.row);
         cell.textLabel.text = titles[indexPath.row];
     } else {
-        NSArray *titles = @[@"搜索", @"设置", @"注销"];
+        NSArray *titles = @[@"搜索", @"设置", @"登录"];
         cell.textLabel.text = titles[indexPath.row];
     }
     

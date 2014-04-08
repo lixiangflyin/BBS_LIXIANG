@@ -1,14 +1,15 @@
 //
-//  TopTenCell.m
-//  SBBS_xiang
+//  BoardTopicCell.m
+//  BBS_LIXIANG
 //
-//  Created by apple on 14-4-5.
+//  Created by apple on 14-4-7.
 //  Copyright (c) 2014年 apple. All rights reserved.
 //
 
-#import "TopTenCell.h"
+#import "BoardTopicCell.h"
+#import "JsonParseEngine.h"
 
-@implementation TopTenCell
+@implementation BoardTopicCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -21,11 +22,11 @@
 
 -(void)setReadyToShow
 {
+    [_authorLabel setText: _author];
     [_titleLabel setText:_title];
-    [_sectionLabel setText:_section];
+    [_timeLabel setText:[JsonParseEngine dateToString:_time]];
+    [_replyLabel setText:[NSString stringWithFormat:@"回%i", _replies]];
     
-    //NSLog(@"frame: %@", NSStringFromCGRect(_sectionLabel.frame));
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

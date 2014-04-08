@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "CustomNavigationViewController.h"
 #import "SingleTopicViewController.h"
+#import "SingleBoardViewController.h"
 
 
 @interface HomeViewController ()
@@ -56,16 +57,18 @@
     _allSectionViewController = [[AllSectionTopViewController alloc]init];
     _allSectionViewController.delegate = self;
     _boardViewController = [[SectionsViewController alloc]init];
+    _boardViewController.delegate = self;
+
     
     //滑动特效
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _scrollView.pagingEnabled = YES;
-    _scrollView.clipsToBounds = YES;
+    _scrollView.clipsToBounds = NO;
     _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width * 3, _scrollView.frame.size.height);
     _scrollView.directionalLockEnabled = YES; //只能一个方向滑动
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.scrollsToTop = YES;
+    _scrollView.scrollsToTop = NO;
     _scrollView.delegate = self;
     [_scrollView setContentOffset:CGPointMake(0, 0)];
     [self.view addSubview:_scrollView];
@@ -83,10 +86,12 @@
     
     [_toptenViewContrller.view setFrame:CGRectMake(320*1, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
     [_allSectionViewController.view setFrame:CGRectMake(320*0, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
-    [_boardViewController.view setFrame:CGRectMake(320*2, -64, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
+    [_boardViewController.view setFrame:CGRectMake(320*2, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
+    
     [_scrollView addSubview:_toptenViewContrller.view];
     [_scrollView addSubview:_allSectionViewController.view];
     [_scrollView addSubview:_boardViewController.view];
+    
     [_scrollView setContentOffset:CGPointMake(320*1, 0)];//页面滑动
 }
 
@@ -113,6 +118,13 @@
 {
     SingleTopicViewController *single = [[SingleTopicViewController alloc]init];
     [single setRootTopic:topic];
+    [self.navigationController pushViewController:single animated:YES];
+    single = nil;
+}
+
+-(void)pushToNextSingleSectionView
+{
+    SingleBoardViewController *single = [[SingleBoardViewController alloc]init];
     [self.navigationController pushViewController:single animated:YES];
     single = nil;
 }

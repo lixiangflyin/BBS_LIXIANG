@@ -36,7 +36,7 @@
     [_sectionLabel setFrame:CGRectMake(_sectionLabel.frame.origin.x, _titleLabel.frame.origin.y + size1.height + 1, 118, 21)];
     [_sectionLabel setText:_section];
     
-    [_replyLabel setFrame:CGRectMake(_replyLabel.frame.origin.x, _titleLabel.frame.origin.y + size1.height + 1, 71, 21)];
+    [_replyLabel setFrame:CGRectMake(237, _titleLabel.frame.origin.y + size1.height + 1, 71, 21)];
     NSLog(@"frame: %@", NSStringFromCGRect(_replyLabel.frame));
     [_replyLabel setText:[NSString stringWithFormat:@"回复(%i)", _replies]];
 }

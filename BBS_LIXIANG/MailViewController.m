@@ -1,22 +1,22 @@
 //
-//  TopTenViewController.m
-//  SBBS_xiang
+//  MailViewController.m
+//  BBS_LIXIANG
 //
-//  Created by apple on 14-4-3.
+//  Created by apple on 14-4-6.
 //  Copyright (c) 2014年 apple. All rights reserved.
 //
 
-#import "TopTenViewController.h"
-#import "TopTenCell.h"
+#import "MailViewController.h"
+#import "MailCell.h"
 //#import "ProgressHUD.h"
 #import "JSONKit.h"
 #import "JsonParseEngine.h"
 
-@interface TopTenViewController ()
+@interface MailViewController ()
 
 @end
 
-@implementation TopTenViewController
+@implementation MailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,21 +31,21 @@
 {
     [super viewDidLoad];
 	
-    //通过url来获得JSON数据
-    
-    NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/topten.json"];
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
+    [baseurl appendFormat:@"token=%@",@"lixiang"];
+    [baseurl appendFormat:@"&type=%i",0];
+    [baseurl appendFormat:@"&limit=30&start=%i",0];
+    NSURL *myurl = [NSURL URLWithString:baseurl];
     _request = [ASIFormDataRequest requestWithURL:myurl];
     [_request setDelegate:self];
     [_request setDidFinishSelector:@selector(GetResult:)];
     [_request setDidFailSelector:@selector(GetErr:)];
     [_request startAsynchronous];
     
-    
-    _tentopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-    _tentopicTableView.dataSource = self;  //数据源代理
-    _tentopicTableView.delegate = self;    //表视图委托
-    [self.view addSubview:_tentopicTableView];
-    
+    _mailsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) style:UITableViewStylePlain];
+    _mailsTableView.dataSource = self;  //数据源代理
+    _mailsTableView.delegate = self;    //表视图委托
+    [self.view addSubview:_mailsTableView];
 }
 
 #pragma -mark asi Delegate
@@ -61,13 +61,14 @@
 {
     NSDictionary *dic = [request.responseString objectFromJSONString];
     NSLog(@"dic %@",dic);
-   
-    NSArray * objects = [JsonParseEngine parseTopics:dic];
+    
+    //我的收件箱
+    NSArray * objects = [JsonParseEngine parseMails:dic Type:0];
     NSLog(@"%@",objects);
     
     //self.tentopicsArr = [NSMutableArray arrayWithArray:[objects objectAtIndex:2]];
-    self.tentopicsArr = [NSMutableArray arrayWithArray:objects];
-    [_tentopicTableView reloadData];
+    self.mailsArr = [NSMutableArray arrayWithArray:objects];
+    [_mailsTableView reloadData];
     
 }
 
@@ -79,54 +80,44 @@
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.tentopicsArr count];
+    return [self.mailsArr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    static NSString * identi = @"TopTenTableViewCell";
+    
+    static NSString * identi = @"MailCell";
     //第一次需要分配内存
-    TopTenCell * cell = (TopTenCell *)[tableView dequeueReusableCellWithIdentifier:identi];
+    MailCell * cell = (MailCell *)[tableView dequeueReusableCellWithIdentifier:identi];
     if (cell == nil) {
-        NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"TopTenCell" owner:self options:nil];
+        NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"MailCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
     }
-        
-    Topic * topic = [self.tentopicsArr objectAtIndex:indexPath.row];
-    cell.section = topic.board;
-    cell.title = topic.title;
-        
-    [cell setReadyToShow];
+    
+    Mail * mail = [self.mailsArr objectAtIndex:indexPath.row];
+    cell.mail = mail;
     
     return cell;
-
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    int returnHeight;
     
-    Topic * topic = [self.tentopicsArr objectAtIndex:indexPath.row];
-    UIFont *font = [UIFont systemFontOfSize:15.0];
-    CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
-    
-    returnHeight = size1.height  + 35;
-    
-    return returnHeight;
+    return 66;
 }
 
 #pragma -mark tableview Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.selectTopic = [self.tentopicsArr objectAtIndex:indexPath.row];
     
-    [_delegate pushToNextViewWithValue:self.selectTopic];
+    //self.selectTopic = [self.tentopicsArr objectAtIndex:indexPath.row];
+    
+    //[_delegate pushToNextViewWithValue:self.selectTopic];
 }
+
 
 
 - (void)didReceiveMemoryWarning

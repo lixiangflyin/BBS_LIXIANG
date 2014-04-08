@@ -41,7 +41,7 @@
     [_request startAsynchronous];
     
     
-    _allTopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) style:UITableViewStylePlain];
+    _allTopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _allTopicTableView.dataSource = self;  //数据源代理
     _allTopicTableView.delegate = self;    //表视图委托
     [self.view addSubview:_allTopicTableView];
@@ -109,7 +109,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 73;
+    int returnHeight;
+    
+    Topic * topic = [self.allTopicsArr objectAtIndex:indexPath.row];
+    UIFont *font = [UIFont systemFontOfSize:14.0];
+    CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 50, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
+    
+    returnHeight = size1.height  + 61;
+    
+    return returnHeight;
 }
 
 #pragma -mark tableview Delegate

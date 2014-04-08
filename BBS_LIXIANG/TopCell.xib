@@ -6,42 +6,52 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopTenTableViewCell" rowHeight="73" id="Rrn-wu-mEP" customClass="TopCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopTenTableViewCell" rowHeight="76" id="Rrn-wu-mEP" customClass="TopCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rrn-wu-mEP" id="AWP-PZ-sHW">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="具体栏目" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5a-xW-rYD">
-                        <rect key="frame" x="11" y="5" width="95" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体栏目具体栏" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5a-xW-rYD">
+                        <rect key="frame" x="14" y="8" width="84" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.4274510145" green="0.90980398650000005" blue="0.46666669849999998" alpha="1" colorSpace="deviceRGB"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" red="0.27843138575553894" green="0.054901964962482452" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="试试看二十五个字怎么样能够放其实真的可以够了" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhu-lZ-s5U">
-                        <rect key="frame" x="23" y="27" width="275" height="25"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试试看二十五个字怎么样能够放其看放其" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" minimumFontSize="7" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="lhu-lZ-s5U">
+                        <rect key="frame" x="27" y="31" width="270" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="作者：lixiangflyin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0p-ZB-fzJ">
-                        <rect key="frame" x="20" y="50" width="122" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者：lixiangflyin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0p-ZB-fzJ">
+                        <rect key="frame" x="27" y="57" width="95" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzT-15-nj7">
-                        <rect key="frame" x="225" y="50" width="75" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恢复0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzT-15-nj7">
+                        <rect key="frame" x="269" y="57" width="31" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="f5a-xW-rYD" firstAttribute="top" secondItem="AWP-PZ-sHW" secondAttribute="top" constant="8" id="26l-eA-u2x"/>
+                    <constraint firstItem="K0p-ZB-fzJ" firstAttribute="top" secondItem="lhu-lZ-s5U" secondAttribute="bottom" constant="8" id="36z-qa-sH1"/>
+                    <constraint firstItem="lhu-lZ-s5U" firstAttribute="top" secondItem="f5a-xW-rYD" secondAttribute="bottom" constant="8" id="6CC-no-HEV"/>
+                    <constraint firstAttribute="trailing" secondItem="gzT-15-nj7" secondAttribute="trailing" constant="20" id="H96-Ao-8g4"/>
+                    <constraint firstItem="f5a-xW-rYD" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="14" id="Nbw-N5-5p8"/>
+                    <constraint firstItem="gzT-15-nj7" firstAttribute="top" secondItem="lhu-lZ-s5U" secondAttribute="bottom" constant="8" id="Uog-tu-Vea"/>
+                    <constraint firstItem="K0p-ZB-fzJ" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="27" id="eQR-qm-VcL"/>
+                    <constraint firstItem="lhu-lZ-s5U" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="27" id="qAq-c3-UcE"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="replyLabel" destination="gzT-15-nj7" id="M3q-AD-JHj"/>

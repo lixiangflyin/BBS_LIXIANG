@@ -28,7 +28,6 @@
     frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
     
     // Make it a root controller
-    //
     self.window.rootViewController = frostedViewController;
     
     self.window.backgroundColor = [UIColor whiteColor];

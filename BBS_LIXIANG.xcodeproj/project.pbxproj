@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18A9222D18F0F6CC002D9EAB /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9222B18F0F6CC002D9EAB /* UserInfoViewController.m */; };
+		18A9222E18F0F6CC002D9EAB /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9222C18F0F6CC002D9EAB /* UserInfoViewController.xib */; };
+		18A9223818F0FBBA002D9EAB /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223518F0FBBA002D9EAB /* MJPopupBackgroundView.m */; };
+		18A9223918F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223718F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A9223E18F138F7002D9EAB /* PostTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223C18F138F7002D9EAB /* PostTopicViewController.m */; };
+		18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9223D18F138F7002D9EAB /* PostTopicViewController.xib */; };
+		18A9224218F13BE4002D9EAB /* seekImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9224118F13BE4002D9EAB /* seekImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A9224918F147CD002D9EAB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9224718F147CD002D9EAB /* LoginViewController.m */; };
+		18A9224A18F147CD002D9EAB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9224818F147CD002D9EAB /* LoginViewController.xib */; };
+		18A9225118F18A1A002D9EAB /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18A9225018F18A1A002D9EAB /* man.jpg */; };
+		18A9225318F18A2F002D9EAB /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18A9225218F18A2F002D9EAB /* girl.jpg */; };
+		18A9225718F1959E002D9EAB /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9225618F1959E002D9EAB /* MailViewController.m */; };
+		18A9225A18F19647002D9EAB /* MailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9225918F19647002D9EAB /* MailCell.m */; };
+		18A9225C18F19658002D9EAB /* MailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9225B18F19658002D9EAB /* MailCell.xib */; };
+		18A9225F18F1992D002D9EAB /* Mail.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9225E18F1992D002D9EAB /* Mail.m */; };
 		18CBF56318F021440036C03B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CBF56218F021440036C03B /* Foundation.framework */; };
 		18CBF56518F021440036C03B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CBF56418F021440036C03B /* CoreGraphics.framework */; };
 		18CBF56718F021440036C03B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CBF56618F021440036C03B /* UIKit.framework */; };
@@ -71,6 +86,11 @@
 		18CBF62E18F033AE0036C03B /* Balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18CBF62D18F033AE0036C03B /* Balloon.png */; };
 		18CBF63218F03B3E0036C03B /* SectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CBF63118F03B3E0036C03B /* SectionsViewController.m */; };
 		18CBF63518F03BF90036C03B /* RADataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CBF63418F03BF90036C03B /* RADataObject.m */; };
+		18F04E7418F25068007E9373 /* SingleBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F04E7318F25068007E9373 /* SingleBoardViewController.m */; };
+		18F04E7818F2D61B007E9373 /* BoardTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F04E7718F2D61B007E9373 /* BoardTopicCell.m */; };
+		18F04E7A18F2D638007E9373 /* BoardTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F04E7918F2D637007E9373 /* BoardTopicCell.xib */; };
+		18F04E7E18F2E1CD007E9373 /* PostMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F04E7C18F2E1CD007E9373 /* PostMailViewController.m */; };
+		18F04E7F18F2E1CD007E9373 /* PostMailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F04E7D18F2E1CD007E9373 /* PostMailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +104,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18A9222A18F0F6CC002D9EAB /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		18A9222B18F0F6CC002D9EAB /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		18A9222C18F0F6CC002D9EAB /* UserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoViewController.xib; sourceTree = "<group>"; };
+		18A9223418F0FBBA002D9EAB /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
+		18A9223518F0FBBA002D9EAB /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
+		18A9223618F0FBBA002D9EAB /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
+		18A9223718F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
+		18A9223B18F138F7002D9EAB /* PostTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTopicViewController.h; sourceTree = "<group>"; };
+		18A9223C18F138F7002D9EAB /* PostTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTopicViewController.m; sourceTree = "<group>"; };
+		18A9223D18F138F7002D9EAB /* PostTopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostTopicViewController.xib; sourceTree = "<group>"; };
+		18A9224018F13BE4002D9EAB /* seekImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = seekImageView.h; sourceTree = "<group>"; };
+		18A9224118F13BE4002D9EAB /* seekImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = seekImageView.m; sourceTree = "<group>"; };
+		18A9224618F147CD002D9EAB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		18A9224718F147CD002D9EAB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		18A9224818F147CD002D9EAB /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		18A9225018F18A1A002D9EAB /* man.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = man.jpg; sourceTree = "<group>"; };
+		18A9225218F18A2F002D9EAB /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl.jpg; sourceTree = "<group>"; };
+		18A9225518F1959E002D9EAB /* MailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailViewController.h; sourceTree = "<group>"; };
+		18A9225618F1959E002D9EAB /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
+		18A9225818F19647002D9EAB /* MailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCell.h; sourceTree = "<group>"; };
+		18A9225918F19647002D9EAB /* MailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailCell.m; sourceTree = "<group>"; };
+		18A9225B18F19658002D9EAB /* MailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailCell.xib; sourceTree = "<group>"; };
+		18A9225D18F1992D002D9EAB /* Mail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mail.h; sourceTree = "<group>"; };
+		18A9225E18F1992D002D9EAB /* Mail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mail.m; sourceTree = "<group>"; };
 		18CBF55F18F021440036C03B /* BBS_LIXIANG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBS_LIXIANG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CBF56218F021440036C03B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18CBF56418F021440036C03B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -200,6 +244,14 @@
 		18CBF63118F03B3E0036C03B /* SectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionsViewController.m; sourceTree = "<group>"; };
 		18CBF63318F03BF90036C03B /* RADataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADataObject.h; sourceTree = "<group>"; };
 		18CBF63418F03BF90036C03B /* RADataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADataObject.m; sourceTree = "<group>"; };
+		18F04E7218F25068007E9373 /* SingleBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleBoardViewController.h; sourceTree = "<group>"; };
+		18F04E7318F25068007E9373 /* SingleBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleBoardViewController.m; sourceTree = "<group>"; };
+		18F04E7618F2D61B007E9373 /* BoardTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardTopicCell.h; sourceTree = "<group>"; };
+		18F04E7718F2D61B007E9373 /* BoardTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardTopicCell.m; sourceTree = "<group>"; };
+		18F04E7918F2D637007E9373 /* BoardTopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardTopicCell.xib; sourceTree = "<group>"; };
+		18F04E7B18F2E1CD007E9373 /* PostMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostMailViewController.h; sourceTree = "<group>"; };
+		18F04E7C18F2E1CD007E9373 /* PostMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMailViewController.m; sourceTree = "<group>"; };
+		18F04E7D18F2E1CD007E9373 /* PostMailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostMailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,12 +279,94 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18A9222918F0F6A0002D9EAB /* userInfoController */ = {
+			isa = PBXGroup;
+			children = (
+				18A9222A18F0F6CC002D9EAB /* UserInfoViewController.h */,
+				18A9222B18F0F6CC002D9EAB /* UserInfoViewController.m */,
+				18A9222C18F0F6CC002D9EAB /* UserInfoViewController.xib */,
+			);
+			name = userInfoController;
+			sourceTree = "<group>";
+		};
+		18A9223318F0FBBA002D9EAB /* MJPopupView */ = {
+			isa = PBXGroup;
+			children = (
+				18A9223418F0FBBA002D9EAB /* MJPopupBackgroundView.h */,
+				18A9223518F0FBBA002D9EAB /* MJPopupBackgroundView.m */,
+				18A9223618F0FBBA002D9EAB /* UIViewController+MJPopupViewController.h */,
+				18A9223718F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m */,
+			);
+			name = MJPopupView;
+			path = BBS_LIXIANG/MJPopupView;
+			sourceTree = "<group>";
+		};
+		18A9223A18F10656002D9EAB /* PostTopicViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18A9224018F13BE4002D9EAB /* seekImageView.h */,
+				18A9224118F13BE4002D9EAB /* seekImageView.m */,
+				18A9223B18F138F7002D9EAB /* PostTopicViewController.h */,
+				18A9223C18F138F7002D9EAB /* PostTopicViewController.m */,
+				18A9223D18F138F7002D9EAB /* PostTopicViewController.xib */,
+			);
+			name = PostTopicViewController;
+			sourceTree = "<group>";
+		};
+		18A9224318F1478F002D9EAB /* LeftView */ = {
+			isa = PBXGroup;
+			children = (
+				18A9226018F19C51002D9EAB /* SingleMailViewController */,
+				18A9225418F19467002D9EAB /* MailViewController */,
+				18A9224518F147B0002D9EAB /* LoginViewController */,
+				18A9224418F147AC002D9EAB /* SearchViewController */,
+			);
+			name = LeftView;
+			sourceTree = "<group>";
+		};
+		18A9224418F147AC002D9EAB /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SearchViewController;
+			sourceTree = "<group>";
+		};
+		18A9224518F147B0002D9EAB /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18A9224618F147CD002D9EAB /* LoginViewController.h */,
+				18A9224718F147CD002D9EAB /* LoginViewController.m */,
+				18A9224818F147CD002D9EAB /* LoginViewController.xib */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		18A9225418F19467002D9EAB /* MailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18A9225518F1959E002D9EAB /* MailViewController.h */,
+				18A9225618F1959E002D9EAB /* MailViewController.m */,
+				18A9225818F19647002D9EAB /* MailCell.h */,
+				18A9225918F19647002D9EAB /* MailCell.m */,
+				18A9225B18F19658002D9EAB /* MailCell.xib */,
+			);
+			name = MailViewController;
+			sourceTree = "<group>";
+		};
+		18A9226018F19C51002D9EAB /* SingleMailViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SingleMailViewController;
+			sourceTree = "<group>";
+		};
 		18CBF55618F021440036C03B = {
 			isa = PBXGroup;
 			children = (
+				18A9223318F0FBBA002D9EAB /* MJPopupView */,
+				18CBF60218F029190036C03B /* RATreeView */,
 				18CBF5E818F029190036C03B /* ASIHTTPRequest */,
 				18CBF5FF18F029190036C03B /* JSON */,
-				18CBF60218F029190036C03B /* RATreeView */,
 				18CBF59118F021790036C03B /* REFrostedViewController */,
 				18CBF56818F021440036C03B /* BBS_LIXIANG */,
 				18CBF58118F021440036C03B /* BBS_LIXIANGTests */,
@@ -274,9 +408,9 @@
 				18CBF5A718F021D00036C03B /* MenuViewController.h */,
 				18CBF5A818F021D00036C03B /* MenuViewController.m */,
 				18CBF5A918F021D00036C03B /* MenuViewController.xib */,
+				18A9224318F1478F002D9EAB /* LeftView */,
 				18CBF5B118F0273D0036C03B /* HomeView */,
-				18CBF5B318F027830036C03B /* New Group */,
-				18CBF5AC18F0221C0036C03B /* avatar.jpg */,
+				18CBF5B318F027830036C03B /* picture */,
 				18CBF57418F021440036C03B /* Images.xcassets */,
 				18CBF56918F021440036C03B /* Supporting Files */,
 			);
@@ -336,6 +470,9 @@
 			isa = PBXGroup;
 			children = (
 				18CBF5B218F0276B0036C03B /* homeViewController */,
+				18F04E7518F2590B007E9373 /* PostMailViewController */,
+				18A9223A18F10656002D9EAB /* PostTopicViewController */,
+				18A9222918F0F6A0002D9EAB /* userInfoController */,
 				18CBF5B618F027940036C03B /* topTenViewController */,
 				18CBF5B518F027900036C03B /* singleTopicViewController */,
 				18CBF5B418F0278C0036C03B /* sectionViewController */,
@@ -353,12 +490,15 @@
 			name = homeViewController;
 			sourceTree = "<group>";
 		};
-		18CBF5B318F027830036C03B /* New Group */ = {
+		18CBF5B318F027830036C03B /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				18A9225018F18A1A002D9EAB /* man.jpg */,
+				18A9225218F18A2F002D9EAB /* girl.jpg */,
+				18CBF5AC18F0221C0036C03B /* avatar.jpg */,
 				18CBF62D18F033AE0036C03B /* Balloon.png */,
 			);
-			name = "New Group";
+			name = picture;
 			sourceTree = "<group>";
 		};
 		18CBF5B418F0278C0036C03B /* sectionViewController */ = {
@@ -412,6 +552,8 @@
 		18CBF5D818F028B50036C03B /* dataModel */ = {
 			isa = PBXGroup;
 			children = (
+				18A9225D18F1992D002D9EAB /* Mail.h */,
+				18A9225E18F1992D002D9EAB /* Mail.m */,
 				18CBF5D918F028C60036C03B /* Attachment.h */,
 				18CBF5DA18F028C60036C03B /* Attachment.m */,
 				18CBF5DB18F028C60036C03B /* Board.h */,
@@ -501,8 +643,23 @@
 				18CBF63418F03BF90036C03B /* RADataObject.m */,
 				18CBF63018F03B3E0036C03B /* SectionsViewController.h */,
 				18CBF63118F03B3E0036C03B /* SectionsViewController.m */,
+				18F04E7218F25068007E9373 /* SingleBoardViewController.h */,
+				18F04E7318F25068007E9373 /* SingleBoardViewController.m */,
+				18F04E7618F2D61B007E9373 /* BoardTopicCell.h */,
+				18F04E7718F2D61B007E9373 /* BoardTopicCell.m */,
+				18F04E7918F2D637007E9373 /* BoardTopicCell.xib */,
 			);
 			name = boardViewController;
+			sourceTree = "<group>";
+		};
+		18F04E7518F2590B007E9373 /* PostMailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18F04E7B18F2E1CD007E9373 /* PostMailViewController.h */,
+				18F04E7C18F2E1CD007E9373 /* PostMailViewController.m */,
+				18F04E7D18F2E1CD007E9373 /* PostMailViewController.xib */,
+			);
+			name = PostMailViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,14 +737,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F04E7F18F2E1CD007E9373 /* PostMailViewController.xib in Resources */,
 				18CBF5BE18F027FF0036C03B /* TopTenCell.xib in Resources */,
 				18CBF5AD18F0221C0036C03B /* avatar.jpg in Resources */,
 				18CBF56D18F021440036C03B /* InfoPlist.strings in Resources */,
 				18CBF5C918F0280F0036C03B /* SingleTopicCell.xib in Resources */,
+				18A9225318F18A2F002D9EAB /* girl.jpg in Resources */,
 				18CBF5AB18F021D00036C03B /* MenuViewController.xib in Resources */,
+				18A9225118F18A1A002D9EAB /* man.jpg in Resources */,
+				18A9225C18F19658002D9EAB /* MailCell.xib in Resources */,
 				18CBF62E18F033AE0036C03B /* Balloon.png in Resources */,
+				18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */,
+				18F04E7A18F2D638007E9373 /* BoardTopicCell.xib in Resources */,
 				18CBF57518F021440036C03B /* Images.xcassets in Resources */,
+				18A9222E18F0F6CC002D9EAB /* UserInfoViewController.xib in Resources */,
 				18CBF5CB18F0280F0036C03B /* CommentCell.xib in Resources */,
+				18A9224A18F147CD002D9EAB /* LoginViewController.xib in Resources */,
 				18CBF5D318F0281F0036C03B /* TopCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,13 +784,16 @@
 				18CBF61A18F029190036C03B /* ASIDownloadCache.m in Sources */,
 				18CBF5E318F028C60036C03B /* Attachment.m in Sources */,
 				18CBF5E618F028C60036C03B /* Topic.m in Sources */,
+				18A9225718F1959E002D9EAB /* MailViewController.m in Sources */,
 				18CBF62318F029190036C03B /* RATreeNodeInfo+Private.m in Sources */,
 				18CBF5A318F021790036C03B /* UIViewController+REFrostedViewController.m in Sources */,
 				18CBF61D18F029190036C03B /* ASIInputStream.m in Sources */,
 				18CBF61818F029190036C03B /* ASIDataCompressor.m in Sources */,
 				18CBF5E718F028C60036C03B /* User.m in Sources */,
 				18CBF59F18F021790036C03B /* REFrostedContainerViewController.m in Sources */,
+				18A9222D18F0F6CC002D9EAB /* UserInfoViewController.m in Sources */,
 				18CBF59E18F021790036C03B /* RECommonFunctions.m in Sources */,
+				18F04E7E18F2E1CD007E9373 /* PostMailViewController.m in Sources */,
 				18CBF63518F03BF90036C03B /* RADataObject.m in Sources */,
 				18CBF62218F029190036C03B /* RATreeNodeCollectionController.m in Sources */,
 				18CBF5E518F028C60036C03B /* DataModel.m in Sources */,
@@ -633,17 +801,26 @@
 				18CBF5B918F027F50036C03B /* TopTenViewController.m in Sources */,
 				18CBF61B18F029190036C03B /* ASIFormDataRequest.m in Sources */,
 				18CBF61C18F029190036C03B /* ASIHTTPRequest.m in Sources */,
+				18A9225A18F19647002D9EAB /* MailCell.m in Sources */,
 				18CBF62118F029190036C03B /* RATreeNode.m in Sources */,
 				18CBF5A618F021AA0036C03B /* HomeViewController.m in Sources */,
+				18A9224918F147CD002D9EAB /* LoginViewController.m in Sources */,
 				18CBF56F18F021440036C03B /* main.m in Sources */,
 				18CBF5D718F028A10036C03B /* JsonParseEngine.m in Sources */,
+				18A9223E18F138F7002D9EAB /* PostTopicViewController.m in Sources */,
 				18CBF62618F029190036C03B /* RATreeView+Private.m in Sources */,
+				18A9223918F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m in Sources */,
+				18A9224218F13BE4002D9EAB /* seekImageView.m in Sources */,
 				18CBF5C718F0280F0036C03B /* SingleTopicViewController.m in Sources */,
 				18CBF5CA18F0280F0036C03B /* CommentCell.m in Sources */,
+				18F04E7818F2D61B007E9373 /* BoardTopicCell.m in Sources */,
 				18CBF62418F029190036C03B /* RATreeNodeInfo.m in Sources */,
 				18CBF61E18F029190036C03B /* ASINetworkQueue.m in Sources */,
 				18CBF62918F029190036C03B /* RATreeView+UIScrollView.m in Sources */,
+				18F04E7418F25068007E9373 /* SingleBoardViewController.m in Sources */,
+				18A9225F18F1992D002D9EAB /* Mail.m in Sources */,
 				18CBF61F18F029190036C03B /* Reachability.m in Sources */,
+				18A9223818F0FBBA002D9EAB /* MJPopupBackgroundView.m in Sources */,
 				18CBF5C818F0280F0036C03B /* SingleTopicCell.m in Sources */,
 				18CBF5CE18F028160036C03B /* AllSectionTopViewController.m in Sources */,
 				18CBF62818F029190036C03B /* RATreeView+TableViewDelegate.m in Sources */,
@@ -857,6 +1034,7 @@
 				18CBF58D18F021440036C03B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18CBF58E18F021440036C03B /* Build configuration list for PBXNativeTarget "BBS_LIXIANGTests" */ = {
 			isa = XCConfigurationList;
@@ -865,6 +1043,7 @@
 				18CBF59018F021440036C03B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

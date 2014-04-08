@@ -22,7 +22,9 @@
 +(NSArray *)parseSectionsTopics:(NSDictionary *)sectionsDictionary;
 //解析单个话题
 +(NSArray *)parseSingleTopic:(NSDictionary *)topicsDictionary;
-
-//+ (NSString *)dateToString:(NSDate *)date;
+//分类解析邮箱
++(NSArray *)parseMails:(NSDictionary *)friendsDictionary Type:(int)type;
+//时间转换
++ (NSString *)dateToString:(NSDate *)date;
 
 @end

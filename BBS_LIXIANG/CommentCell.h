@@ -18,8 +18,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentToLabel;
 
 @property(nonatomic, assign)int ID;
+@property(nonatomic, strong)NSString *name;
 @property(nonatomic, assign)int read;
 @property(nonatomic, assign)int num;
+@property(nonatomic, assign)BOOL isMan;
 @property(nonatomic, strong)NSDate * time;
 @property(nonatomic, strong)NSString * author;
 @property(nonatomic, strong)NSString * content;

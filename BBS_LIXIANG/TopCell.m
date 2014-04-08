@@ -28,12 +28,9 @@
 
 -(void)setReadyToShow
 {
-    UIView *bgView = [[UIView alloc] init];
-    bgView.backgroundColor = [UIColor lightTextColor];
-    self.selectedBackgroundView = bgView;
     
-    [_sectionLabel setText:_section];
     [_titleLabel setText:_title];
+    [_sectionLabel setText:_section];
     [_timeLabel setText:[NSString stringWithFormat:@"作者:%@", _author]];
     [_replyLabel setText:[NSString stringWithFormat:@"回复%i", _replies]];
 }

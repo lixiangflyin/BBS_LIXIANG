@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol SectionsDelegate <NSObject>
+
+-(void)pushToNextSingleSectionView;
+
+@end
 
 @interface SectionsViewController : UIViewController
+
+@property (nonatomic, assign) id delegate;
 
 @end

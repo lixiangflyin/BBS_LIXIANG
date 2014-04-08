@@ -181,6 +181,90 @@
     }
 }
 
++(NSArray *)parseMails:(NSDictionary *)friendsDictionary Type:(int)type
+{
+    BOOL success = [[friendsDictionary objectForKey:@"success"] boolValue];
+    if (success)
+    {
+        NSMutableArray * mails = [[NSMutableArray alloc] init];
+        NSArray *mailsArr = [friendsDictionary objectForKey:@"mails"];
+        for (int i=0; i<[mailsArr count]; i++) {
+            Mail * mail = [[Mail alloc] init];
+            
+            mail.ID = [[[[friendsDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"id"] intValue];
+            mail.size = [[[[friendsDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"size"] intValue];
+            mail.unread = [[[[friendsDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"unread"] boolValue];
+            mail.author = [[[friendsDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"author"];
+            mail.title = [[[friendsDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"title"];
+            
+            NSTimeInterval interval = [[[[friendsDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"time"] doubleValue];
+            mail.time = [NSDate dateWithTimeIntervalSince1970:interval];
+            mail.type = type;
+            
+            [mails addObject:mail];
+        }
+        return mails;
+    }
+    else {
+        return nil;
+    }
+}
+
+
++ (NSString *)dateToString:(NSDate *)date;
+{
+    NSMutableString * dateString = [[NSMutableString alloc] init];
+    
+    
+    NSDate *today = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents *dateComponents;
+    dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
+    
+    NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:today];
+    
+    if (dateComponents.year == todayComponents.year && dateComponents.month == todayComponents.month && dateComponents.day == todayComponents.day) {
+        
+        [dateString  appendString:@""];
+        
+    } else if ((dateComponents.year == todayComponents.year) && (dateComponents.month == todayComponents.month) && (dateComponents.day == todayComponents.day - 1)) {
+        
+        [dateString  appendString:@"昨天"];
+        
+    } else if ((dateComponents.year == todayComponents.year) && (dateComponents.weekOfYear == todayComponents.weekOfYear)) {
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"cccc";
+        NSArray * array = [NSArray arrayWithObjects:@"开始", @"天", @"一", @"二", @"三", @"四", @"五", @"六", nil];
+        [dateString  appendString:[NSString stringWithFormat:@"星期%@", [array objectAtIndex:dateComponents.weekday]]];
+        
+    } else if (dateComponents.year == todayComponents.year) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"M-d";
+        if ([dateFormatter stringFromDate:date] != nil) {
+            [dateString  appendString:[NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]]];
+        }
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-M-d";
+        NSLog(@"%@", [dateFormatter stringFromDate:date]);
+        if ([dateFormatter stringFromDate:date] != nil) {
+            [dateString  appendString:[NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]]];
+        }
+    }
+    
+    [dateString  appendString:@"  "];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    if ([dateFormatter stringFromDate:date] != nil) {
+        [dateString  appendString:[NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]]];
+    }
+    
+    return dateString;
+}
+
 
 @end
 

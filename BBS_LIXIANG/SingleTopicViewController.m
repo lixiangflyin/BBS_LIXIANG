@@ -7,11 +7,15 @@
 //
 
 #import "SingleTopicViewController.h"
+#import "UserInfoViewController.h"
+#import "PostTopicViewController.h"
 #import "SingleTopicCell.h"
 #import "CommentCell.h"
 
 #import "ASIFormDataRequest.h"
 #import "JsonParseEngine.h"
+
+static int count;
 
 @interface SingleTopicViewController ()
 
@@ -32,9 +36,13 @@
 {
     [super viewDidLoad];
 
+    count = 0;
+    _isRequestToTopics = YES;
+    _usersInfo = [[NSMutableArray alloc]init];
+    
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
     [baseurl appendFormat:@"/%@",_rootTopic.board];
-    [baseurl appendFormat:@"/%i.json?start=%i&limit=30",_rootTopic.ID,0];
+    [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,0];
     //通过url来获得JSON数据
     NSURL *myurl = [NSURL URLWithString:baseurl];
     _request = [ASIFormDataRequest requestWithURL:myurl];
@@ -60,14 +68,33 @@
 //ASI委托函数，信息处理
 -(void) GetResult:(ASIHTTPRequest *)request
 {
+
     NSDictionary *dic = [request.responseString objectFromJSONString];
-    NSLog(@"dic %@",dic);
-    
+    //NSLog(@"dic %@",dic);
+        
     NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
-    NSLog(@"%@",objects);
-    
+    //NSLog(@"%@",objects);
+        
     self.topicsArray = [NSMutableArray arrayWithArray:objects];
+
+    //同步请求
+    for ( ; count<[_topicsArray count]; count++) {
+        Topic *topic = [_topicsArray objectAtIndex:count];
+        NSString *str = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",topic.author];
+        NSURL *myurl = [NSURL URLWithString:str];
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:myurl];
+        [request startSynchronous];
+        NSError *error = [request error];
+        if (!error) {
+            NSString *response = [request responseString];
+            //NSLog(@"reponse:%@",response);
+            NSDictionary *dictionary = [response objectFromJSONString];
+            [_usersInfo addObject:dictionary];
+        }
+    }
+        
     [_singletopicTableView reloadData];
+
     
 }
 
@@ -123,7 +150,16 @@
         cell.num = indexPath.row;
         cell.content = topic.content;
         cell.attachments = topic.attachments;
-
+        
+        NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
+        NSDictionary *userDic = [dic objectForKey:@"user"];
+        if ([[userDic objectForKey:@"gender"] isEqualToString:@"M"])
+            cell.isMan = YES;
+        else
+            cell.isMan = NO;
+        
+        cell.name = [userDic objectForKey:@"name"];
+        
         [cell setReadyToShow];
         
         return cell;
@@ -144,9 +180,13 @@
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];
         
         UIFont *font = [UIFont systemFontOfSize:15.0];
-        UIFont *font2 = [UIFont boldSystemFontOfSize:12.0];
-        CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 30, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
-        CGSize size2 = [[NSString stringWithFormat:@"回复 %@：%@",topic.quoter, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 30, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
+        UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
+        CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName: font} context:nil].size;
+        
+        NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
+        NSDictionary *userDic = [dic objectForKey:@"user"];
+        NSString *name = [userDic objectForKey:@"name"];
+        CGSize size2 = [[NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",topic.quoter,name, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
         
         returnHeight = size1.height + size2.height + 80;
     }
@@ -156,7 +196,11 @@
 #pragma -mark tableview Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+ 
+    if (indexPath.row == 0) {
+        return;
+    }
+    _oneUserInfo = [self.usersInfo objectAtIndex:indexPath.row-1];
     [self showActionSheet];
 }
 
@@ -178,9 +222,16 @@
 {
     if(buttonIndex == 0)
     {
+        PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
+      
+        [self.navigationController pushViewController:postTopic animated:YES];
     }
+    
     if(buttonIndex == 1)
     {
+        UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
+        userInfor.userDictionary = _oneUserInfo;
+        [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
     }
     
 }
