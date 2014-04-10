@@ -7,10 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "REFrostedViewController.h"
-#import "CustomNavigationViewController.h"
-#import "HomeViewController.h"
+#import "LCViewController.h"
 #import "MenuViewController.h"
+
+#import "MMDrawerController.h"
+#import "MMDrawerVisualState.h"
+
+static const CGFloat kPublicLeftMenuWidth = 260.0f;
 
 @implementation AppDelegate
 
@@ -18,17 +21,23 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    CustomNavigationViewController *navigationController = [[CustomNavigationViewController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
-    MenuViewController *menuController = [[MenuViewController alloc] initWithStyle:UITableViewStylePlain];
+    MenuViewController *leftVC = [[MenuViewController alloc]
+                                         initWithNibName:@"MenuViewController"
+                                         bundle:nil];
+    LCViewController * drawerController = [[LCViewController alloc]
+                                            initWithCenterViewController:leftVC.navSwitchViewController
+                                            leftDrawerViewController:leftVC
+                                            rightDrawerViewController:nil];
+    [drawerController setMaximumLeftDrawerWidth:kPublicLeftMenuWidth];
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    [drawerController setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
+        MMDrawerControllerDrawerVisualStateBlock block;
+        block = [MMDrawerVisualState parallaxVisualStateBlockWithParallaxFactor:2.0];
+        block(drawerController, drawerSide, percentVisible);
+    }];
     
-    // Create frosted view controller
-    //
-    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-    frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-    frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
-    
-    // Make it a root controller
-    self.window.rootViewController = frostedViewController;
+    [self.window setRootViewController:drawerController];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -7,6 +7,8 @@
 //
 
 #import "MailViewController.h"
+#import "UIViewController+MMDrawerController.h"
+
 #import "MailCell.h"
 //#import "ProgressHUD.h"
 #import "JSONKit.h"
@@ -31,8 +33,13 @@
 {
     [super viewDidLoad];
 	
+    self.title = @"我的邮箱";
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(leftDrawerButtonPress:)];
+    self.navigationItem.leftBarButtonItem = leftButton;
+    
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
-    [baseurl appendFormat:@"token=%@",@"lixiang"];
+    [baseurl appendFormat:@"token=%@",@"bGl4aWFuZ2ZseWlu%3A%3D%3DwxN2Rp0T%2B4FOVeCJCmo7cu"];
     [baseurl appendFormat:@"&type=%i",0];
     [baseurl appendFormat:@"&limit=30&start=%i",0];
     NSURL *myurl = [NSURL URLWithString:baseurl];
@@ -42,10 +49,15 @@
     [_request setDidFailSelector:@selector(GetErr:)];
     [_request startAsynchronous];
     
-    _mailsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) style:UITableViewStylePlain];
+    _mailsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _mailsTableView.dataSource = self;  //数据源代理
     _mailsTableView.delegate = self;    //表视图委托
     [self.view addSubview:_mailsTableView];
+}
+
+#pragma mark - Button Handlers
+-(void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
 #pragma -mark asi Delegate

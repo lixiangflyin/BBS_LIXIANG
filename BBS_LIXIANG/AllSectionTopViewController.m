@@ -41,7 +41,7 @@
     [_request startAsynchronous];
     
     
-    _allTopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _allTopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _allTopicTableView.dataSource = self;  //数据源代理
     _allTopicTableView.delegate = self;    //表视图委托
     [self.view addSubview:_allTopicTableView];

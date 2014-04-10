@@ -12,8 +12,13 @@
 #import "SingleTopicCell.h"
 #import "CommentCell.h"
 
+#import "UIImageView+MJWebCache.h"
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
+
 #import "ASIFormDataRequest.h"
 #import "JsonParseEngine.h"
+
 
 static int count;
 
@@ -40,6 +45,9 @@ static int count;
     _isRequestToTopics = YES;
     _usersInfo = [[NSMutableArray alloc]init];
     
+    UIBarButtonItem *browerButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(browerPicture:)];
+    self.navigationItem.rightBarButtonItem = browerButton;
+    
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
     [baseurl appendFormat:@"/%@",_rootTopic.board];
     [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,0];
@@ -56,6 +64,30 @@ static int count;
     _singletopicTableView.delegate = self;    //表视图委托
     [self.view addSubview:_singletopicTableView];
 }
+
+#pragma mark - Button Handlers
+-(void)browerPicture:(id)sender{
+    NSArray *urls = @[@"http://ww4.sinaimg.cn/thumbnail/7f8c1087gw1e9g06pc68ug20ag05y4qq.gif", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg", @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1d0vyj20pf0gytcj.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr2n1jjj20gy0o9tcc.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr39ht9j20gy0o6q74.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr3xvtlj20gy0obadv.jpg", @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr4nndfj20gy0o9q6i.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr57tn9j20gy0obn0f.jpg"];
+    
+    int count = (int)urls.count;
+    // 1.封装图片数据
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
+    for (int i = 0; i<count; i++) {
+        // 替换为中等尺寸图片
+        NSString *url = [urls[i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:url]; // 图片路径
+        //photo.srcImageView = self.view.subviews[i]; // 来源于哪个UIImageView
+        [photos addObject:photo];
+    }
+    
+    // 2.显示相册
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = 2; // 弹出相册时显示的第一张图片是？
+    browser.photos = photos; // 设置所有的图片
+    [browser show];
+}
+
 
 #pragma -mark asi Delegate
 //ASI委托函数，错误处理
@@ -147,9 +179,22 @@ static int count;
         cell.quote = topic.quote;
         cell.quoter = topic.quoter;
         cell.content = topic.content;
-        cell.num = indexPath.row;
+        //cell.num = indexPath.row;
         cell.content = topic.content;
         cell.attachments = topic.attachments;
+    
+        
+        if (indexPath.row == 1) {
+            cell.num = @"楼主";
+        }
+        else if(indexPath.row == 2){
+            cell.num = @"沙发";
+        }
+        else if(indexPath.row == 3){
+            cell.num = @"板凳";
+        }
+        else
+            cell.num = [NSString stringWithFormat:@"%li楼",indexPath.row -1];
         
         NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
         NSDictionary *userDic = [dic objectForKey:@"user"];
@@ -160,8 +205,13 @@ static int count;
         
         cell.name = [userDic objectForKey:@"name"];
         
+        //楼主特殊
+        if (indexPath.row == 1){
+            [cell setReadyToShowOne];
+            return cell;
+        }
+ 
         [cell setReadyToShow];
-        
         return cell;
     }
 }
@@ -179,16 +229,23 @@ static int count;
     else {
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];
         
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:15.0];
         UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
-        CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName: font} context:nil].size;
+        CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        
+        //楼主那一cell
+        if (indexPath.row == 1) {
+            return returnHeight = size1.height + 80 + 120;
+        }
         
         NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
         NSDictionary *userDic = [dic objectForKey:@"user"];
         NSString *name = [userDic objectForKey:@"name"];
         CGSize size2 = [[NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",topic.quoter,name, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
         
-        returnHeight = size1.height + size2.height + 80;
+        returnHeight = size1.height + size2.height + 80  + 120;
     }
     return returnHeight;
 }

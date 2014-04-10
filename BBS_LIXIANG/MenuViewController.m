@@ -7,8 +7,10 @@
 //
 
 #import "MenuViewController.h"
-#import "UIViewController+REFrostedViewController.h"
-#import "HomeViewController.h"
+#import "SwitchViewController.h"
+#import "LoginViewController.h"
+
+#import "UIViewController+MMDrawerController.h"
 
 #define MYMAIL     201
 #define ATME       202
@@ -20,11 +22,24 @@
 
 @implementation MenuViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        SwitchViewController *slideSwitchVC = [[SwitchViewController alloc] initWithNibName:@"SwitchViewController" bundle:nil];
+        
+        self.navSwitchViewController = [[UINavigationController alloc] initWithRootViewController:slideSwitchVC];
+        NSLog(@"nav: %@",self.navigationController.navigationController);
+        
+    }
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -87,19 +102,55 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        //UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
     
-        if (indexPath.section == 0 && indexPath.row == 0) {
-            
-            //navigationController.viewControllers = self.frostedViewController.contentViewController;
+    int section = (int)indexPath.section;
+    int row = (int)indexPath.row;
+    if (section == 0) {
+        switch (row) {
+            case 0:
+                if (!self.navSwitchViewController) {
+                    SwitchViewController *slideSwitchVC = [[SwitchViewController alloc] init];
+                    
+                    self.navSwitchViewController = [[UINavigationController alloc] initWithRootViewController:slideSwitchVC];
+                }
+                
+                [self.mm_drawerController setCenterViewController:self.navSwitchViewController
+                                               withCloseAnimation:YES completion:^(BOOL finished){
+                                                   NSLog(@"finished animation");
+                                                }];
+                break;
+            default:
+                break;
         }
+    }
     
-//        else {
-//           DEMOSecondViewController *secondViewController = [[DEMOSecondViewController alloc] init];
-//            navigationController.viewControllers = @[secondViewController];
-//        }
-    
-        [self.frostedViewController hideMenuViewController];
+    else if (section == 1)
+    {
+        switch (row) {
+            case 0:
+                if (!self.navSwitchViewController) {
+                    SwitchViewController *slideSwitchVC = [[SwitchViewController alloc] init];
+                    
+                    self.navSwitchViewController = [[UINavigationController alloc] initWithRootViewController:slideSwitchVC];
+                }
+                
+                [self.mm_drawerController setCenterViewController:self.navSwitchViewController
+                                               withCloseAnimation:YES completion:^(BOOL finished){
+                                                   NSLog(@"finished animation");
+                                               }];
+                break;
+            case 1:
+               
+                break;
+            case 2:{
+                LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                [self presentViewController:login animated:YES completion:nil];
+                break;
+            }
+            default:
+                break;
+        } //滑动切换视图
+    }
 }
 
 #pragma mark -
@@ -154,6 +205,16 @@
     switch (tag) {
         case MYMAIL:
             NSLog(@"201");
+            if (!self.navMailViewController) {
+                MailViewController *mailVC = [[MailViewController alloc] init];
+                
+                self.navMailViewController = [[UINavigationController alloc] initWithRootViewController:mailVC];
+            }
+            
+            [self.mm_drawerController setCenterViewController:self.navMailViewController
+                                           withCloseAnimation:YES completion:^(BOOL finished){
+                                               NSLog(@"finished animation");
+                                           }];
             break;
         case ATME:
             NSLog(@"202");

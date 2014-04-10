@@ -16,11 +16,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *numLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentToLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageVIew;
 
 @property(nonatomic, assign)int ID;
 @property(nonatomic, strong)NSString *name;
 @property(nonatomic, assign)int read;
-@property(nonatomic, assign)int num;
+@property(nonatomic, strong)NSString *num;
 @property(nonatomic, assign)BOOL isMan;
 @property(nonatomic, strong)NSDate * time;
 @property(nonatomic, strong)NSString * author;
@@ -31,5 +32,6 @@
 @property(nonatomic, strong)NSMutableArray * attachmentsViewArray;
 
 -(void)setReadyToShow;
+-(void)setReadyToShowOne;
 
 @end

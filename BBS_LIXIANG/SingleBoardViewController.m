@@ -42,7 +42,7 @@
     
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/" mutableCopy];
     [baseurl appendFormat:@"board/%@.json?", @"feeling"];
-    [baseurl appendFormat:@"mode=%d&limit=30&start=%i", 1,0];
+    [baseurl appendFormat:@"mode=%d&limit=30&start=%i", 2,0];
     NSURL *myurl = [NSURL URLWithString:baseurl];
     _request = [ASIFormDataRequest requestWithURL:myurl];
     [_request setDelegate:self];

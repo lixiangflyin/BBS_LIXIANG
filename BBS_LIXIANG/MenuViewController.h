@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "REFrostedViewController.h"
+#import "MailViewController.h"
 
 @interface MenuViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 
@@ -15,6 +15,10 @@
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UILabel *name1Label;
 @property (weak, nonatomic) IBOutlet UILabel *name2Label;
+
+@property (nonatomic, strong) UINavigationController *navSwitchViewController;
+@property (nonatomic, strong) UINavigationController *navCommonComponentVC;
+@property (nonatomic, strong) UINavigationController *navMailViewController;
 
 - (IBAction)clickButton:(id)sender;
 

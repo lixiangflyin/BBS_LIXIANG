@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 - (IBAction)login:(id)sender;
 - (IBAction)cancel:(id)sender;
+- (IBAction)back:(id)sender;
 @end

@@ -8,6 +8,7 @@
 
 #import "CommentCell.h"
 #import "JsonParseEngine.h"
+#import "UIImageView+MJWebCache.h"
 
 @implementation CommentCell
 
@@ -29,7 +30,7 @@
         [_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
     }
     
-    [_numLabel setText:[NSString stringWithFormat:@"%i楼", _num]];
+    [_numLabel setText:[NSString stringWithFormat:@"%@", _num]];
     [_userLabel setText:[NSString stringWithFormat:@"%@", _author]];
     //[_timeLabel setText:[JsonParseEngine dateToString:_time]];
     NSDateFormatter *date = [[NSDateFormatter alloc] init];
@@ -42,6 +43,28 @@
     NSString *str = [NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",_quoter,_name,_quote];
     [_commentToLabel setText:str];
 
+}
+
+-(void)setReadyToShowOne
+{
+    if (_isMan) {
+        [_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
+    }
+    else{
+        [_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
+    }
+    
+    [_numLabel setText:[NSString stringWithFormat:@"%@", _num]];
+    [_userLabel setText:[NSString stringWithFormat:@"%@", _author]];
+    //[_timeLabel setText:[JsonParseEngine dateToString:_time]];
+    NSDateFormatter *date = [[NSDateFormatter alloc] init];
+    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [_timeLabel setText:[date stringFromDate:_time]];
+    date = nil;
+
+    [_contentLabel setText:_content];
+    [_commentToLabel setText:@""];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

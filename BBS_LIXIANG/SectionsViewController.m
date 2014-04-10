@@ -89,7 +89,7 @@
     
     self.data = [NSArray arrayWithObjects:phone, computer, car, bike, house, motorbike, drinks, renWen, sweets, watches, walls, nil];
     
-    RATreeView *treeView = [[RATreeView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    RATreeView *treeView = [[RATreeView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44)];
     
     treeView.delegate = self;
     treeView.dataSource = self;
