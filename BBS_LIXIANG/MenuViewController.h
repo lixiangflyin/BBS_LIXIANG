@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MailViewController.h"
+#import "UIViewController+MJPopupViewController.h"
 
-@interface MenuViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
+#import "InputViewController.h"  //输入搜索文字
+
+@interface MenuViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate,InputSearchStrDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *headPhotoView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
@@ -19,6 +21,9 @@
 @property (nonatomic, strong) UINavigationController *navSwitchViewController;
 @property (nonatomic, strong) UINavigationController *navCommonComponentVC;
 @property (nonatomic, strong) UINavigationController *navMailViewController;
+@property (nonatomic, strong) UINavigationController *navSearchViewController;
+
+@property (nonatomic, strong) InputViewController *inputSearchVC;
 
 - (IBAction)clickButton:(id)sender;
 

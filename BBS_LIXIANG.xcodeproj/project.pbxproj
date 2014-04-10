@@ -38,6 +38,13 @@
 		1830EB8118F43AC800EB59B2 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830EB6518F43AC800EB59B2 /* UIImage+WebP.m */; };
 		1830EB8218F43AC800EB59B2 /* UIImageView+MJWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830EB6718F43AC800EB59B2 /* UIImageView+MJWebCache.m */; };
 		1830EB8318F43AC800EB59B2 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830EB6918F43AC800EB59B2 /* UIImageView+WebCache.m */; };
+		18739BB718F689F900DE590A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BB518F689F900DE590A /* SearchViewController.m */; };
+		18739BB818F689F900DE590A /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18739BB618F689F900DE590A /* SearchViewController.xib */; };
+		18739BBC18F6989100DE590A /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BBA18F6989100DE590A /* InputViewController.m */; };
+		18739BBD18F6989100DE590A /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18739BBB18F6989100DE590A /* InputViewController.xib */; };
+		18739BC518F6C31600DE590A /* WBUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BBF18F6C31600DE590A /* WBUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18739BC618F6C31600DE590A /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BC118F6C31600DE590A /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18739BC718F6C31600DE590A /* Hmacsha1.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BC418F6C31600DE590A /* Hmacsha1.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		189205C618F538880023F993 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205B718F538880023F993 /* MMDrawerBarButtonItem.m */; };
 		189205C718F538880023F993 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BA18F538880023F993 /* MMDrawerController.m */; };
 		189205C818F538880023F993 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BC18F538880023F993 /* MMDrawerVisualState.m */; };
@@ -197,6 +204,19 @@
 		1830EB6718F43AC800EB59B2 /* UIImageView+MJWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MJWebCache.m"; sourceTree = "<group>"; };
 		1830EB6818F43AC800EB59B2 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		1830EB6918F43AC800EB59B2 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
+		18739BB418F689F900DE590A /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		18739BB518F689F900DE590A /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		18739BB618F689F900DE590A /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		18739BB918F6989100DE590A /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		18739BBA18F6989100DE590A /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
+		18739BBB18F6989100DE590A /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		18739BBE18F6C31600DE590A /* WBUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBUtil.h; sourceTree = "<group>"; };
+		18739BBF18F6C31600DE590A /* WBUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBUtil.m; sourceTree = "<group>"; };
+		18739BC018F6C31600DE590A /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		18739BC118F6C31600DE590A /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		18739BC218F6C31600DE590A /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		18739BC318F6C31600DE590A /* Hmacsha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hmacsha1.h; sourceTree = "<group>"; };
+		18739BC418F6C31600DE590A /* Hmacsha1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hmacsha1.m; sourceTree = "<group>"; };
 		189205B618F538880023F993 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		189205B718F538880023F993 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		189205B818F538880023F993 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -567,6 +587,12 @@
 		18A9224418F147AC002D9EAB /* SearchViewController */ = {
 			isa = PBXGroup;
 			children = (
+				18739BB918F6989100DE590A /* InputViewController.h */,
+				18739BBA18F6989100DE590A /* InputViewController.m */,
+				18739BBB18F6989100DE590A /* InputViewController.xib */,
+				18739BB418F689F900DE590A /* SearchViewController.h */,
+				18739BB518F689F900DE590A /* SearchViewController.m */,
+				18739BB618F689F900DE590A /* SearchViewController.xib */,
 			);
 			name = SearchViewController;
 			sourceTree = "<group>";
@@ -830,6 +856,13 @@
 		18CBF5FF18F029190036C03B /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				18739BBE18F6C31600DE590A /* WBUtil.h */,
+				18739BBF18F6C31600DE590A /* WBUtil.m */,
+				18739BC018F6C31600DE590A /* GTMBase64.h */,
+				18739BC118F6C31600DE590A /* GTMBase64.m */,
+				18739BC218F6C31600DE590A /* GTMDefines.h */,
+				18739BC318F6C31600DE590A /* Hmacsha1.h */,
+				18739BC418F6C31600DE590A /* Hmacsha1.m */,
 				18CBF60018F029190036C03B /* JSONKit.h */,
 				18CBF60118F029190036C03B /* JSONKit.m */,
 			);
@@ -969,8 +1002,10 @@
 				18F04E7F18F2E1CD007E9373 /* PostMailViewController.xib in Resources */,
 				18CBF5BE18F027FF0036C03B /* TopTenCell.xib in Resources */,
 				1830EB6B18F43AC800EB59B2 /* MBProgressHUD.bundle in Resources */,
+				18739BBD18F6989100DE590A /* InputViewController.xib in Resources */,
 				18964FC418F3EA9300F7ECDB /* SwitchViewController.xib in Resources */,
 				189205CB18F538880023F993 /* icon_rightarrow@2x.png in Resources */,
+				18739BB818F689F900DE590A /* SearchViewController.xib in Resources */,
 				18CBF5AD18F0221C0036C03B /* avatar.jpg in Resources */,
 				18CBF56D18F021440036C03B /* InfoPlist.strings in Resources */,
 				18CBF5C918F0280F0036C03B /* SingleTopicCell.xib in Resources */,
@@ -1016,6 +1051,7 @@
 				18CBF5E418F028C60036C03B /* Board.m in Sources */,
 				18CBF5BD18F027FF0036C03B /* TopTenCell.m in Sources */,
 				18CBF57318F021440036C03B /* AppDelegate.m in Sources */,
+				18739BC518F6C31600DE590A /* WBUtil.m in Sources */,
 				1830EB7018F43AC800EB59B2 /* MJPhotoLoadingView.m in Sources */,
 				18CBF62018F029190036C03B /* JSONKit.m in Sources */,
 				18CBF62718F029190036C03B /* RATreeView+TableViewDataSource.m in Sources */,
@@ -1028,12 +1064,15 @@
 				18CBF5E618F028C60036C03B /* Topic.m in Sources */,
 				18A9225718F1959E002D9EAB /* MailViewController.m in Sources */,
 				18CBF62318F029190036C03B /* RATreeNodeInfo+Private.m in Sources */,
+				18739BC618F6C31600DE590A /* GTMBase64.m in Sources */,
 				18CBF61D18F029190036C03B /* ASIInputStream.m in Sources */,
 				1830EB7718F43AC800EB59B2 /* SDWebImageCompat.m in Sources */,
 				18CBF61818F029190036C03B /* ASIDataCompressor.m in Sources */,
 				18CBF5E718F028C60036C03B /* User.m in Sources */,
 				18A9222D18F0F6CC002D9EAB /* UserInfoViewController.m in Sources */,
+				18739BBC18F6989100DE590A /* InputViewController.m in Sources */,
 				18F04E7E18F2E1CD007E9373 /* PostMailViewController.m in Sources */,
+				18739BC718F6C31600DE590A /* Hmacsha1.m in Sources */,
 				1830EB7418F43AC800EB59B2 /* MKAnnotationView+WebCache.m in Sources */,
 				18CBF63518F03BF90036C03B /* RADataObject.m in Sources */,
 				18CBF62218F029190036C03B /* RATreeNodeCollectionController.m in Sources */,
@@ -1044,6 +1083,7 @@
 				1830EB7F18F43AC800EB59B2 /* UIImage+GIF.m in Sources */,
 				18CBF61C18F029190036C03B /* ASIHTTPRequest.m in Sources */,
 				1830EB7218F43AC800EB59B2 /* MJPhotoToolbar.m in Sources */,
+				18739BB718F689F900DE590A /* SearchViewController.m in Sources */,
 				18A9225A18F19647002D9EAB /* MailCell.m in Sources */,
 				18CBF62118F029190036C03B /* RATreeNode.m in Sources */,
 				18A9224918F147CD002D9EAB /* LoginViewController.m in Sources */,

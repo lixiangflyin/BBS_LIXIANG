@@ -210,6 +210,47 @@
     }
 }
 
++(NSArray *)parseSearchTopics:(NSDictionary *)topicsDictionary
+{
+    BOOL success = [[topicsDictionary objectForKey:@"success"] boolValue];
+    if (success)
+    {
+        NSMutableArray * topTen = [[NSMutableArray alloc] init];
+        NSArray *topics = [topicsDictionary objectForKey:@"topics"];
+        for (int i=0; i<[topics count]; i++) {
+            Topic * topic = [[Topic alloc] init];
+            
+            int ID = [[[[topicsDictionary objectForKey:@"topics"] objectAtIndex:i] objectForKey:@"id"] intValue];
+            NSString * title = [[[topicsDictionary objectForKey:@"topics"] objectAtIndex:i] objectForKey:@"title"];
+            NSString * author = [[[topicsDictionary objectForKey:@"topics"] objectAtIndex:i] objectForKey:@"author"];
+            NSString * board = [[[topicsDictionary objectForKey:@"topics"] objectAtIndex:i] objectForKey:@"board"];
+            
+            NSString *  timeString = [[[topicsDictionary objectForKey:@"topics"] objectAtIndex:i] objectForKey:@"time"];
+            //NSLog(@"%@",timeString);
+            NSDateFormatter *inputFormat = [[NSDateFormatter alloc] init];
+            [inputFormat setDateFormat:@"yyyyMMdd"]; //20101208
+            //将NSString转换为NSDate
+            NSDate *time = [inputFormat dateFromString:timeString];
+            
+            int replies = [[[[topicsDictionary objectForKey:@"topics"] objectAtIndex:i] objectForKey:@"replies"] intValue];
+            int read = [[[[topicsDictionary objectForKey:@"topics"] objectAtIndex:i] objectForKey:@"read"] intValue];
+            
+            topic.ID = ID;
+            topic.title = title;
+            topic.author = author;
+            topic.board = board;
+            topic.time = time;
+            topic.replies = replies;
+            topic.read = read;
+            
+            [topTen addObject:topic];
+        }
+        return topTen;
+    }
+    else {
+        return nil;
+    }
+}
 
 + (NSString *)dateToString:(NSDate *)date;
 {

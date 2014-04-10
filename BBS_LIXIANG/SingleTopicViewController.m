@@ -24,6 +24,8 @@ static int count;
 
 @interface SingleTopicViewController ()
 
+@property (nonatomic, strong) CommentCell *prototypeCell;
+
 @end
 
 @implementation SingleTopicViewController
@@ -33,6 +35,11 @@ static int count;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        count = 0;
+        _isRequestToTopics = YES;
+        _usersInfo = [[NSMutableArray alloc]init];
+        
+        self.prototypeCell = [self.singletopicTableView dequeueReusableCellWithIdentifier:@"CommentCell"];
     }
     return self;
 }
@@ -41,10 +48,6 @@ static int count;
 {
     [super viewDidLoad];
 
-    count = 0;
-    _isRequestToTopics = YES;
-    _usersInfo = [[NSMutableArray alloc]init];
-    
     UIBarButtonItem *browerButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(browerPicture:)];
     self.navigationItem.rightBarButtonItem = browerButton;
     
@@ -210,7 +213,7 @@ static int count;
             [cell setReadyToShowOne];
             return cell;
         }
- 
+        
         [cell setReadyToShow];
         return cell;
     }
@@ -227,6 +230,11 @@ static int count;
         returnHeight = size1.height  + 35;
     }
     else {
+        
+        
+//        CommentCell *cell = (CommentCell *)self.prototypeCell;
+//        CGSize sieze = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+//        returnHeight = sieze.height + 1;
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];

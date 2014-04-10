@@ -9,8 +9,12 @@
 #import "MenuViewController.h"
 #import "SwitchViewController.h"
 #import "LoginViewController.h"
+#import "MailViewController.h"
+#import "SearchViewController.h"
+#import "InputViewController.h"
 
 #import "UIViewController+MMDrawerController.h"
+
 
 #define MYMAIL     201
 #define ATME       202
@@ -29,7 +33,7 @@
         SwitchViewController *slideSwitchVC = [[SwitchViewController alloc] initWithNibName:@"SwitchViewController" bundle:nil];
         
         self.navSwitchViewController = [[UINavigationController alloc] initWithRootViewController:slideSwitchVC];
-        NSLog(@"nav: %@",self.navigationController.navigationController);
+        //NSLog(@"nav: %@",self.navigationController.navigationController);
         
     }
     return self;
@@ -127,20 +131,27 @@
     else if (section == 1)
     {
         switch (row) {
-            case 0:
-                if (!self.navSwitchViewController) {
-                    SwitchViewController *slideSwitchVC = [[SwitchViewController alloc] init];
+            case 0:{
+                if (!_inputSearchVC) {
+                    _inputSearchVC = [[InputViewController alloc]init];
+                    _inputSearchVC.delegate = self;
+                }
+
+                //需要回调函数
+                [self.mm_drawerController presentPopupViewController:_inputSearchVC animationType:MJPopupViewAnimationSlideTopBottom];
+                break;
+            }
+            case 1:
+                if (!self.navSearchViewController) {
+                    SearchViewController *searchVC = [[SearchViewController alloc] init];
                     
-                    self.navSwitchViewController = [[UINavigationController alloc] initWithRootViewController:slideSwitchVC];
+                    self.navSearchViewController = [[UINavigationController alloc] initWithRootViewController:searchVC];
                 }
                 
-                [self.mm_drawerController setCenterViewController:self.navSwitchViewController
+                [self.mm_drawerController setCenterViewController:self.navSearchViewController
                                                withCloseAnimation:YES completion:^(BOOL finished){
                                                    NSLog(@"finished animation");
                                                }];
-                break;
-            case 1:
-               
                 break;
             case 2:{
                 LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
@@ -226,6 +237,33 @@
             break;
     }
     
+}
+
+#pragma -mark InputSearchStrDelegate
+-(void)pushToSearchViewWithValue:(NSString *)searchString
+{
+    [self.mm_drawerController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
+    
+    if (!self.navSearchViewController) {
+        SearchViewController *searchVC = [[SearchViewController alloc] init];
+        searchVC.searchString = searchString;
+        self.navSearchViewController = [[UINavigationController alloc] initWithRootViewController:searchVC];
+    }
+    else{
+        //为传数据
+        SearchViewController *searchVC = [self.navSearchViewController.viewControllers objectAtIndex:0];
+        searchVC.searchString = searchString;
+    }
+    
+    [self.mm_drawerController setCenterViewController:self.navSearchViewController
+                                   withCloseAnimation:YES completion:^(BOOL finished){
+                                       NSLog(@"finished animation");
+                                   }];
+}
+
+-(void)cancelSearchView
+{
+    [self.mm_drawerController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
 }
 
 @end
