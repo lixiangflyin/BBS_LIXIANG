@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIFormDataRequest.h"
+
+@protocol LoginDelegate <NSObject>
+
+-(void)loginSuccess;
+
+@end
 
 @interface LoginViewController : UIViewController
+
+@property (nonatomic, retain) ASIFormDataRequest *request;
+
+@property (nonatomic, assign) id delegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;

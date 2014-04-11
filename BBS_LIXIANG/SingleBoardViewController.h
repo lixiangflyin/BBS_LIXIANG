@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
+#import "Board.h"
 #import "Topic.h"
 
 @interface SingleBoardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
@@ -17,6 +18,8 @@
 @property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, retain) NSMutableArray *singleSectionArr;
+
+@property (nonatomic, retain) Board *requestBoard;
 
 @property (nonatomic, retain) Topic *selectTopic;
 

@@ -10,8 +10,9 @@
 #import "UIViewController+MJPopupViewController.h"
 
 #import "InputViewController.h"  //输入搜索文字
+#import "LoginViewController.h"
 
-@interface MenuViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate,InputSearchStrDelegate>
+@interface MenuViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate,InputSearchStrDelegate,LoginDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *headPhotoView;
 @property (weak, nonatomic) IBOutlet UIView *headView;

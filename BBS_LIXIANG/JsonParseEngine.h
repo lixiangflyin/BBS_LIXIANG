@@ -24,8 +24,12 @@
 +(NSArray *)parseSingleTopic:(NSDictionary *)topicsDictionary;
 //解析搜索结果
 +(NSArray *)parseSearchTopics:(NSDictionary *)topicsDictionary;
-//分类解析邮箱
+//分类解析邮件
 +(NSArray *)parseMails:(NSDictionary *)friendsDictionary Type:(int)type;
+//解析单个邮件
++(Mail *)parseSingleMail:(NSDictionary *)friendsDictionary  Type:(int)type;
+//解析版面
++(NSArray *)parseBoards:(NSDictionary *)boardsDictionary;
 //时间转换
 + (NSString *)dateToString:(NSDate *)date;
 

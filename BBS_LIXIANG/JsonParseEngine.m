@@ -252,6 +252,60 @@
     }
 }
 
++(Mail *)parseSingleMail:(NSDictionary *)friendsDictionary  Type:(int)type
+{
+    BOOL success = [[friendsDictionary objectForKey:@"success"] boolValue];
+    if (success)
+    {
+        Mail * mail = [[Mail alloc] init];
+        
+        mail.ID = [[[friendsDictionary objectForKey:@"mail"] objectForKey:@"id"] intValue];
+        mail.size = [[[friendsDictionary objectForKey:@"mail"] objectForKey:@"size"] intValue];
+        mail.unread = [[[friendsDictionary objectForKey:@"mail"] objectForKey:@"unread"] boolValue];
+        mail.author = [[friendsDictionary objectForKey:@"mail"] objectForKey:@"author"];
+        mail.title = [[friendsDictionary objectForKey:@"mail"] objectForKey:@"title"];
+        mail.content = [[friendsDictionary objectForKey:@"mail"] objectForKey:@"content"];
+        
+        NSTimeInterval interval = [[[friendsDictionary objectForKey:@"mail"] objectForKey:@"time"] doubleValue];
+        mail.time = [NSDate dateWithTimeIntervalSince1970:interval];
+        mail.type = type;
+        
+        return mail;
+    }
+    else {
+        return nil;
+    }
+}
+
++(NSArray *)parseBoards:(NSDictionary *)boardsDictionary
+{
+    BOOL success = [[boardsDictionary objectForKey:@"success"] boolValue];
+    if (success)
+    {
+        NSMutableArray * boards = [[NSMutableArray alloc] init];
+        NSArray *boardArr = [boardsDictionary objectForKey:@"boards"];
+        for (int i=0; i<[boardArr count]; i++) {
+            Board * board = [[Board alloc] init];
+            
+            NSString * name = [[[boardsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"name"];
+            int section = [[[[boardsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"id"] intValue];
+            BOOL leaf = [[[[boardsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"leaf"] boolValue];
+            NSString * description = [[[boardsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"description"];
+            
+            board.name = name;
+            board.section = section;
+            board.leaf = leaf;
+            board.description = description;
+            
+            [boards addObject:board];
+        }
+        return boards;
+    }
+    else {
+        return nil;
+    }
+}
+
 + (NSString *)dateToString:(NSDate *)date;
 {
     NSMutableString * dateString = [[NSMutableString alloc] init];

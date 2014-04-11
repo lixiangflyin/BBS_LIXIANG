@@ -57,6 +57,7 @@
     
     _hotBoardViewController = [[HotBoardViewController alloc]init];
     _hotBoardViewController.title = @"人气版面";
+    _hotBoardViewController.delegate = self;
     
     UIButton *rightSideButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightSideButton setImage:[UIImage imageNamed:@"icon_rightarrow.png"] forState:UIControlStateNormal];
@@ -147,6 +148,17 @@
     [self.navigationController pushViewController:single animated:YES];
     single = nil;
 }
+
+#pragma -mark TopTenTopicsDelegate
+-(void)pushToNextSingleSectionViewWithValue:(Board *)board
+{
+    
+    SingleBoardViewController *single = [[SingleBoardViewController alloc]init];
+    [single setRequestBoard:board];
+    [self.navigationController pushViewController:single animated:YES];
+    single = nil;
+}
+
 
 #pragma -mark AllSectionsTopicsDelegate
 -(void)pushToNextSingleSectionView

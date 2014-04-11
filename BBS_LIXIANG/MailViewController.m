@@ -8,6 +8,9 @@
 
 #import "MailViewController.h"
 #import "UIViewController+MMDrawerController.h"
+#import "SingleMailViewController.h"
+#import "PostMailViewController.h"
+#import "Toolkit.h"
 
 #import "MailCell.h"
 //#import "ProgressHUD.h"
@@ -33,13 +36,15 @@
 {
     [super viewDidLoad];
 	
-    self.title = @"我的邮箱";
-    
+    self.title = @"我的信箱";
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(leftDrawerButtonPress:)];
     self.navigationItem.leftBarButtonItem = leftButton;
     
+    UIBarButtonItem *writeButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(writeMail:)];
+    self.navigationItem.rightBarButtonItem = writeButton;
+    
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
-    [baseurl appendFormat:@"token=%@",@"bGl4aWFuZ2ZseWlu%3A%3D%3DwxN2Rp0T%2B4FOVeCJCmo7cu"];
+    [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
     [baseurl appendFormat:@"&type=%i",0];
     [baseurl appendFormat:@"&limit=30&start=%i",0];
     NSURL *myurl = [NSURL URLWithString:baseurl];
@@ -78,7 +83,6 @@
     NSArray * objects = [JsonParseEngine parseMails:dic Type:0];
     NSLog(@"%@",objects);
     
-    //self.tentopicsArr = [NSMutableArray arrayWithArray:[objects objectAtIndex:2]];
     self.mailsArr = [NSMutableArray arrayWithArray:objects];
     [_mailsTableView reloadData];
     
@@ -125,12 +129,22 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
-    //self.selectTopic = [self.tentopicsArr objectAtIndex:indexPath.row];
+    self.selectMail = [self.mailsArr objectAtIndex:indexPath.row];
     
-    //[_delegate pushToNextViewWithValue:self.selectTopic];
+    SingleMailViewController *single = [[SingleMailViewController alloc]init];
+    [single setRootMail:self.selectMail];
+    [self.navigationController pushViewController:single animated:YES];
+    single = nil;
 }
 
-
+#pragma -mark 回复邮件
+-(void)writeMail:(id)sender
+{
+    //发邮件
+    PostMailViewController *postMailVC = [[PostMailViewController alloc]init];
+    postMailVC.postType = 0;
+    [self presentViewController:postMailVC animated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning
 {

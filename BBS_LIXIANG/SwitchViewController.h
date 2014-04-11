@@ -15,7 +15,7 @@
 #import "SUNSlideSwitchView.h"
 #import "LCViewController.h"
 
-@interface SwitchViewController : UIViewController<TopTenTopicsDelegate,SectionsDelegate,AllSectionsTopicsDelegate,SUNSlideSwitchViewDelegate>
+@interface SwitchViewController : UIViewController<TopTenTopicsDelegate,HotBoardDelegate,SectionsDelegate,AllSectionsTopicsDelegate,SUNSlideSwitchViewDelegate>
 
 @property (weak, nonatomic) IBOutlet SUNSlideSwitchView *slideSwitchView;
 

@@ -7,6 +7,7 @@
 //
 
 #import "MailCell.h"
+#import "JsonParseEngine.h"
 
 @implementation MailCell
 
@@ -42,7 +43,7 @@
         [_authorLabel setText:[NSString stringWithFormat:@"%@", _mail.author]];
     
     [_titleLabel setText:[NSString stringWithFormat:@"%@", _mail.title]];
-    [_timeLabel setText:[NSString stringWithFormat:@"%@", _mail.time]];
+    [_timeLabel setText:[NSString stringWithFormat:@"%@", [JsonParseEngine dateToString:_mail.time]]];
     
 }
 

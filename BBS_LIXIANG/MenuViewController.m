@@ -12,6 +12,8 @@
 #import "MailViewController.h"
 #import "SearchViewController.h"
 #import "InputViewController.h"
+#import "MenuCell.h"
+#import "Toolkit.h"
 
 #import "UIViewController+MMDrawerController.h"
 
@@ -53,9 +55,14 @@
     [super viewDidLoad];
 
     self.tableView.tableHeaderView = _headView;
-    
-    [_name1Label setText:@"心往之"];
-    [_name2Label setText:@"lixiangflyin"];
+    if ([Toolkit getID] != nil) {
+        [_name1Label setText:[Toolkit getID]];
+        [_name2Label setText:[Toolkit getName]];
+    }
+    else{
+        [_name1Label setText:@"quest"];
+        [_name2Label setText:@"quest"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,9 +93,9 @@
     label.backgroundColor = [UIColor clearColor];
     
     if (sectionIndex == 0)
-        label.text = @"常用";
+        label.text = @"  常用";
     else
-        label.text = @"操作";
+        label.text = @"  操作";
     
     [label sizeToFit];
     [view addSubview:label];
@@ -142,19 +149,11 @@
                 break;
             }
             case 1:
-                if (!self.navSearchViewController) {
-                    SearchViewController *searchVC = [[SearchViewController alloc] init];
-                    
-                    self.navSearchViewController = [[UINavigationController alloc] initWithRootViewController:searchVC];
-                }
-                
-                [self.mm_drawerController setCenterViewController:self.navSearchViewController
-                                               withCloseAnimation:YES completion:^(BOOL finished){
-                                                   NSLog(@"finished animation");
-                                               }];
+               
                 break;
             case 2:{
                 LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                login.delegate = self;
                 [self presentViewController:login animated:YES completion:nil];
                 break;
             }
@@ -188,26 +187,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+    static NSString * identi = @"MenuCell";
+    //第一次需要分配内存
+    MenuCell * cell = (MenuCell *)[tableView dequeueReusableCellWithIdentifier:identi];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"MenuCell" owner:self options:nil];
+        cell = [array objectAtIndex:0];
+        cell.selectionStyle = UITableViewCellEditingStyleNone;
     }
     
     if (indexPath.section == 0) {
         NSArray *titles = @[@"热门话题"];
         NSLog(@"%ld",(long)indexPath.row);
-        cell.textLabel.text = titles[indexPath.row];
-    } else {
+        cell.titleLabel.text = titles[indexPath.row];
+        cell.titleImageView.image = [UIImage imageNamed:@"man.jpg"];
+    }
+    else {
         NSArray *titles = @[@"搜索", @"设置", @"登录"];
-        cell.textLabel.text = titles[indexPath.row];
+        cell.titleLabel.text = titles[indexPath.row];
+        cell.titleImageView.image = [UIImage imageNamed:@"man.jpg"];
     }
     
     return cell;
 }
 
+#pragma -mark button handle
 - (IBAction)clickButton:(id)sender {
     
     UIButton *button = (UIButton *)sender;
@@ -264,6 +269,13 @@
 -(void)cancelSearchView
 {
     [self.mm_drawerController dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
+}
+
+#pragma -mark loginDelegate
+-(void)loginSuccess
+{
+    [_name1Label setText:[Toolkit getID]];
+    [_name2Label setText:[Toolkit getName]];
 }
 
 @end

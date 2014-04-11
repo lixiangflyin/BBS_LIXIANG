@@ -129,6 +129,11 @@
 		18CBF62E18F033AE0036C03B /* Balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18CBF62D18F033AE0036C03B /* Balloon.png */; };
 		18CBF63218F03B3E0036C03B /* SectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CBF63118F03B3E0036C03B /* SectionsViewController.m */; };
 		18CBF63518F03BF90036C03B /* RADataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CBF63418F03BF90036C03B /* RADataObject.m */; };
+		18E64A2C18F7CBEF004BEFF0 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E64A2B18F7CBEF004BEFF0 /* MenuCell.m */; };
+		18E64A2E18F7CC00004BEFF0 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E64A2D18F7CC00004BEFF0 /* MenuCell.xib */; };
+		18E64A3118F7D917004BEFF0 /* HotBoardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E64A3018F7D917004BEFF0 /* HotBoardCell.m */; };
+		18E64A3318F7D92A004BEFF0 /* HotBoardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E64A3218F7D92A004BEFF0 /* HotBoardCell.xib */; };
+		18E64A3618F81641004BEFF0 /* Toolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E64A3518F81641004BEFF0 /* Toolkit.m */; };
 		18F04E7418F25068007E9373 /* SingleBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F04E7318F25068007E9373 /* SingleBoardViewController.m */; };
 		18F04E7818F2D61B007E9373 /* BoardTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F04E7718F2D61B007E9373 /* BoardTopicCell.m */; };
 		18F04E7A18F2D638007E9373 /* BoardTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F04E7918F2D637007E9373 /* BoardTopicCell.xib */; };
@@ -363,6 +368,14 @@
 		18CBF63118F03B3E0036C03B /* SectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionsViewController.m; sourceTree = "<group>"; };
 		18CBF63318F03BF90036C03B /* RADataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADataObject.h; sourceTree = "<group>"; };
 		18CBF63418F03BF90036C03B /* RADataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADataObject.m; sourceTree = "<group>"; };
+		18E64A2A18F7CBEE004BEFF0 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
+		18E64A2B18F7CBEF004BEFF0 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		18E64A2D18F7CC00004BEFF0 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		18E64A2F18F7D917004BEFF0 /* HotBoardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotBoardCell.h; sourceTree = "<group>"; };
+		18E64A3018F7D917004BEFF0 /* HotBoardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotBoardCell.m; sourceTree = "<group>"; };
+		18E64A3218F7D92A004BEFF0 /* HotBoardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotBoardCell.xib; sourceTree = "<group>"; };
+		18E64A3418F81641004BEFF0 /* Toolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolkit.h; sourceTree = "<group>"; };
+		18E64A3518F81641004BEFF0 /* Toolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toolkit.m; sourceTree = "<group>"; };
 		18F04E7218F25068007E9373 /* SingleBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleBoardViewController.h; sourceTree = "<group>"; };
 		18F04E7318F25068007E9373 /* SingleBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleBoardViewController.m; sourceTree = "<group>"; };
 		18F04E7618F2D61B007E9373 /* BoardTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardTopicCell.h; sourceTree = "<group>"; };
@@ -406,6 +419,9 @@
 				181BB66B18F593E9004DB55E /* HotBoardViewController.h */,
 				181BB66C18F593E9004DB55E /* HotBoardViewController.m */,
 				181BB66D18F593E9004DB55E /* HotBoardViewController.xib */,
+				18E64A2F18F7D917004BEFF0 /* HotBoardCell.h */,
+				18E64A3018F7D917004BEFF0 /* HotBoardCell.m */,
+				18E64A3218F7D92A004BEFF0 /* HotBoardCell.xib */,
 			);
 			name = HotBoardViewController;
 			sourceTree = "<group>";
@@ -576,8 +592,8 @@
 		18A9224318F1478F002D9EAB /* LeftView */ = {
 			isa = PBXGroup;
 			children = (
-				18A9226018F19C51002D9EAB /* SingleMailViewController */,
 				18A9225418F19467002D9EAB /* MailViewController */,
+				18A9226018F19C51002D9EAB /* SingleMailViewController */,
 				18A9224518F147B0002D9EAB /* LoginViewController */,
 				18A9224418F147AC002D9EAB /* SearchViewController */,
 			);
@@ -680,6 +696,9 @@
 				18CBF5A718F021D00036C03B /* MenuViewController.h */,
 				18CBF5A818F021D00036C03B /* MenuViewController.m */,
 				18CBF5A918F021D00036C03B /* MenuViewController.xib */,
+				18E64A2A18F7CBEE004BEFF0 /* MenuCell.h */,
+				18E64A2B18F7CBEF004BEFF0 /* MenuCell.m */,
+				18E64A2D18F7CC00004BEFF0 /* MenuCell.xib */,
 				18A9224318F1478F002D9EAB /* LeftView */,
 				18CBF5B118F0273D0036C03B /* HomeView */,
 				18CBF5B318F027830036C03B /* picture */,
@@ -721,8 +740,8 @@
 		18CBF5B118F0273D0036C03B /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				181BB66A18F5939A004DB55E /* HotBoardViewController */,
 				18CBF5B218F0276B0036C03B /* homeViewController */,
+				181BB66A18F5939A004DB55E /* HotBoardViewController */,
 				18F04E7518F2590B007E9373 /* PostMailViewController */,
 				18A9223A18F10656002D9EAB /* PostTopicViewController */,
 				18A9222918F0F6A0002D9EAB /* userInfoController */,
@@ -807,6 +826,8 @@
 		18CBF5D818F028B50036C03B /* dataModel */ = {
 			isa = PBXGroup;
 			children = (
+				18E64A3418F81641004BEFF0 /* Toolkit.h */,
+				18E64A3518F81641004BEFF0 /* Toolkit.m */,
 				18A9225D18F1992D002D9EAB /* Mail.h */,
 				18A9225E18F1992D002D9EAB /* Mail.m */,
 				18CBF5D918F028C60036C03B /* Attachment.h */,
@@ -1005,6 +1026,7 @@
 				18739BBD18F6989100DE590A /* InputViewController.xib in Resources */,
 				18964FC418F3EA9300F7ECDB /* SwitchViewController.xib in Resources */,
 				189205CB18F538880023F993 /* icon_rightarrow@2x.png in Resources */,
+				18E64A3318F7D92A004BEFF0 /* HotBoardCell.xib in Resources */,
 				18739BB818F689F900DE590A /* SearchViewController.xib in Resources */,
 				18CBF5AD18F0221C0036C03B /* avatar.jpg in Resources */,
 				18CBF56D18F021440036C03B /* InfoPlist.strings in Resources */,
@@ -1017,6 +1039,7 @@
 				181BB67118F5959A004DB55E /* icon_rightarrow.png in Resources */,
 				181BB66F18F593E9004DB55E /* HotBoardViewController.xib in Resources */,
 				18A9225118F18A1A002D9EAB /* man.jpg in Resources */,
+				18E64A2E18F7CC00004BEFF0 /* MenuCell.xib in Resources */,
 				18A9225C18F19658002D9EAB /* MailCell.xib in Resources */,
 				18CBF62E18F033AE0036C03B /* Balloon.png in Resources */,
 				18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */,
@@ -1045,6 +1068,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E64A2C18F7CBEF004BEFF0 /* MenuCell.m in Sources */,
 				1830EB7918F43AC800EB59B2 /* SDWebImageDownloader.m in Sources */,
 				1830EB6D18F43AC800EB59B2 /* MJPhoto.m in Sources */,
 				1830EB8218F43AC800EB59B2 /* UIImageView+MJWebCache.m in Sources */,
@@ -1052,6 +1076,7 @@
 				18CBF5BD18F027FF0036C03B /* TopTenCell.m in Sources */,
 				18CBF57318F021440036C03B /* AppDelegate.m in Sources */,
 				18739BC518F6C31600DE590A /* WBUtil.m in Sources */,
+				18E64A3118F7D917004BEFF0 /* HotBoardCell.m in Sources */,
 				1830EB7018F43AC800EB59B2 /* MJPhotoLoadingView.m in Sources */,
 				18CBF62018F029190036C03B /* JSONKit.m in Sources */,
 				18CBF62718F029190036C03B /* RATreeView+TableViewDataSource.m in Sources */,
@@ -1092,6 +1117,7 @@
 				1830EB8118F43AC800EB59B2 /* UIImage+WebP.m in Sources */,
 				18CBF56F18F021440036C03B /* main.m in Sources */,
 				1830EB7C18F43AC800EB59B2 /* SDWebImageManager.m in Sources */,
+				18E64A3618F81641004BEFF0 /* Toolkit.m in Sources */,
 				18CBF5D718F028A10036C03B /* JsonParseEngine.m in Sources */,
 				181BB66E18F593E9004DB55E /* HotBoardViewController.m in Sources */,
 				18A9223E18F138F7002D9EAB /* PostTopicViewController.m in Sources */,

@@ -7,7 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIFormDataRequest.h"
+#import "Board.h"
 
-@interface HotBoardViewController : UIViewController
+@protocol HotBoardDelegate <NSObject>
+
+-(void)pushToNextSingleSectionViewWithValue:(Board *)board;
+
+@end
+
+@interface HotBoardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, retain) UITableView *hotBoardTableView;
+
+@property (nonatomic, retain) ASIFormDataRequest *request;
+
+@property (nonatomic, retain) NSMutableArray *hotBoardArr;
+
+@property (nonatomic, retain) Board *selectBoard;
+
+@property (nonatomic, assign) id delegate;
 
 @end

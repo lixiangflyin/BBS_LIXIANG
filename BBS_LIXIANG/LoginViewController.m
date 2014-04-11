@@ -7,6 +7,9 @@
 //
 
 #import "LoginViewController.h"
+#import "MBProgressHUD.h"
+#import "JsonParseEngine.h"
+#import "Toolkit.h"
 
 @interface LoginViewController ()
 
@@ -29,13 +32,17 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)login:(id)sender {
+    
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/token.json?" mutableCopy];
+    [baseurl appendFormat:@"user=%@", _nameTextField.text];
+    [baseurl appendFormat:@"&pass=%@",_pwdTextField.text];
+    NSURL *myurl = [NSURL URLWithString:baseurl];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
 }
 
 - (IBAction)cancel:(id)sender {
@@ -43,5 +50,34 @@
 
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma -mark asi Delegate
+//ASI委托函数，错误处理
+-(void) GetErr:(ASIHTTPRequest *)request
+{
+    NSLog(@"error!");
+    
+}
+
+//ASI委托函数，信息处理
+-(void) GetResult:(ASIHTTPRequest *)request
+{
+    NSLog(@"responseString = %@",request.responseString);
+    
+    NSDictionary *dic = [request.responseString objectFromJSONString];
+    NSLog(@"dic %@",dic);
+    if ([[dic objectForKey:@"success"] boolValue] == 1) {
+        
+        [Toolkit saveUserName:_nameTextField.text];
+        [Toolkit saveID:[dic objectForKey:@"id"]];
+        [Toolkit saveName:[dic objectForKey:@"name"]];
+        [Toolkit saveToken:[dic objectForKey:@"token"]];
+        
+        //[MBProgressHUD showSuccess:@"登陆成功"];
+        [_delegate loginSuccess];
+        [self back:self];
+    }
+    
 }
 @end

@@ -33,15 +33,14 @@
 {
     [super viewDidLoad];
     
-    self.title = @"feeling";
+    self.title = _requestBoard.name;
     
     UIBarButtonItem *newTopicButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(postNewTopic:)];
     self.navigationItem.rightBarButtonItem = newTopicButton;
 	
     //通过url来获得JSON数据
-    
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/" mutableCopy];
-    [baseurl appendFormat:@"board/%@.json?", @"feeling"];
+    [baseurl appendFormat:@"board/%@.json?", _requestBoard.name];
     [baseurl appendFormat:@"mode=%d&limit=30&start=%i", 2,0];
     NSURL *myurl = [NSURL URLWithString:baseurl];
     _request = [ASIFormDataRequest requestWithURL:myurl];
