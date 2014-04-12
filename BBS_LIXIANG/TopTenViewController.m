@@ -34,6 +34,7 @@
     //通过url来获得JSON数据
     
     NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/topten.json"];
+    //NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/sections.json?"];
     _request = [ASIFormDataRequest requestWithURL:myurl];
     [_request setDelegate:self];
     [_request setDidFinishSelector:@selector(GetResult:)];
@@ -61,9 +62,29 @@
 {
     NSDictionary *dic = [request.responseString objectFromJSONString];
     NSLog(@"dic %@",dic);
-   
-    NSArray * objects = [JsonParseEngine parseTopics:dic];
-    NSLog(@"%@",objects);
+    NSArray *arr = [dic objectForKey:@"boards"];
+    NSLog(@"arr = %@",arr);
+   NSArray * objects = [JsonParseEngine parseTopics:dic];
+    
+//    NSMutableArray *array = [[NSMutableArray alloc]init];
+//    for (int i=0; i<[objects count]; i++) {
+//        Board *dict = [objects objectAtIndex:i];
+//        NSArray *sectionArr = dict.sectionBoards;
+//        for (int j=0; j<[sectionArr count]; j++) {
+//            Board *board = [sectionArr objectAtIndex:j];
+//            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"sectionName",board.name,@"description",board.description, nil];
+//            [array addObject:dic];
+//        }
+//    }
+//    
+//    NSArray*paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+//    NSString*path=[paths objectAtIndex:0];
+//    NSString *filename= [path stringByAppendingPathComponent:@"sections.plist"];
+//    
+//    [array writeToFile:filename  atomically:YES];
+//    
+//    //NSArray * objects = [JsonParseEngine parseTopics:dic];
+//    NSLog(@"%@",objects);
     
     //self.tentopicsArr = [NSMutableArray arrayWithArray:[objects objectAtIndex:2]];
     self.tentopicsArr = [NSMutableArray arrayWithArray:objects];

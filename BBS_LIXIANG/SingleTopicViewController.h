@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
 #import "Topic.h"
+#import "CommentCell.h"
 #import "UIViewController+MJPopupViewController.h"
 
-@interface SingleTopicViewController : UIViewController<UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface SingleTopicViewController : UIViewController<UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,CommentCellDelegate>
 
 @property (nonatomic, retain) UITableView *singletopicTableView;
 

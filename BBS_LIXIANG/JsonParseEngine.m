@@ -1,10 +1,11 @@
 //
-//  JsonParseEngine.m
-//  虎踞龙盘BBS
+//  HotBoardViewController.h
+//  BBS_LIXIANG
 //
-//  Created by 张晓波 on 4/28/12.
-//  Copyright (c) 2012 Ethan. All rights reserved.
+//  Created by apple on 14-4-9.
+//  Copyright (c) 2014年 apple. All rights reserved.
 //
+
 
 #import "JsonParseEngine.h"
 
@@ -303,6 +304,69 @@
     }
     else {
         return nil;
+    }
+}
+
++(NSArray *)parseSections:(NSDictionary *)sectionsDictionary
+{
+    BOOL success = [[sectionsDictionary objectForKey:@"success"] boolValue];
+    if (success)
+    {
+        NSMutableArray * boards = [[NSMutableArray alloc] init];
+        NSArray *sectionArr = [sectionsDictionary objectForKey:@"boards"];
+        for (int i=0; i<[sectionArr count]; i++) {
+            Board * board = [[Board alloc] init];
+            
+            BOOL leaf = [[[[sectionsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"leaf"] boolValue];
+            NSString * name = [[[sectionsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"name"];
+            NSString * description = [[[sectionsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"description"];
+            int count = [[[[sectionsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"count"] intValue];
+            int users = [[[[sectionsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"users"] intValue];
+            NSArray * bm = [[[sectionsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"bm"];
+            
+            board.leaf = leaf;
+            board.name = name;
+            board.description = description;
+            board.count = count;
+            board.users = users;
+            board.bm = bm;
+            
+            if (!leaf) {
+                [JsonParseEngine parseSingleSection:board BoardsDictionary:[[[sectionsDictionary objectForKey:@"boards"] objectAtIndex:i] objectForKey:@"boards"]];
+                
+            }
+            [boards addObject:board];
+        }
+        return boards;
+    }
+    else {
+        return nil;
+    }
+}
+
++(void)parseSingleSection:(Board *)board BoardsDictionary:(NSArray *)boardsArray
+{
+    for (int i=0; i<[boardsArray count]; i++) {
+        Board * boardcach = [[Board alloc] init];
+        BOOL leaf = [[[boardsArray objectAtIndex:i] objectForKey:@"leaf"] boolValue];
+        NSString * name = [[boardsArray objectAtIndex:i] objectForKey:@"name"];
+        NSString * description = [[boardsArray objectAtIndex:i] objectForKey:@"description"];
+        int count = [[[boardsArray objectAtIndex:i] objectForKey:@"count"] intValue];
+        int users = [[[boardsArray objectAtIndex:i] objectForKey:@"users"] intValue];
+        NSArray * bm = [[boardsArray objectAtIndex:i] objectForKey:@"bm"];
+        
+        boardcach.leaf = leaf;
+        boardcach.name = name;
+        boardcach.description = description;
+        boardcach.count = count;
+        boardcach.users = users;
+        boardcach.bm = bm;
+        
+        if (!leaf) {
+            [JsonParseEngine parseSingleSection:boardcach BoardsDictionary:[[boardsArray objectAtIndex:i] objectForKey:@"boards"]];
+        }
+        
+        [board.sectionBoards addObject:boardcach];
     }
 }
 

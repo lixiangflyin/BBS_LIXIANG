@@ -1,9 +1,10 @@
 //
-//  JsonParseEngine.h
-//  虎踞龙盘BBS
+//  HotBoardViewController.h
+//  BBS_LIXIANG
 //
-//  Created by 张晓波 on 4/28/12.
-//  Copyright (c) 2012 Ethan. All rights reserved.
+//  Created by apple on 14-4-9.
+//  Copyright (c) 2014年 apple. All rights reserved.
+//
 
 
 //该文件主要实现从服务器中获取的信息中获取我们想要的信息，
@@ -30,6 +31,8 @@
 +(Mail *)parseSingleMail:(NSDictionary *)friendsDictionary  Type:(int)type;
 //解析版面
 +(NSArray *)parseBoards:(NSDictionary *)boardsDictionary;
+//解析版面分支
++(NSArray *)parseSections:(NSDictionary *)sectionsDictionary;
 //时间转换
 + (NSString *)dateToString:(NSDate *)date;
 

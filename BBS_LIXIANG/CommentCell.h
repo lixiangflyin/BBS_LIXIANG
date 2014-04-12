@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataModel.h"
+#import "ImageAttachmentView.h"
 
-@interface CommentCell : UITableViewCell
+@protocol CommentCellDelegate <NSObject>
+
+-(void)imageAttachmentViewInCellTaped:(int)indexRow Index:(int)indexNum;
+-(void)attachmentViewInCellTaped:(BOOL)isPhoto IndexRow:(int)indexRow IndexNum:(int)indexNum;
+//点击头像
+-(void)tapHeadPhoto:(int)index;
+
+@end
+
+@interface CommentCell : UITableViewCell<ImageAttachmentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *headPhotoImage;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
@@ -16,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *numLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentToLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageVIew;
 
 @property(nonatomic, assign)int ID;
 @property(nonatomic, strong)NSString *name;
@@ -30,6 +40,9 @@
 @property(nonatomic, strong)NSString * quote;
 @property(nonatomic, strong)NSArray * attachments;
 @property(nonatomic, strong)NSMutableArray * attachmentsViewArray;
+
+@property(nonatomic, assign)int indexRow;
+@property(nonatomic, assign)id delegate;
 
 -(void)setReadyToShow;
 -(void)setReadyToShowOne;

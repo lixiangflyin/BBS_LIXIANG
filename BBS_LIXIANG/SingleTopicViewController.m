@@ -10,7 +10,6 @@
 #import "UserInfoViewController.h"
 #import "PostTopicViewController.h"
 #import "SingleTopicCell.h"
-#import "CommentCell.h"
 
 #import "UIImageView+MJWebCache.h"
 #import "MJPhotoBrowser.h"
@@ -176,6 +175,7 @@ static int count;
         
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];
         
+        cell.delegate = self;
         cell.ID = topic.ID;
         cell.time = topic.time;
         cell.author = topic.author;
@@ -185,7 +185,6 @@ static int count;
         //cell.num = indexPath.row;
         cell.content = topic.content;
         cell.attachments = topic.attachments;
-    
         
         if (indexPath.row == 1) {
             cell.num = @"楼主";
@@ -197,7 +196,7 @@ static int count;
             cell.num = @"板凳";
         }
         else
-            cell.num = [NSString stringWithFormat:@"%li楼",indexPath.row -1];
+            cell.num = [NSString stringWithFormat:@"%i楼",indexPath.row -1];
         
         NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
         NSDictionary *userDic = [dic objectForKey:@"user"];
@@ -240,22 +239,42 @@ static int count;
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:15.0];
-        UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
         CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
         
         //楼主那一cell
         if (indexPath.row == 1) {
-            return returnHeight = size1.height + 80 + 120;
+            if (topic.attachments != nil) {
+                return returnHeight = size1.height + 80 + (180 * [[self getPicList:topic.attachments] count]);
+            }
+            return returnHeight = size1.height + 80;
         }
         
         NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
         NSDictionary *userDic = [dic objectForKey:@"user"];
         NSString *name = [userDic objectForKey:@"name"];
+        UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
         CGSize size2 = [[NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",topic.quoter,name, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
         
-        returnHeight = size1.height + size2.height + 80  + 120;
+        if (topic.attachments != nil) {
+            return returnHeight = size1.height + +size2.height + 80 + (180 * [[self getPicList:topic.attachments] count]);
+        }
+        returnHeight = size1.height + size2.height + 80;
     }
     return returnHeight;
+}
+
+//获取附件中的照片
+-(NSArray *)getPicList:(NSArray *)attachments
+{
+    NSMutableArray * picArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [attachments count]; i++) {
+        NSString * attUrlString=[[[attachments objectAtIndex:i] attUrl] lowercaseString];
+        if ([attUrlString hasSuffix:@".png"] || [attUrlString hasSuffix:@".jpeg"] || [attUrlString hasSuffix:@".jpg"] || [attUrlString hasSuffix:@".tiff"] || [attUrlString hasSuffix:@".bmp"])
+        {
+            [picArray addObject:[attachments objectAtIndex:i]];
+        }
+    }
+    return picArray;
 }
 
 #pragma -mark tableview Delegate
@@ -299,6 +318,36 @@ static int count;
         [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
     }
     
+}
+
+#pragma - SingleTopicCellDelegate
+-(void)imageAttachmentViewInCellTaped:(int)indexRow Index:(int)indexNum
+{
+    Topic * topic = [_topicsArray objectAtIndex:indexRow];
+    NSArray * picArray = [self getPicList:topic.attachments];
+    
+    int count = (int)[picArray count];
+    // 1.封装图片数据
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
+    for (int i = 0; i<count; i++) {
+        Attachment *attachment = picArray[i];
+        // 替换为中等尺寸图片
+        NSString *url = [attachment.attUrl stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:url]; // 图片路径
+        //photo.srcImageView = self.view.subviews[i]; // 来源于哪个UIImageView
+        [photos addObject:photo];
+    }
+    
+    // 2.显示相册
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = indexNum; // 弹出相册时显示的第一张图片是？
+    browser.photos = photos; // 设置所有的图片
+    [browser show];
+}
+
+-(void)attachmentViewInCellTaped:(BOOL)isPhoto IndexRow:(int)indexRow IndexNum:(int)indexNum
+{
 }
 
 - (void)didReceiveMemoryWarning

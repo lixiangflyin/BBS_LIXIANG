@@ -37,7 +37,27 @@
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"发帖", nil);
+    if (_postType == 0) {
+        self.title = @"发新帖";
+        [_postTypeLabel setText:@"发帖"];
+        [_postContentView setText:@""];
+    }
+    if (_postType == 1) {
+        self.title = @"回帖";
+        [_postTypeLabel setText:@"回帖"];
+        [_postTypeLabel setText: _rootTopic.title];
+        [_postContentView setText:@""];
+
+    }
+    
+    if (_postType == 2) {
+        self.title = @"修改帖子";
+        [_postTypeLabel setText:@"修改"];
+        [_postTitleLabel setText:_rootTopic.title];
+        [_postContentView setText:_rootTopic.content];
+    }
+    
+    
 }
 
 #pragma -mark 获取上传图片
