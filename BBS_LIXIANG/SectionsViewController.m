@@ -34,73 +34,142 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    RADataObject *phone1 = [RADataObject dataObjectWithName:@"本站系统" children:nil];
-    RADataObject *phone2 = [RADataObject dataObjectWithName:@"东南大学" children:nil];
-    RADataObject *phone3 = [RADataObject dataObjectWithName:@"Phone 3" children:nil];
-    RADataObject *phone4 = [RADataObject dataObjectWithName:@"Phone 4" children:nil];
-    
-    RADataObject *phone = [RADataObject dataObjectWithName:@"本站系统"
-                                                  children:[NSArray arrayWithObjects:phone1, phone2, phone3, phone4, nil]];
-    
-    RADataObject *notebook1 = [RADataObject dataObjectWithName:@"Notebook 1" children:nil];
-    RADataObject *notebook2 = [RADataObject dataObjectWithName:@"Notebook 2" children:nil];
-    self.expanded = notebook1;
-    
-    RADataObject *computer1 = [RADataObject dataObjectWithName:@"东南大学"
-                                                      children:[NSArray arrayWithObjects:notebook1, notebook2, nil]];
-    RADataObject *computer2 = [RADataObject dataObjectWithName:@"Computer 2" children:nil];
-    RADataObject *computer3 = [RADataObject dataObjectWithName:@"Computer 3" children:nil];
-    
-    RADataObject *computer = [RADataObject dataObjectWithName:@"电脑技术"
-                                                     children:[NSArray arrayWithObjects:computer1, computer2, computer3, nil]];
-    RADataObject *car = [RADataObject dataObjectWithName:@"学术科学" children:nil];
-    RADataObject *bike = [RADataObject dataObjectWithName:@"艺术文化" children:nil];
-    RADataObject *house = [RADataObject dataObjectWithName:@"乡情校意" children:nil];
-    RADataObject *motorbike = [RADataObject dataObjectWithName:@"休闲娱乐" children:nil];
-    RADataObject *drinks = [RADataObject dataObjectWithName:@"知性感性" children:nil];
-    
-    RADataObject *renWen0 = [RADataObject dataObjectWithName:@"飞跃重洋" children:nil];
-    RADataObject *renWen1 = [RADataObject dataObjectWithName:@"校园讲座与活动" children:nil];
-    RADataObject *renWen2 = [RADataObject dataObjectWithName:@"商业代理" children:nil];
-    RADataObject *renWen3 = [RADataObject dataObjectWithName:@"探索之旅" children:nil];
-    RADataObject *renWen4 = [RADataObject dataObjectWithName:@"8区区长工作室" children:nil];
-    RADataObject *renWen5 = [RADataObject dataObjectWithName:@"党建之窗" children:nil];
-    RADataObject *renWen6 = [RADataObject dataObjectWithName:@"经济天地" children:nil];
-    RADataObject *renWen7 = [RADataObject dataObjectWithName:@"高考招生" children:nil];
-    RADataObject *renWen8 = [RADataObject dataObjectWithName:@"历史" children:nil];
-    RADataObject *renWen9 = [RADataObject dataObjectWithName:@"房产信息" children:nil];
-    RADataObject *renWen10 = [RADataObject dataObjectWithName:@"实习" children:nil];
-    RADataObject *renWen11 = [RADataObject dataObjectWithName:@"招聘特快" children:nil];
-    RADataObject *renWen12 = [RADataObject dataObjectWithName:@"打工一族" children:nil];
-    RADataObject *renWen13 = [RADataObject dataObjectWithName:@"考研" children:nil];
-    RADataObject *renWen14 = [RADataObject dataObjectWithName:@"法网恢恢" children:nil];
-    RADataObject *renWen15 = [RADataObject dataObjectWithName:@"失物招领" children:nil];
-    RADataObject *renWen16 = [RADataObject dataObjectWithName:@"军事天地" children:nil];
-    RADataObject *renWen17 = [RADataObject dataObjectWithName:@"网络资源" children:nil];
-    RADataObject *renWen18 = [RADataObject dataObjectWithName:@"跳槽市场" children:nil];
-    RADataObject *renWen19 = [RADataObject dataObjectWithName:@"交通信息" children:nil];
-    RADataObject *renWen20 = [RADataObject dataObjectWithName:@"统一战线" children:nil];
-    RADataObject *renWen = [RADataObject dataObjectWithName:@"人文信息" children:[NSArray arrayWithObjects:renWen0, renWen1, renWen2, renWen3, renWen4, renWen5, renWen6, renWen7, renWen8, renWen9, renWen10, renWen11, renWen12, renWen13, renWen14, renWen15, renWen16, renWen17, renWen18,  renWen19, renWen20, nil]];
-    
-    RADataObject *sweets = [RADataObject dataObjectWithName:@"体坛风暴" children:nil];
-    RADataObject *watches = [RADataObject dataObjectWithName:@"校务信箱" children:nil];
-    RADataObject *walls = [RADataObject dataObjectWithName:@"社团群体" children:nil];
-    
-    self.data = [NSArray arrayWithObjects:phone, computer, car, bike, house, motorbike, drinks, renWen, sweets, watches, walls, nil];
+
+    [self getdataFormLocation];
     
     RATreeView *treeView = [[RATreeView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44)];
-    
     treeView.delegate = self;
     treeView.dataSource = self;
     treeView.separatorStyle = RATreeViewCellSeparatorStyleSingleLine;
-    
+    //加载数据
     [treeView reloadData];
     //[treeView expandRowForItem:phone withRowAnimation:RATreeViewRowAnimationLeft]; //expands Row
     [treeView setBackgroundColor:UIColorFromRGB(0xF7F7F7)];
     
     self.treeView = treeView;
     [self.view addSubview:treeView];
+}
+
+-(void)getdataFormLocation
+{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sections_info" ofType:@"plist"];
+    _sectionsArr = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
+ 
+    //具体填写cell
+    NSArray *sArr;
+    
+    sArr = _sectionsArr[0];
+    NSMutableArray *benzhan = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [benzhan addObject:obj];
+    }
+    RADataObject *board1 = [RADataObject dataObjectWithName:@"本站系统"
+                                                  children:benzhan];
+    
+    sArr = _sectionsArr[1];
+    NSMutableArray *dongnan = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [dongnan addObject:obj];
+    }
+    RADataObject *board2 = [RADataObject dataObjectWithName:@"东南大学"
+                                                   children:dongnan];
+    
+    sArr = _sectionsArr[2];
+    NSMutableArray *diannao = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [diannao addObject:obj];
+    }
+    RADataObject *board3 = [RADataObject dataObjectWithName:@"电脑技术"
+                                                     children:diannao];
+    
+    sArr = _sectionsArr[3];
+    NSMutableArray *xueshu = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [xueshu addObject:obj];
+    }
+    RADataObject *board4 = [RADataObject dataObjectWithName:@"学术科学" children:xueshu];
+    
+    sArr = _sectionsArr[4];
+    NSMutableArray *yishu = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [yishu addObject:obj];
+    }
+    RADataObject *board5 = [RADataObject dataObjectWithName:@"艺术文化" children:yishu];
+    
+    sArr = _sectionsArr[5];
+    NSMutableArray *xiangqing = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [xiangqing addObject:obj];
+    }
+    RADataObject *board6 = [RADataObject dataObjectWithName:@"乡情校意" children:xiangqing];
+    
+    sArr = _sectionsArr[6];
+    NSMutableArray *xiuxian = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [xiuxian addObject:obj];
+    }
+    RADataObject *board7 = [RADataObject dataObjectWithName:@"休闲娱乐" children:xiuxian];
+    
+    sArr = _sectionsArr[7];
+    NSMutableArray *zhixing = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [zhixing addObject:obj];
+    }
+    RADataObject *board8 = [RADataObject dataObjectWithName:@"知性感性" children:zhixing];
+    
+    sArr = _sectionsArr[8];
+    NSMutableArray *renwen = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [renwen addObject:obj];
+    }
+    RADataObject *board9 = [RADataObject dataObjectWithName:@"人文信息" children:renwen];
+    
+    sArr = _sectionsArr[9];
+    NSMutableArray *titan = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [titan addObject:obj];
+    }
+    RADataObject *board10 = [RADataObject dataObjectWithName:@"体坛风暴" children:titan];
+    
+    sArr = _sectionsArr[10];
+    NSMutableArray *xiaowu = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [xiaowu addObject:obj];
+    }
+    RADataObject *board11 = [RADataObject dataObjectWithName:@"校务信箱" children:xiaowu];
+    
+    sArr = _sectionsArr[11];
+    NSMutableArray *shetuan = [[NSMutableArray alloc]init];
+    for (int i=0; i<[sArr count]; i++) {
+        NSDictionary *sDic = sArr[i];
+        RADataObject *obj = [RADataObject dataObjectWithName:[sDic objectForKey:@"description"] children:nil];
+        [shetuan addObject:obj];
+    }
+    RADataObject *board12 = [RADataObject dataObjectWithName:@"社团群体" children:shetuan];
+    
+    self.data = [NSArray arrayWithObjects:board1, board2, board3, board4, board5, board6, board7, board8, board9, board10, board11,board12, nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -156,10 +225,15 @@
 
 - (void)treeView:(RATreeView *)treeView didSelectRowForItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
 {
+    //获取cell信息
     NSLog(@"aItem: %ld bItem:% ld",(long)treeNodeInfo.positionInSiblings,(long)treeNodeInfo.parent.positionInSiblings);
     NSLog(@"item：%@",((RADataObject *)item).name);
     
-    [_delegate pushToNextSingleSectionView];
+    NSArray *selectArr = [self.sectionsArr objectAtIndex:treeNodeInfo.parent.positionInSiblings];
+    NSDictionary *detailDic = [selectArr objectAtIndex:treeNodeInfo.positionInSiblings];
+    NSString *boardName = [detailDic objectForKey:@"sectionName"];
+    
+    [_delegate pushToNextSingleSectionViewWithValue:boardName];
 }
 
 

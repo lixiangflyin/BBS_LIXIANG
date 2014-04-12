@@ -12,7 +12,7 @@
 
 @protocol HotBoardDelegate <NSObject>
 
--(void)pushToNextSingleSectionViewWithValue:(Board *)board;
+-(void)pushToNextSingleSectionViewWithValue:(NSString *)boardName;
 
 @end
 

@@ -150,11 +150,11 @@
 }
 
 #pragma -mark TopTenTopicsDelegate
--(void)pushToNextSingleSectionViewWithValue:(Board *)board
+-(void)pushToNextSingleSectionViewWithValue:(NSString *)boardName
 {
     
     SingleBoardViewController *single = [[SingleBoardViewController alloc]init];
-    [single setRequestBoard:board];
+    [single setBoardName:boardName];
     [self.navigationController pushViewController:single animated:YES];
     single = nil;
 }

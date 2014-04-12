@@ -111,7 +111,7 @@
     
     self.selectBoard = [self.hotBoardArr objectAtIndex:indexPath.row];
     
-    [_delegate pushToNextSingleSectionViewWithValue:self.selectBoard];
+    [_delegate pushToNextSingleSectionViewWithValue:self.selectBoard.name];
 }
 
 - (void)didReceiveMemoryWarning

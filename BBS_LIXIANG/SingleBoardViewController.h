@@ -19,7 +19,7 @@
 
 @property (nonatomic, retain) NSMutableArray *singleSectionArr;
 
-@property (nonatomic, retain) Board *requestBoard;
+@property (nonatomic, retain) NSString *boardName;
 
 @property (nonatomic, retain) Topic *selectTopic;
 

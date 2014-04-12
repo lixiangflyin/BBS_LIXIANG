@@ -34,6 +34,7 @@
     //通过url来获得JSON数据
     
     NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/topten.json"];
+    
     //NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/sections.json?"];
     _request = [ASIFormDataRequest requestWithURL:myurl];
     [_request setDelegate:self];
@@ -62,31 +63,34 @@
 {
     NSDictionary *dic = [request.responseString objectFromJSONString];
     NSLog(@"dic %@",dic);
-    NSArray *arr = [dic objectForKey:@"boards"];
-    NSLog(@"arr = %@",arr);
-   NSArray * objects = [JsonParseEngine parseTopics:dic];
-    
+
+//    NSArray * objects = [JsonParseEngine parseSections:dic];
+//    
 //    NSMutableArray *array = [[NSMutableArray alloc]init];
+//    
 //    for (int i=0; i<[objects count]; i++) {
+//        
 //        Board *dict = [objects objectAtIndex:i];
 //        NSArray *sectionArr = dict.sectionBoards;
+//        NSMutableArray *arr1 = [[NSMutableArray alloc]init];
 //        for (int j=0; j<[sectionArr count]; j++) {
+//            
 //            Board *board = [sectionArr objectAtIndex:j];
-//            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"sectionName",board.name,@"description",board.description, nil];
-//            [array addObject:dic];
+//            NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:board.name,@"sectionName",board.description,@"description", nil];
+//            [arr1 addObject:dic1];
 //        }
+//        [array addObject:arr1];
 //    }
 //    
 //    NSArray*paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
 //    NSString*path=[paths objectAtIndex:0];
-//    NSString *filename= [path stringByAppendingPathComponent:@"sections.plist"];
+//    NSString *filename= [path stringByAppendingPathComponent:@"sections_info.plist"];
 //    
 //    [array writeToFile:filename  atomically:YES];
-//    
-//    //NSArray * objects = [JsonParseEngine parseTopics:dic];
-//    NSLog(@"%@",objects);
     
-    //self.tentopicsArr = [NSMutableArray arrayWithArray:[objects objectAtIndex:2]];
+    NSArray * objects = [JsonParseEngine parseTopics:dic];
+    NSLog(@"%@",objects);
+    
     self.tentopicsArr = [NSMutableArray arrayWithArray:objects];
     [_tentopicTableView reloadData];
     

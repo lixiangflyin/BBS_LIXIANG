@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 @protocol SectionsDelegate <NSObject>
 
--(void)pushToNextSingleSectionView;
+-(void)pushToNextSingleSectionViewWithValue:(NSString *)boardName;
 
 @end
 
 @interface SectionsViewController : UIViewController
+
+@property (nonatomic, strong) NSMutableArray *sectionsArr;
 
 @property (nonatomic, assign) id delegate;
 

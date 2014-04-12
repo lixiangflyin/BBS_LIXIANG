@@ -52,11 +52,32 @@
     NSString *str = [NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",_quoter,_name,_quote];
     [_commentToLabel setText:str];
     
+    //如果有附件，就加载
     if ([_attachments count] > 0) {
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        UIFont *font = [UIFont systemFontOfSize:15.0];
+        CGSize size1 = [_content boundingRectWithSize:CGSizeMake(self.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        
+        UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
+        CGSize size2 = [str boundingRectWithSize:CGSizeMake(self.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
+        
+        NSArray * picArray = [self getPicList];
+        for (int i = 0; i < [picArray count]; i++) {
+            Attachment * att = [picArray objectAtIndex:i];
+            ImageAttachmentView * imageAttachmentView = [[ImageAttachmentView alloc] initWithFrame:CGRectMake(60, i*180 + _contentLabel.frame.origin.y + size1.height + size2.height + 20, 200, 180)];
+            [imageAttachmentView setAttachmentURL:[NSURL URLWithString:att.attUrl] NameText:att.attFileName];
+            imageAttachmentView.indexNum = i;
+            imageAttachmentView.mDelegate = self;
+            [self addSubview:imageAttachmentView];
+            [self.attachmentsViewArray addObject:imageAttachmentView];
+        }
     }
 
 }
 
+//楼主cell调用
 -(void)setReadyToShowOne
 {
     if (_isMan) {
@@ -78,6 +99,7 @@
     //NSLog(@"CommentCell after frame: %@", NSStringFromCGRect(_contentLabel.frame));
     [_commentToLabel setText:@""];
     
+    //如果有附件，就加载
     if ([_attachments count] > 0) {
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];

@@ -176,13 +176,13 @@ static int count;
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];
         
         cell.delegate = self;
+        cell.indexRow = indexPath.row;
         cell.ID = topic.ID;
         cell.time = topic.time;
         cell.author = topic.author;
         cell.quote = topic.quote;
         cell.quoter = topic.quoter;
         cell.content = topic.content;
-        //cell.num = indexPath.row;
         cell.content = topic.content;
         cell.attachments = topic.attachments;
         
@@ -323,7 +323,8 @@ static int count;
 #pragma - SingleTopicCellDelegate
 -(void)imageAttachmentViewInCellTaped:(int)indexRow Index:(int)indexNum
 {
-    Topic * topic = [_topicsArray objectAtIndex:indexRow];
+    //由于特殊原因 主题对象需要在行减一处理 indexRow-1
+    Topic * topic = [_topicsArray objectAtIndex:indexRow-1];
     NSArray * picArray = [self getPicList:topic.attachments];
     
     int count = (int)[picArray count];

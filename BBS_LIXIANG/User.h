@@ -27,6 +27,7 @@
     NSString * astro; //星座（用户相关设置允许后显示)
     NSString * mode; //在线状态
 }
+
 @property(nonatomic, strong)NSString * ID;
 @property(nonatomic, strong)NSString * name;
 @property(nonatomic, strong)NSString * token;
