@@ -9,12 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
 #import "Topic.h"
+#import "MJRefresh.h"
 
 @interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) NSString *searchString;
 
 @property (nonatomic, retain) UITableView *searchTableView;
+
+//加载与刷新
+@property (nonatomic, retain) MJRefreshHeaderView *headerView;
+
+@property (nonatomic, retain) MJRefreshFooterView *footerView;
+
+@property (nonatomic, assign) BOOL isRefreshAgain;
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
 

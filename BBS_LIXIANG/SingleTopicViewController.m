@@ -23,7 +23,7 @@ static int count;
 
 @interface SingleTopicViewController ()
 
-@property (nonatomic, strong) CommentCell *prototypeCell;
+//@property (nonatomic, strong) CommentCell *prototypeCell;
 
 @end
 
@@ -36,9 +36,10 @@ static int count;
         // Custom initialization
         count = 0;
         _isRequestToTopics = YES;
+        _topicsArray = [[NSMutableArray alloc]init];
         _usersInfo = [[NSMutableArray alloc]init];
         
-        self.prototypeCell = [self.singletopicTableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+        //self.prototypeCell = [self.singletopicTableView dequeueReusableCellWithIdentifier:@"CommentCell"];
     }
     return self;
 }
@@ -47,47 +48,101 @@ static int count;
 {
     [super viewDidLoad];
 
-    UIBarButtonItem *browerButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(browerPicture:)];
-    self.navigationItem.rightBarButtonItem = browerButton;
-    
-    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
-    [baseurl appendFormat:@"/%@",_rootTopic.board];
-    [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,0];
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    UIBarButtonItem *replyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(replyToTopic:)];
+    self.navigationItem.rightBarButtonItem = replyButton;
     
     _singletopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _singletopicTableView.dataSource = self;  //数据源代理
     _singletopicTableView.delegate = self;    //表视图委托
     [self.view addSubview:_singletopicTableView];
+    
+    [self addHeaderView];
+    [self addFooterView];
+}
+
+//添加下拉刷新
+- (void)addHeaderView
+{
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = _singletopicTableView;
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        
+        _isRefreshAgain = YES;
+        
+        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
+        [baseurl appendFormat:@"/%@",_rootTopic.board];
+        [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,0];
+        //通过url来获得JSON数据
+        NSURL *myurl = [NSURL URLWithString:baseurl];
+        _request = [ASIFormDataRequest requestWithURL:myurl];
+        [_request setDelegate:self];
+        [_request setDidFinishSelector:@selector(GetResult:)];
+        [_request setDidFailSelector:@selector(GetErr:)];
+        [_request startAsynchronous];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+        
+    };
+    
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    
+    [header beginRefreshing];
+    _headerView = header;
+}
+
+//上拉加载更多
+- (void)addFooterView
+{
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = _singletopicTableView;
+    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        
+        _isRefreshAgain = NO;
+        
+        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
+        [baseurl appendFormat:@"/%@",_rootTopic.board];
+        [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,[_topicsArray count]];
+        //通过url来获得JSON数据
+        NSURL *myurl = [NSURL URLWithString:baseurl];
+        _request = [ASIFormDataRequest requestWithURL:myurl];
+        [_request setDelegate:self];
+        [_request setDidFinishSelector:@selector(GetResult:)];
+        [_request setDidFailSelector:@selector(GetErr:)];
+        [_request startAsynchronous];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    
+    _footerView = footer;
 }
 
 #pragma mark - Button Handlers
--(void)browerPicture:(id)sender{
-    NSArray *urls = @[@"http://ww4.sinaimg.cn/thumbnail/7f8c1087gw1e9g06pc68ug20ag05y4qq.gif", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr0nly5j20pf0gygo6.jpg", @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1d0vyj20pf0gytcj.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr1xydcj20gy0o9q6s.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr2n1jjj20gy0o9tcc.jpg", @"http://ww2.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr39ht9j20gy0o6q74.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr3xvtlj20gy0obadv.jpg", @"http://ww4.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr4nndfj20gy0o9q6i.jpg", @"http://ww3.sinaimg.cn/thumbnail/8e88b0c1gw1e9lpr57tn9j20gy0obn0f.jpg"];
+-(void)replyToTopic:(id)sender{
     
-    int count = (int)urls.count;
-    // 1.封装图片数据
-    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
-    for (int i = 0; i<count; i++) {
-        // 替换为中等尺寸图片
-        NSString *url = [urls[i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-        MJPhoto *photo = [[MJPhoto alloc] init];
-        photo.url = [NSURL URLWithString:url]; // 图片路径
-        //photo.srcImageView = self.view.subviews[i]; // 来源于哪个UIImageView
-        [photos addObject:photo];
-    }
-    
-    // 2.显示相册
-    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
-    browser.currentPhotoIndex = 2; // 弹出相册时显示的第一张图片是？
-    browser.photos = photos; // 设置所有的图片
-    [browser show];
+    //发表评论
 }
 
 
@@ -108,10 +163,21 @@ static int count;
         
     NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
     //NSLog(@"%@",objects);
+    
+    if (_isRefreshAgain) {
+        //获取信息的记录,重新置0
+        count = 0;
         
-    self.topicsArray = [NSMutableArray arrayWithArray:objects];
+        [self.topicsArray removeAllObjects];
+        [self.usersInfo removeAllObjects];
+        
+        [self.topicsArray addObjectsFromArray:objects];
+    }
+    else{
+        [self.topicsArray addObjectsFromArray:objects];
+    }
 
-    //同步请求
+    //同步请求,其用户信息
     for ( ; count<[_topicsArray count]; count++) {
         Topic *topic = [_topicsArray objectAtIndex:count];
         NSString *str = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",topic.author];
@@ -120,14 +186,17 @@ static int count;
         [request startSynchronous];
         NSError *error = [request error];
         if (!error) {
+            
             NSString *response = [request responseString];
-            //NSLog(@"reponse:%@",response);
+    
             NSDictionary *dictionary = [response objectFromJSONString];
             [_usersInfo addObject:dictionary];
         }
     }
         
     [_singletopicTableView reloadData];
+    [_headerView endRefreshing];
+    [_footerView endRefreshing];
 
     
 }
@@ -170,6 +239,7 @@ static int count;
         if (cell == nil) {
             NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"CommentCell" owner:self options:nil];
             cell = [array objectAtIndex:0];
+            [cell addTapToImageView];
         }
         //[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
         
@@ -263,7 +333,7 @@ static int count;
     return returnHeight;
 }
 
-//获取附件中的照片
+#pragma -mark 获取附件中的照片
 -(NSArray *)getPicList:(NSArray *)attachments
 {
     NSMutableArray * picArray = [[NSMutableArray alloc] init];
@@ -320,7 +390,7 @@ static int count;
     
 }
 
-#pragma - SingleTopicCellDelegate
+#pragma -mark SingleTopicCellDelegate
 -(void)imageAttachmentViewInCellTaped:(int)indexRow Index:(int)indexNum
 {
     //由于特殊原因 主题对象需要在行减一处理 indexRow-1
@@ -349,6 +419,13 @@ static int count;
 
 -(void)attachmentViewInCellTaped:(BOOL)isPhoto IndexRow:(int)indexRow IndexNum:(int)indexNum
 {
+}
+
+-(void)tapHeadPhoto:(int)index
+{
+    UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
+    userInfor.userDictionary = self.usersInfo[index-1];
+    [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
 }
 
 - (void)didReceiveMemoryWarning

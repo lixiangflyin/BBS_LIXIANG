@@ -11,10 +11,18 @@
 #import "Topic.h"
 #import "CommentCell.h"
 #import "UIViewController+MJPopupViewController.h"
+#import "MJRefresh.h"
 
 @interface SingleTopicViewController : UIViewController<UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,CommentCellDelegate>
 
 @property (nonatomic, retain) UITableView *singletopicTableView;
+
+//加载与刷新
+@property (nonatomic, retain) MJRefreshHeaderView *headerView;
+
+@property (nonatomic, retain) MJRefreshFooterView *footerView;
+
+@property (nonatomic, assign) BOOL isRefreshAgain;
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
 

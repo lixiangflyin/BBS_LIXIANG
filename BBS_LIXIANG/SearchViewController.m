@@ -38,30 +38,105 @@
     
     self.title = @"搜索结果";
     
+    _searchTopicsArr = [[NSMutableArray alloc]init];
+    
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(leftDrawerButtonPress:)];
     self.navigationItem.leftBarButtonItem = leftButton;
     
-    //通过url来获得JSON数据
-    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/search/topics.json?" mutableCopy];
-    [baseurl appendFormat:@"keys=%@",[_searchString URLEncodedString]];
-    [baseurl appendFormat:@"&limit=30&start=%d", 0];
-//    if (token != nil) {
-//        [baseurl appendFormat:@"&token=%@", token];
-//    }
-
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
-    
-    
-    _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64) style:UITableViewStylePlain];
+    _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _searchTableView.dataSource = self;  //数据源代理
     _searchTableView.delegate = self;    //表视图委托
     [self.view addSubview:_searchTableView];
+    
+    [self addHeaderView];
+    [self addFooterView];
 }
+
+//添加下拉刷新
+- (void)addHeaderView
+{
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = _searchTableView;
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        
+        _isRefreshAgain = YES;
+        
+        //通过url来获得JSON数据
+        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/search/topics.json?" mutableCopy];
+        [baseurl appendFormat:@"keys=%@",[_searchString URLEncodedString]];
+        [baseurl appendFormat:@"&limit=30&start=%d", 0];
+        //    if (token != nil) {
+        //        [baseurl appendFormat:@"&token=%@", token];
+        //    }
+        
+        NSURL *myurl = [NSURL URLWithString:baseurl];
+        _request = [ASIFormDataRequest requestWithURL:myurl];
+        [_request setDelegate:self];
+        [_request setDidFinishSelector:@selector(GetResult:)];
+        [_request setDidFailSelector:@selector(GetErr:)];
+        [_request startAsynchronous];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+        
+    };
+    
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    
+    [header beginRefreshing];
+    _headerView = header;
+}
+
+- (void)addFooterView
+{
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = _searchTableView;
+    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        
+        _isRefreshAgain = NO;
+        
+        //通过url来获得JSON数据
+        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/search/topics.json?" mutableCopy];
+        [baseurl appendFormat:@"keys=%@",[_searchString URLEncodedString]];
+        [baseurl appendFormat:@"&limit=30&start=%d", [_searchTopicsArr count]];
+        //    if (token != nil) {
+        //        [baseurl appendFormat:@"&token=%@", token];
+        //    }
+        
+        NSURL *myurl = [NSURL URLWithString:baseurl];
+        _request = [ASIFormDataRequest requestWithURL:myurl];
+        [_request setDelegate:self];
+        [_request setDidFinishSelector:@selector(GetResult:)];
+        [_request setDidFailSelector:@selector(GetErr:)];
+        [_request startAsynchronous];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    _footerView = footer;
+}
+
 
 #pragma mark - Button Handlers
 -(void)leftDrawerButtonPress:(id)sender{
@@ -85,9 +160,19 @@
     NSArray * objects = [JsonParseEngine parseSearchTopics:dic];
     NSLog(@"%@",objects);
     
-    self.searchTopicsArr = [NSMutableArray arrayWithArray:objects];
-    
-    [_searchTableView reloadData];
+    if (_isRefreshAgain) {
+        [self.searchTopicsArr removeAllObjects];
+        [self.searchTopicsArr addObjectsFromArray:objects];
+        
+        [_searchTableView reloadData];
+        [_headerView endRefreshing];
+    }
+    else{
+        [self.searchTopicsArr addObjectsFromArray:objects];
+        
+        [_searchTableView reloadData];
+        [_footerView endRefreshing];
+    }
     
 }
 

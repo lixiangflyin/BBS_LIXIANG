@@ -12,22 +12,30 @@
 
 @implementation CommentCell
 
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UITapGestureRecognizer *clickHeadPhoto = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHeadPhoto:)];
-        [_headPhotoImage addGestureRecognizer: clickHeadPhoto];
+        
     }
     return self;
+}
+
+-(void)addTapToImageView
+{
+    UITapGestureRecognizer *clickHeadPhoto = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHeadPhoto:)];
+    _headPhotoImage.userInteractionEnabled = YES;
+    [_headPhotoImage addGestureRecognizer: clickHeadPhoto];
+    
 }
 
 #pragma -mark tap
 -(void) clickHeadPhoto:(id)sender
 {
-    //[_delegate tapHeadPhoto];
     NSLog(@"click headPhoto!");
+    [_delegate tapHeadPhoto:_indexRow];
 }
 
 -(void)setReadyToShow

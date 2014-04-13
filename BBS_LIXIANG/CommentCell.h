@@ -46,5 +46,6 @@
 
 -(void)setReadyToShow;
 -(void)setReadyToShowOne;
+-(void)addTapToImageView;
 
 @end

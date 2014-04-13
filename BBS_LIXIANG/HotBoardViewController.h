@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
 #import "Board.h"
+#import "MJRefresh.h"
 
 @protocol HotBoardDelegate <NSObject>
 
@@ -21,6 +22,8 @@
 @property (nonatomic, retain) UITableView *hotBoardTableView;
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
+
+@property (nonatomic, retain) MJRefreshHeaderView *headerView;
 
 @property (nonatomic, retain) NSMutableArray *hotBoardArr;
 

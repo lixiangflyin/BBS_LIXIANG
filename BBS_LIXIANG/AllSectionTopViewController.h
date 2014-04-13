@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
 #import "Topic.h"
+#import "MJRefresh.h"
 
 @protocol AllSectionsTopicsDelegate <NSObject>
 
@@ -21,6 +22,8 @@
 @property (nonatomic, retain) UITableView *allTopicTableView;
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
+
+@property (nonatomic, retain) MJRefreshHeaderView *headerView;
 
 @property (nonatomic, retain) NSMutableArray *allTopicsArr;
 

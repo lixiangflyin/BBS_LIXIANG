@@ -36,6 +36,8 @@
 {
     [super viewDidLoad];
 	
+    _mailsArr = [[NSMutableArray alloc]init];
+    
     self.title = @"我的信箱";
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(leftDrawerButtonPress:)];
     self.navigationItem.leftBarButtonItem = leftButton;
@@ -43,21 +45,93 @@
     UIBarButtonItem *writeButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(writeMail:)];
     self.navigationItem.rightBarButtonItem = writeButton;
     
-    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
-    [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
-    [baseurl appendFormat:@"&type=%i",0];
-    [baseurl appendFormat:@"&limit=30&start=%i",0];
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
-    
     _mailsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _mailsTableView.dataSource = self;  //数据源代理
     _mailsTableView.delegate = self;    //表视图委托
     [self.view addSubview:_mailsTableView];
+    
+    [self addHeaderView];
+    [self addFooterView];
+    
+    
+}
+
+//添加下拉刷新
+- (void)addHeaderView
+{
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = _mailsTableView;
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        
+        _isRefreshAgain = YES;
+        
+        //发送请求
+        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
+        [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
+        [baseurl appendFormat:@"&type=%i",0];
+        [baseurl appendFormat:@"&limit=30&start=%i",0];
+        NSURL *myurl = [NSURL URLWithString:baseurl];
+        _request = [ASIFormDataRequest requestWithURL:myurl];
+        [_request setDelegate:self];
+        [_request setDidFinishSelector:@selector(GetResult:)];
+        [_request setDidFailSelector:@selector(GetErr:)];
+        [_request startAsynchronous];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+        
+    };
+    
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    
+    [header beginRefreshing];
+    _headerView = header;
+}
+
+- (void)addFooterView
+{
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = _mailsTableView;
+    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        
+        _isRefreshAgain = NO;
+        //发送请求
+        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
+        [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
+        [baseurl appendFormat:@"&type=%i",0];
+        [baseurl appendFormat:@"&limit=30&start=%i",(int)[_mailsArr count]];
+        NSURL *myurl = [NSURL URLWithString:baseurl];
+        _request = [ASIFormDataRequest requestWithURL:myurl];
+        [_request setDelegate:self];
+        [_request setDidFinishSelector:@selector(GetResult:)];
+        [_request setDidFailSelector:@selector(GetErr:)];
+        [_request startAsynchronous];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    _footerView = footer;
 }
 
 #pragma mark - Button Handlers
@@ -83,8 +157,19 @@
     NSArray * objects = [JsonParseEngine parseMails:dic Type:0];
     NSLog(@"%@",objects);
     
-    self.mailsArr = [NSMutableArray arrayWithArray:objects];
-    [_mailsTableView reloadData];
+    if (_isRefreshAgain) {
+        [self.mailsArr removeAllObjects];
+        [self.mailsArr addObjectsFromArray:objects];
+        
+        [_mailsTableView reloadData];
+        [_headerView endRefreshing];
+    }
+    else{
+        [self.mailsArr addObjectsFromArray:objects];
+        
+        [_mailsTableView reloadData];
+        [_footerView endRefreshing];
+    }
     
 }
 

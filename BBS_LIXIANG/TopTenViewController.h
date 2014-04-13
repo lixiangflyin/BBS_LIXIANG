@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
 #import "Topic.h"
+#import "MJRefresh.h"
 
 @protocol TopTenTopicsDelegate <NSObject>
 
@@ -19,6 +20,8 @@
 @interface TopTenViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView *tentopicTableView;
+
+@property (nonatomic, retain) MJRefreshHeaderView *headerView;
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
 
