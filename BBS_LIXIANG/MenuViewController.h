@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UINavigationController *navCommonComponentVC;
 @property (nonatomic, strong) UINavigationController *navMailViewController;
 @property (nonatomic, strong) UINavigationController *navSearchViewController;
+@property (nonatomic, strong) UINavigationController *navMyCollectViewController;
 
 @property (nonatomic, strong) InputViewController *inputSearchVC;
 

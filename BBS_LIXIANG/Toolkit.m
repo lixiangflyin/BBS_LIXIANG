@@ -35,26 +35,12 @@
     [defaults setObject:token forKey:@"token"];
 }
 
-
-
-+ (void)saveTestUrl:(NSString *)url
++ (void)saveCollectedSections:(NSMutableArray *)sections
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:url forKey:@"ip_test"];
+    [defaults setObject:sections forKey:@"collect_sections"];
 }
 
-+ (void)saveUploadFileName:(NSString *)fileName
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:fileName forKey:@"uploadFileName"];
-}
-
-+ (void)saveLocalAccess:(BOOL)local_access
-
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:local_access forKey:@"local_access"];
-}
 
 
 + (NSString *)getUserName
@@ -81,24 +67,13 @@
     return (NSString *)[defaults objectForKey:@"token"];
 }
 
-
-
-+ (NSString *)getTestUrl
++ (NSMutableArray *)getCollectedSections
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return (NSString *)[defaults objectForKey:@"ip_test"];
+    return (NSMutableArray *)[defaults objectForKey:@"collect_sections"];
 }
 
-+ (NSString *)getUploadFileName
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return (NSString *)[defaults objectForKey:@"uploadFileName"];
-}
 
-+ (BOOL)getLocalAccess
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [[defaults objectForKey:@"local_access"]boolValue];
-}
+
 
 @end

@@ -1,14 +1,14 @@
 //
-//  MenuCell.m
+//  MySectionCell.m
 //  BBS_LIXIANG
 //
-//  Created by apple on 14-4-11.
+//  Created by apple on 14-4-15.
 //  Copyright (c) 2014年 apple. All rights reserved.
 //
 
-#import "MenuCell.h"
+#import "MySectionCell.h"
 
-@implementation MenuCell
+@implementation MySectionCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -17,12 +17,6 @@
         // Initialization code
     }
     return self;
-}
-
--(void)setReadyShow
-{
-    [_titleImageView setImage:[UIImage imageNamed:_imageName]];
-    [_titleLabel setText:_titleString];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

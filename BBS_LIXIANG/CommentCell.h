@@ -15,7 +15,8 @@
 -(void)imageAttachmentViewInCellTaped:(int)indexRow Index:(int)indexNum;
 -(void)attachmentViewInCellTaped:(BOOL)isPhoto IndexRow:(int)indexRow IndexNum:(int)indexNum;
 //点击头像
--(void)tapHeadPhoto:(int)index;
+-(void)tapHeadPhoto:(int)indexRow;
+-(void)replyTheTopic:(int)indexRow;
 
 @end
 
@@ -41,11 +42,15 @@
 @property(nonatomic, strong)NSArray * attachments;
 @property(nonatomic, strong)NSMutableArray * attachmentsViewArray;
 
+@property(nonatomic, strong)NSString *headPhotoUrl;
+
 @property(nonatomic, assign)int indexRow;
 @property(nonatomic, assign)id delegate;
 
 -(void)setReadyToShow;
 -(void)setReadyToShowOne;
+
 -(void)addTapToImageView;
+- (IBAction)replyToTopic:(id)sender;
 
 @end

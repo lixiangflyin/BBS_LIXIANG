@@ -8,6 +8,9 @@
 
 #import "PostTopicViewController.h"
 #import "seekImageView.h"
+#import "JsonParseEngine.h"
+#import "Toolkit.h"
+#import "WBUtil.h"
 
 #define XLoc  70
 #define YLoc  70
@@ -36,27 +39,84 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"root content %@",_rootTopic.content);
+    
+    UIBarButtonItem *replyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(postTopic:)];
+    self.navigationItem.rightBarButtonItem = replyButton;
+    replyButton = nil;
     
     if (_postType == 0) {
         self.title = @"发新帖";
-        [_postTypeLabel setText:@"发帖"];
+        [_postTypeLabel setText:@"新帖:"];
         [_postContentView setText:@""];
     }
     if (_postType == 1) {
         self.title = @"回帖";
-        [_postTypeLabel setText:@"回帖"];
-        [_postTypeLabel setText: _rootTopic.title];
+        [_postTypeLabel setText:@"回帖:"];
+        [_postTitleLabel setText:_rootTopic.title];
         [_postContentView setText:@""];
 
     }
     
     if (_postType == 2) {
         self.title = @"修改帖子";
-        [_postTypeLabel setText:@"修改"];
+        [_postTypeLabel setText:@"修改:"];
         [_postTitleLabel setText:_rootTopic.title];
         [_postContentView setText:_rootTopic.content];
     }
     
+    
+}
+
+#pragma -mark 发送帖子（修改，发新帖，回复）
+-(void)postTopic:(id)sender
+{
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic/post.json?" mutableCopy];
+    [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
+    [baseurl appendFormat:@"&board=%@",_boardName];
+    [baseurl appendFormat:@"&title=%@",[_postTitleLabel.text URLEncodedString]];
+    [baseurl appendFormat:@"&content=%@",[_postContentView.text URLEncodedString]];
+    
+    if (_postType == 0) {
+        [baseurl appendFormat:@"&reid=%i",0]; //新帖阅读数为0
+    }
+    if (_postType == 1) {
+        [baseurl appendFormat:@"&reid=%i",_rootTopic.read];
+    }
+    if (_postType == 2) {
+        [baseurl appendFormat:@"&reid=%i",_rootTopic.read];
+    }
+    [baseurl appendFormat:@"&type=%i",3];
+    
+    //通过url来获得JSON数据
+    NSURL *myurl = [NSURL URLWithString:baseurl];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
+}
+
+#pragma -mark asi Delegate
+//ASI委托函数，错误处理
+-(void) GetErr:(ASIHTTPRequest *)request
+{
+    NSLog(@"error!");
+    
+}
+
+//ASI委托函数，信息处理
+-(void) GetResult:(ASIHTTPRequest *)request
+{
+    
+    NSDictionary *dic = [request.responseString objectFromJSONString];
+    //NSLog(@"dic %@",dic);
+    
+    NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
+    //NSLog(@"%@",objects);
+    
+    //同步请求,其用户信息
+
     
 }
 

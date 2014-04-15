@@ -33,8 +33,16 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(leftDrawerButtonPress:)];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation_color.png"] forBarMetrics:UIBarMetricsDefault];
+
+
+    //自制ui
+    UIImage* image= [UIImage imageNamed:@"bbs_section.png"];
+    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
+                                 initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = leftButton;
     
     self.title = @"虎踞龙盘";
@@ -146,7 +154,7 @@
     SingleTopicViewController *single = [[SingleTopicViewController alloc]init];
     [single setRootTopic:topic];
     [self.navigationController pushViewController:single animated:YES];
-    single = nil;
+    //single = nil;
 }
 
 #pragma -mark TopTenTopicsDelegate
@@ -156,7 +164,7 @@
     SingleBoardViewController *single = [[SingleBoardViewController alloc]init];
     [single setBoardName:boardName];
     [self.navigationController pushViewController:single animated:YES];
-    single = nil;
+    //single = nil;
 }
 
 
@@ -166,7 +174,7 @@
 
     SingleBoardViewController *single = [[SingleBoardViewController alloc]init];
     [self.navigationController pushViewController:single animated:YES];
-    single = nil;
+    //single = nil;
 }
 
 - (void)didReceiveMemoryWarning

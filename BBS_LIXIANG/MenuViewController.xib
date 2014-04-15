@@ -29,8 +29,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="242"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-AS-hho">
-                    <rect key="frame" x="20" y="67" width="86" height="81"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="dH9-wE-9IV">
+                    <rect key="frame" x="0.0" y="0.0" width="260" height="167"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="author.png" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-AS-hho">
+                    <rect key="frame" x="20" y="74" width="86" height="81"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="guest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="La8-cX-1ds">
@@ -48,7 +52,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" tag="201" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3B-yr-70S">
-                    <rect key="frame" x="10" y="180" width="70" height="49"/>
+                    <rect key="frame" x="5" y="180" width="78" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.97254908084869385" green="0.40392160415649414" blue="0.019607843831181526" alpha="1" colorSpace="deviceRGB"/>
                     <state key="normal" title="我的信箱">
@@ -60,10 +64,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="202" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdy-aQ-w0n">
-                    <rect key="frame" x="84" y="180" width="70" height="49"/>
+                    <rect key="frame" x="91" y="180" width="78" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.27843138579999999" green="0.054901964960000001" blue="0.96470594409999999" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" title="@我的">
+                    <state key="normal" title="我的消息">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -72,10 +76,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="203" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UhS-sN-gvt">
-                    <rect key="frame" x="159" y="180" width="70" height="49"/>
+                    <rect key="frame" x="177" y="180" width="78" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.4274510145" green="0.90980398650000005" blue="0.46666669849999998" alpha="1" colorSpace="deviceRGB"/>
-                    <state key="normal" title="回复我的">
+                    <state key="normal" title="我的收藏">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -89,6 +93,7 @@
         </view>
     </objects>
     <resources>
-        <image name="avatar.jpg" width="420" height="420"/>
+        <image name="author.png" width="120" height="120"/>
+        <image name="profile_bg.jpg" width="480" height="270"/>
     </resources>
 </document>

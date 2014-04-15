@@ -10,6 +10,7 @@
 #import "PostMailViewController.h"
 
 #import "JsonParseEngine.h"
+#import "Toolkit.h"
 
 @interface SingleMailViewController ()
 
@@ -34,9 +35,10 @@
     self.navigationItem.rightBarButtonItem = replyButton;
     
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mail/get.json?" mutableCopy];
+    //[baseurl appendFormat:@"token=%@",[Toolkit getToken]];
     [baseurl appendFormat:@"token=%@",@"bGl4aWFuZ2ZseWlu%3A%3D%3DwxN2Rp0T%2B4FOVeCJCmo7cu"];
     [baseurl appendFormat:@"&type=%i",_rootMail.type];
-    [baseurl appendFormat:@"&id==%i",_rootMail.ID];
+    [baseurl appendFormat:@"&id=%i",_rootMail.ID];
     NSURL *myurl = [NSURL URLWithString:baseurl];
     _request = [ASIFormDataRequest requestWithURL:myurl];
     [_request setDelegate:self];
@@ -73,17 +75,19 @@
     [_contentLabel setText:_mail.content];
     [_timeLabel setText:[JsonParseEngine dateToString:_mail.time]];
     
-    //[_scrollView addSubview:_realView];
+    [_scollView addSubview:_realView];
     
-    UIFont *font = [UIFont systemFontOfSize:17.0];
-    CGSize size = [_mail.content sizeWithFont:font constrainedToSize:CGSizeMake(self.view.frame.size.width - 30, 10000) lineBreakMode:NSLineBreakByWordWrapping];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    UIFont *font = [UIFont systemFontOfSize:16.0];
+    CGSize size = [_mail.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 60, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
     
-    [_contentLabel setFrame:CGRectMake(_contentLabel.frame.origin.x, _contentLabel.frame.origin.y, self.view.frame.size.width - 30, size.height)];
+    [_contentLabel setFrame:CGRectMake(_contentLabel.frame.origin.x, _contentLabel.frame.origin.y, self.view.frame.size.width - 60, size.height)];
     
     [_realView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _contentLabel.frame.origin.y + size.height)];
-    //[_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, _contentLabel.frame.origin.y + size.height+10)];
+    [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, _contentLabel.frame.origin.y + size.height+10 + 64)];
     if (_contentLabel.frame.origin.y + size.height+10 <= self.view.frame.size.height) {
-        //[_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 10)];
+        [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 10)];
     }
     
 }

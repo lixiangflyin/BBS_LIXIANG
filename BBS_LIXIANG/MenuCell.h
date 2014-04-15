@@ -13,5 +13,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *titleImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (strong, nonatomic) NSString *imageName;
+@property (strong, nonatomic) NSString *titleString;
+
+-(void)setReadyShow;
 
 @end

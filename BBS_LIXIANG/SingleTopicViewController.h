@@ -30,8 +30,6 @@
 
 @property (nonatomic, retain) NSMutableArray *usersInfo;
 
-@property (nonatomic, retain) NSDictionary *oneUserInfo;
-
 @property (nonatomic, assign) BOOL isRequestToTopics;
 
 @property(nonatomic, strong) Topic * rootTopic;

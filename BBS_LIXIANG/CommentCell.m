@@ -23,6 +23,7 @@
     return self;
 }
 
+//给图片添加事件
 -(void)addTapToImageView
 {
     UITapGestureRecognizer *clickHeadPhoto = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHeadPhoto:)];
@@ -89,10 +90,16 @@
 -(void)setReadyToShowOne
 {
     if (_isMan) {
-        [_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
+        //[_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
+        
+        NSURL *url =[NSURL URLWithString:_headPhotoUrl];
+        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"man.jpg"]];
     }
     else{
-        [_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
+        //[_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
+        
+        NSURL *url =[NSURL URLWithString:_headPhotoUrl];
+        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"girl.jpg"]];
     }
     
     [_numLabel setText:[NSString stringWithFormat:@"%@", _num]];
@@ -102,6 +109,7 @@
     [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     [_timeLabel setText:[date stringFromDate:_time]];
     date = nil;
+    
     //NSLog(@"CommentCell before frame: %@", NSStringFromCGRect(_contentLabel.frame));
     [_contentLabel setText:_content];
     //NSLog(@"CommentCell after frame: %@", NSStringFromCGRect(_contentLabel.frame));
@@ -128,7 +136,8 @@
     }
     
 }
-    
+
+//处理集中图片
 -(NSArray *)getPicList
 {
     NSMutableArray * picArray = [[NSMutableArray alloc] init];
@@ -154,11 +163,19 @@
     [_delegate attachmentViewInCellTaped:isPhoto IndexRow:_indexRow IndexNum:indexNum];
 }
 
+- (IBAction)replyToTopic:(id)sender {
+    [_delegate replyTheTopic:_indexRow];
+}
+
+
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
+
 
 @end

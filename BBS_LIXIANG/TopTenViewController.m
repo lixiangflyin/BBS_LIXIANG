@@ -107,7 +107,7 @@
 -(void) GetResult:(ASIHTTPRequest *)request
 {
     NSDictionary *dic = [request.responseString objectFromJSONString];
-    NSLog(@"dic %@",dic);
+    //NSLog(@"dic %@",dic);
 
 //    NSArray * objects = [JsonParseEngine parseSections:dic];
 //    
@@ -134,7 +134,7 @@
 //    [array writeToFile:filename  atomically:YES];
     
     NSArray * objects = [JsonParseEngine parseTopics:dic];
-    NSLog(@"%@",objects);
+    //NSLog(@"%@",objects);
     
     [self.tentopicsArr removeAllObjects];
     self.tentopicsArr = [NSMutableArray arrayWithArray:objects];

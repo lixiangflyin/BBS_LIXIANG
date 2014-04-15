@@ -9,6 +9,9 @@
 #import "SectionsViewController.h"
 #import "RATreeView.h"
 #import "RADataObject.h"
+#import "SectionCell.h"
+#import "Toolkit.h"
+#import "JsonParseEngine.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -169,7 +172,7 @@
     }
     RADataObject *board12 = [RADataObject dataObjectWithName:@"社团群体" children:shetuan];
     
-    self.data = [NSArray arrayWithObjects:board1, board2, board3, board4, board5, board6, board7, board8, board9, board10, board11,board12, nil];
+    self.data = [NSArray arrayWithObjects:board1, board2, board3, board4, board5, board6, board7, board8, board9, board10, board11, board12, nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -189,8 +192,14 @@
 #pragma mark TreeView Delegate methods
 - (CGFloat)treeView:(RATreeView *)treeView heightForRowForItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
 {
-    //return 47;
-    return 40;
+    if (treeNodeInfo.treeDepthLevel == 0) {
+        return 40;
+    } else if (treeNodeInfo.treeDepthLevel == 1) {
+        return 34;
+    } else if (treeNodeInfo.treeDepthLevel == 2) {
+        return 40;
+    }
+    return 44;
 }
 
 - (NSInteger)treeView:(RATreeView *)treeView indentationLevelForRowForItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
@@ -215,9 +224,9 @@
 - (void)treeView:(RATreeView *)treeView willDisplayCell:(UITableViewCell *)cell forItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
 {
     if (treeNodeInfo.treeDepthLevel == 0) {
-        cell.backgroundColor = UIColorFromRGB(0xF7F7F7);
+        //cell.backgroundColor = UIColorFromRGB(0xF7F7F7);
     } else if (treeNodeInfo.treeDepthLevel == 1) {
-        cell.backgroundColor = UIColorFromRGB(0xD1EEFC);
+        //cell.backgroundColor = UIColorFromRGB(0xD1EEFC);
     } else if (treeNodeInfo.treeDepthLevel == 2) {
         cell.backgroundColor = UIColorFromRGB(0xE0F8D8);
     }
@@ -228,6 +237,10 @@
     //获取cell信息
     NSLog(@"aItem: %ld bItem:% ld",(long)treeNodeInfo.positionInSiblings,(long)treeNodeInfo.parent.positionInSiblings);
     NSLog(@"item：%@",((RADataObject *)item).name);
+    NSString *title = ((RADataObject *)item).name;
+    if ([title isEqualToString:@"本站系统"] | [title isEqualToString:@"东南大学"] | [title isEqualToString:@"电脑技术"] | [title isEqualToString:@"学术科学"] | [title isEqualToString:@"艺术文化"] | [title isEqualToString:@"乡情校意"] | [title isEqualToString:@"休闲娱乐"] | [title isEqualToString:@"知性感性"] | [title isEqualToString:@"人文信息"] | [title isEqualToString:@"体坛风暴"] | [title isEqualToString:@"校务信箱"] | [title isEqualToString:@"社团群体"]) {
+        return;
+    }
     
     NSArray *selectArr = [self.sectionsArr objectAtIndex:treeNodeInfo.parent.positionInSiblings];
     NSDictionary *detailDic = [selectArr objectAtIndex:treeNodeInfo.positionInSiblings];
@@ -238,19 +251,47 @@
 
 
 #pragma mark TreeView Data Source
-
 - (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
 {
-    //NSInteger numberOfChildren = [treeNodeInfo.children count];
-    
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    //cell.detailTextLabel.text = [NSString stringWithFormat:@"Number of children %@", [@(numberOfChildren) stringValue]];
-    cell.textLabel.text = ((RADataObject *)item).name;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (treeNodeInfo.treeDepthLevel == 0) {
-        cell.detailTextLabel.textColor = [UIColor blackColor];
+        
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+        cell.textLabel.text = ((RADataObject *)item).name;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
     }
+    
+    else if (treeNodeInfo.treeDepthLevel == 1) {
+        
+        static NSString * identi = @"SectionCell";
+        //第一次需要分配内存
+        SectionCell * cell = (SectionCell *)[treeView dequeueReusableCellWithIdentifier:identi];
+        if (cell == nil) {
+            NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"SectionCell" owner:self options:nil];
+            cell = [array objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellEditingStyleNone;
+        }
+        
+        NSArray *selectArr = self.sectionsArr[treeNodeInfo.parent.positionInSiblings];
+        NSDictionary *detailDic = selectArr[treeNodeInfo.positionInSiblings];
+        
+        cell.sectionDic = detailDic;
+        
+        [cell setReadyToShow];
+        
+        return cell;
+    }
+    
+    else{
+        
+    }
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+  
+    cell.textLabel.text = ((RADataObject *)item).name;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -274,6 +315,10 @@
     
     return [data.children objectAtIndex:index];
 }
+
+
+
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -29,6 +29,17 @@ static int count;
 
 @implementation SingleTopicViewController
 
+-(void)dealloc
+{
+    [_headerView free];
+    [_footerView free];
+    _singletopicTableView = nil;
+    _topicsArray = nil;
+    _usersInfo = nil;
+    _request = nil;
+    _rootTopic = nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,8 +49,6 @@ static int count;
         _isRequestToTopics = YES;
         _topicsArray = [[NSMutableArray alloc]init];
         _usersInfo = [[NSMutableArray alloc]init];
-        
-        //self.prototypeCell = [self.singletopicTableView dequeueReusableCellWithIdentifier:@"CommentCell"];
     }
     return self;
 }
@@ -47,9 +56,10 @@ static int count;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     UIBarButtonItem *replyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(replyToTopic:)];
     self.navigationItem.rightBarButtonItem = replyButton;
+    replyButton = nil;
     
     _singletopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _singletopicTableView.dataSource = self;  //数据源代理
@@ -57,7 +67,7 @@ static int count;
     [self.view addSubview:_singletopicTableView];
     
     [self addHeaderView];
-    [self addFooterView];
+    //[self addFooterView];
 }
 
 //添加下拉刷新
@@ -111,6 +121,7 @@ static int count;
     
     [header beginRefreshing];
     _headerView = header;
+    header = nil;
 }
 
 //上拉加载更多
@@ -124,7 +135,7 @@ static int count;
         
         NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
         [baseurl appendFormat:@"/%@",_rootTopic.board];
-        [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,[_topicsArray count]];
+        [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,(int)[_topicsArray count]];
         //通过url来获得JSON数据
         NSURL *myurl = [NSURL URLWithString:baseurl];
         _request = [ASIFormDataRequest requestWithURL:myurl];
@@ -137,12 +148,17 @@ static int count;
     };
     
     _footerView = footer;
+    footer = nil;
 }
 
 #pragma mark - Button Handlers
 -(void)replyToTopic:(id)sender{
     
     //发表评论
+    PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
+    [postTopic setPostType:1];
+    [postTopic setRootTopic:_rootTopic];
+    [self.navigationController pushViewController:postTopic animated:YES];
 }
 
 
@@ -192,6 +208,8 @@ static int count;
             NSDictionary *dictionary = [response objectFromJSONString];
             [_usersInfo addObject:dictionary];
         }
+        
+        request = nil;
     }
         
     [_singletopicTableView reloadData];
@@ -213,7 +231,7 @@ static int count;
     if (self.topicsArray == nil) {
         return 0;
     }
-    return [self.topicsArray count]+1;
+    return [self.topicsArray count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -225,7 +243,7 @@ static int count;
             NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"SingleTopicCell" owner:self options:nil];
             cell = [array objectAtIndex:0];
         }
-        //[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.section = _rootTopic.board;
         cell.title = _rootTopic.title;
@@ -239,9 +257,15 @@ static int count;
         if (cell == nil) {
             NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"CommentCell" owner:self options:nil];
             cell = [array objectAtIndex:0];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell addTapToImageView];
         }
-        //[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//         for(UIView *subView in cell.contentView) {
+//             //这里要进行判断，该移除哪个View
+//             [subView removeFromSuperView];
+//         }
         
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];
         
@@ -266,7 +290,7 @@ static int count;
             cell.num = @"板凳";
         }
         else
-            cell.num = [NSString stringWithFormat:@"%i楼",indexPath.row -1];
+            cell.num = [NSString stringWithFormat:@"%d楼",(int)indexPath.row -1];
         
         NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
         NSDictionary *userDic = [dic objectForKey:@"user"];
@@ -275,6 +299,7 @@ static int count;
         else
             cell.isMan = NO;
         
+        cell.headPhotoUrl = [userDic objectForKey:@"avatar"];
         cell.name = [userDic objectForKey:@"name"];
         
         //楼主特殊
@@ -310,13 +335,14 @@ static int count;
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:15.0];
         CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        paragraphStyle = nil;
         
         //楼主那一cell
         if (indexPath.row == 1) {
             if (topic.attachments != nil) {
-                return returnHeight = size1.height + 80 + (180 * [[self getPicList:topic.attachments] count]);
+                return returnHeight = size1.height + 80 + (180 * [[self getPicList:topic.attachments] count] + 30);
             }
-            return returnHeight = size1.height + 80;
+            return returnHeight = size1.height + 80 + 30;
         }
         
         NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
@@ -326,9 +352,9 @@ static int count;
         CGSize size2 = [[NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",topic.quoter,name, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
         
         if (topic.attachments != nil) {
-            return returnHeight = size1.height + +size2.height + 80 + (180 * [[self getPicList:topic.attachments] count]);
+            return returnHeight = size1.height + +size2.height + 80 + (180 * [[self getPicList:topic.attachments] count] + 30);
         }
-        returnHeight = size1.height + size2.height + 80;
+        returnHeight = size1.height + size2.height + 80 + 30;
     }
     return returnHeight;
 }
@@ -351,43 +377,6 @@ static int count;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
  
-    if (indexPath.row == 0) {
-        return;
-    }
-    _oneUserInfo = [self.usersInfo objectAtIndex:indexPath.row-1];
-    [self showActionSheet];
-}
-
--(void)showActionSheet
-{
-    UIActionSheet*actionSheet = [[UIActionSheet alloc]
-                                 initWithTitle:@"针对该话题"
-                                 delegate:self
-                                cancelButtonTitle:@"取消"
-                                 destructiveButtonTitle:nil
-                                 otherButtonTitles:@"回复", @"查看用户" ,nil];
-
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    [actionSheet showInView:self.view];
-    actionSheet = nil;
-}
-
-- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 0)
-    {
-        PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
-      
-        [self.navigationController pushViewController:postTopic animated:YES];
-    }
-    
-    if(buttonIndex == 1)
-    {
-        UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
-        userInfor.userDictionary = _oneUserInfo;
-        [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
-    }
-    
 }
 
 #pragma -mark SingleTopicCellDelegate
@@ -421,11 +410,25 @@ static int count;
 {
 }
 
--(void)tapHeadPhoto:(int)index
+-(void)tapHeadPhoto:(int)indexRow
 {
     UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
-    userInfor.userDictionary = self.usersInfo[index-1];
+    userInfor.userDictionary = self.usersInfo[indexRow-1];
     [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
+}
+
+-(void)replyTheTopic:(int)indexRow
+{
+    PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
+    if (indexRow == 1) {
+        [postTopic setPostType:2];  //修改帖子
+    }
+    else
+        [postTopic setPostType:1];  //发表对自己或对别人的跟帖
+    
+    //各楼的帖子
+    [postTopic setRootTopic:self.topicsArray[indexRow-1]];
+    [self.navigationController pushViewController:postTopic animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

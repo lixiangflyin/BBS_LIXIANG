@@ -12,6 +12,8 @@
 #import "MailViewController.h"
 #import "SearchViewController.h"
 #import "InputViewController.h"
+#import "UserInfoViewController.h"
+#import "MySectionsViewController.h"
 #import "MenuCell.h"
 #import "Toolkit.h"
 
@@ -35,7 +37,6 @@
         SwitchViewController *slideSwitchVC = [[SwitchViewController alloc] initWithNibName:@"SwitchViewController" bundle:nil];
         
         self.navSwitchViewController = [[UINavigationController alloc] initWithRootViewController:slideSwitchVC];
-        //NSLog(@"nav: %@",self.navigationController.navigationController);
         
     }
     return self;
@@ -55,6 +56,9 @@
     [super viewDidLoad];
 
     self.tableView.tableHeaderView = _headView;
+    self.tableView.scrollEnabled = NO;
+    [self addTapToHeadImageView];
+    
     if ([Toolkit getID] != nil) {
         [_name1Label setText:[Toolkit getID]];
         [_name2Label setText:[Toolkit getName]];
@@ -63,6 +67,21 @@
         [_name1Label setText:@"quest"];
         [_name2Label setText:@"quest"];
     }
+}
+
+//给图片添加事件
+-(void)addTapToHeadImageView
+{
+    UITapGestureRecognizer *clickHeadPhoto = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHeadPhoto)];
+    _headPhotoView.userInteractionEnabled = YES;
+    [_headPhotoView addGestureRecognizer: clickHeadPhoto];
+    
+}
+
+-(void)clickHeadPhoto
+{
+    UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
+    [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
 }
 
 - (void)didReceiveMemoryWarning
@@ -199,14 +218,17 @@
     
     if (indexPath.section == 0) {
         NSArray *titles = @[@"热门话题"];
-        NSLog(@"%ld",(long)indexPath.row);
+        //NSLog(@"%ld",(long)indexPath.row);
         cell.titleLabel.text = titles[indexPath.row];
-        cell.titleImageView.image = [UIImage imageNamed:@"man.jpg"];
+        cell.titleImageView.image = [UIImage imageNamed:@"menu_top.png"];
     }
     else {
         NSArray *titles = @[@"搜索", @"设置", @"登录"];
-        cell.titleLabel.text = titles[indexPath.row];
-        cell.titleImageView.image = [UIImage imageNamed:@"man.jpg"];
+        NSArray *images = @[@"menu_search.png",@"menu_setting",@"menu_logout"];
+        cell.titleString = titles[indexPath.row];
+        cell.imageName = images[indexPath.row];
+        
+        [cell setReadyShow];
     }
     
     return cell;
@@ -220,7 +242,6 @@
     
     switch (tag) {
         case MYMAIL:
-            NSLog(@"201");
             if (!self.navMailViewController) {
                 MailViewController *mailVC = [[MailViewController alloc] init];
                 
@@ -236,7 +257,16 @@
             NSLog(@"202");
             break;
         case REPLYME:
-            NSLog(@"203");
+            if (!self.navMyCollectViewController) {
+                MySectionsViewController *mySectionVC = [[MySectionsViewController alloc] init];
+                
+                self.navMyCollectViewController = [[UINavigationController alloc] initWithRootViewController:mySectionVC];
+            }
+            
+            [self.mm_drawerController setCenterViewController:self.navMyCollectViewController
+                                           withCloseAnimation:YES completion:^(BOOL finished){
+                                               NSLog(@"finished animation");
+                                           }];
             break;
         default:
             break;

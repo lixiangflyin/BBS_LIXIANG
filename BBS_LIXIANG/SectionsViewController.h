@@ -7,15 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIFormDataRequest.h"
+#import "SectionCell.h"
+
 @protocol SectionsDelegate <NSObject>
 
 -(void)pushToNextSingleSectionViewWithValue:(NSString *)boardName;
 
 @end
 
+
 @interface SectionsViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *sectionsArr;
+
+@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, assign) id delegate;
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIFormDataRequest.h"
 #import "Topic.h"
 
 @interface PostTopicViewController : UIViewController<UITextViewDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate>
@@ -18,8 +19,12 @@
 
 @property(nonatomic, retain)NSMutableArray *picArray;//picture upoaded array
 
+@property (nonatomic, retain) ASIFormDataRequest *request;
+
 @property(nonatomic, strong) Topic * rootTopic;   //传值 话题
+
 @property(nonatomic, strong) NSString * boardName;  //版面
+
 @property(nonatomic, assign) int postType;   //发表类型，0发表新文章，1回帖，2修改文章
 
 - (IBAction)getPostPicture:(id)sender;

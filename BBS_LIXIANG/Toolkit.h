@@ -14,17 +14,13 @@
 + (void)saveID:(NSString *)ID;
 + (void)saveName:(NSString *)name;
 + (void)saveToken:(NSString *)token;
++ (void)saveCollectedSections:(NSMutableArray *)sections;
 
-+ (void)saveTestUrl:(NSString *)url;
-+ (void)saveUploadFileName:(NSString *)fileName;
-+ (void)saveLocalAccess:(BOOL)local_access;
 
 + (NSString *)getUserName;
 + (NSString *)getID;
 + (NSString *)getName;
 + (NSString *)getToken;
++ (NSMutableArray *)getCollectedSections;
 
-+ (NSString *)getTestUrl;
-+ (NSString *)getUploadFileName;
-+ (BOOL)getLocalAccess;
 @end
