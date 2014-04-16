@@ -7,6 +7,9 @@
 //
 
 #import "UserInfoViewController.h"
+#import "PostMailViewController.h"
+
+#import "UIViewController+MJPopupViewController.h"
 
 @interface UserInfoViewController ()
 
@@ -71,4 +74,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)postMail:(id)sender {
+    
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
+    
+    PostMailViewController *postMailVC = [[PostMailViewController alloc]init];
+    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postMailVC];
+    //[self presentViewController:postMailVC animated:YES completion:nil];
+}
 @end

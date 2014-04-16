@@ -10,18 +10,35 @@
 #import "UIViewController+MMDrawerController.h"
 
 #import "SingleTopicViewController.h"
-#import "TopCell.h"
-//#import "ProgressHUD.h"
+#import "SearchTopicCell.h"
+#import "ProgressHUD.h"
 #import "JSONKit.h"
 #import "JsonParseEngine.h"
+#import "MJRefresh.h"
 
 #import "WBUtil.h"   //格式转换
 
-@interface SearchViewController ()
+@interface SearchViewController ()<MJRefreshBaseViewDelegate>
+{
+    MJRefreshHeaderView *_headerView;
+    MJRefreshFooterView *_footerView;
+    BOOL _isRefreshAgain;
+}
 
 @end
 
 @implementation SearchViewController
+
+-(void)dealloc
+{
+    [_headerView free];
+    [_footerView free];
+    _searchTableView = nil;
+    _searchTopicsArr = nil;
+    _searchString = nil;
+    _selectTopic = nil;
+    _request = nil;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,95 +65,76 @@
     _searchTableView.delegate = self;    //表视图委托
     [self.view addSubview:_searchTableView];
     
-    [self addHeaderView];
-    [self addFooterView];
-}
-
-//添加下拉刷新
-- (void)addHeaderView
-{
+    //刷新和加载更多
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = _searchTableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        _isRefreshAgain = YES;
-        
-        //通过url来获得JSON数据
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/search/topics.json?" mutableCopy];
-        [baseurl appendFormat:@"keys=%@",[_searchString URLEncodedString]];
-        [baseurl appendFormat:@"&limit=30&start=%d", 0];
-        //    if (token != nil) {
-        //        [baseurl appendFormat:@"&token=%@", token];
-        //    }
-        
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-    };
-    
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    
+    header.scrollView = self.searchTableView;
+    header.delegate = self;
+    // 自动刷新
     [header beginRefreshing];
     _headerView = header;
-}
-
-- (void)addFooterView
-{
+    
     MJRefreshFooterView *footer = [MJRefreshFooterView footer];
-    footer.scrollView = _searchTableView;
-    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        
-        _isRefreshAgain = NO;
-        
-        //通过url来获得JSON数据
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/search/topics.json?" mutableCopy];
-        [baseurl appendFormat:@"keys=%@",[_searchString URLEncodedString]];
-        [baseurl appendFormat:@"&limit=30&start=%d", [_searchTopicsArr count]];
-        //    if (token != nil) {
-        //        [baseurl appendFormat:@"&token=%@", token];
-        //    }
-        
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    };
+    footer.scrollView = self.searchTableView;
+    footer.delegate = self;
     _footerView = footer;
 }
 
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+{
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    //通过url来获得JSON数据
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/search/topics.json?" mutableCopy];
+    [baseurl appendFormat:@"keys=%@",[_searchString URLEncodedString]];
+    
+    //判断是否是刷新还是加载更多
+    if ([refreshView isKindOfClass:[MJRefreshHeaderView class]]) {
+        
+        _isRefreshAgain = YES;
+        [baseurl appendFormat:@"&limit=30&start=%d", 0];
+        
+    } else {
+        
+        _isRefreshAgain = NO;
+        [baseurl appendFormat:@"&limit=30&start=%d", (int)[_searchTopicsArr count]];
+        
+    }
+    //通过url来获得JSON数据
+    NSURL *myurl = [NSURL URLWithString:baseurl];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
+}
+
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    //NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+#pragma mark 监听刷新状态的改变
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
+}
 
 #pragma mark - Button Handlers
 -(void)leftDrawerButtonPress:(id)sender{
@@ -148,7 +146,9 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [_headerView endRefreshing];
+    [_footerView endRefreshing];
+    [ProgressHUD showError:@"网络故障"];
 }
 
 //ASI委托函数，信息处理
@@ -191,11 +191,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString * identi = @"TopTenTableViewCell";
+    static NSString * identi = @"SearchTopicCell";
     //第一次需要分配内存
-    TopCell * cell = (TopCell *)[tableView dequeueReusableCellWithIdentifier:identi];
+    SearchTopicCell * cell = (SearchTopicCell *)[tableView dequeueReusableCellWithIdentifier:identi];
     if (cell == nil) {
-        NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"TopCell" owner:self options:nil];
+        NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"SearchTopicCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
     }
@@ -204,7 +204,6 @@
     cell.section = topic.board;
     cell.title = topic.title;
     cell.author = topic.author;
-    cell.replies = topic.replies;
     
     [cell setReadyToShow];
     
@@ -218,10 +217,10 @@
     int returnHeight;
     
     Topic * topic = [self.searchTopicsArr objectAtIndex:indexPath.row];
-    UIFont *font = [UIFont systemFontOfSize:14.0];
+    UIFont *font = [UIFont systemFontOfSize:15.0];
     CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 50, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
     
-    returnHeight = size1.height  + 61;
+    returnHeight = size1.height  + 49;
     
     return returnHeight;
 }

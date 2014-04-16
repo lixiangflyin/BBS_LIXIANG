@@ -10,17 +10,10 @@
 #import "ASIFormDataRequest.h"
 #import "Board.h"
 #import "Topic.h"
-#import "MJRefresh.h"
 
 @interface SingleBoardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView *singleSectionTableView;
-
-@property (nonatomic, retain) MJRefreshHeaderView *headerView;
-
-@property (nonatomic, retain) MJRefreshFooterView *footerView;
-
-@property (nonatomic, assign) BOOL isRefreshAgain;
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
 

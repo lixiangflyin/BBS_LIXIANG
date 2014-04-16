@@ -10,12 +10,17 @@
 #import "SingleTopicViewController.h"
 #import "PostTopicViewController.h"
 #import "BoardTopicCell.h"
-//#import "ProgressHUD.h"
+#import "ProgressHUD.h"
 #import "JSONKit.h"
 #import "JsonParseEngine.h"
+#import "MJRefresh.h"
 
-@interface SingleBoardViewController ()
-
+@interface SingleBoardViewController ()<MJRefreshBaseViewDelegate>
+{
+    MJRefreshHeaderView *_headerView;
+    MJRefreshFooterView *_footerView;
+    BOOL _isRefreshAgain;
+}
 @end
 
 @implementation SingleBoardViewController
@@ -55,84 +60,74 @@
     _singleSectionTableView.delegate = self;    //表视图委托
     [self.view addSubview:_singleSectionTableView];
     
-    [self addHeaderView];
-    [self addFooterView];
-}
-
-//添加下拉刷新
-- (void)addHeaderView
-{
+    //刷新和加载更多
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = _singleSectionTableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        _isRefreshAgain = YES;
-        
-        //通过url来获得JSON数据
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/" mutableCopy];
-        [baseurl appendFormat:@"board/%@.json?", _boardName];
-        [baseurl appendFormat:@"mode=%d&limit=30&start=%i", 2,0];
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-    };
-    
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    
+    header.scrollView = self.singleSectionTableView;
+    header.delegate = self;
+    // 自动刷新
     [header beginRefreshing];
     _headerView = header;
+    
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.singleSectionTableView;
+    footer.delegate = self;
+    _footerView = footer;
 }
 
-- (void)addFooterView
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
-    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
-    footer.scrollView = _singleSectionTableView;
-    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/" mutableCopy];
+    [baseurl appendFormat:@"board/%@.json?", _boardName];
+    [baseurl appendFormat:@"mode=%d&limit=30&start=%i", 2,0];
+    //判断是否是刷新还是加载更多
+    if ([refreshView isKindOfClass:[MJRefreshHeaderView class]]) {
+        
+        _isRefreshAgain = YES;
+        [baseurl appendFormat:@"mode=%d&limit=30&start=%i", 2,0];
+        
+    } else {
         
         _isRefreshAgain = NO;
-        //发送请求
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/" mutableCopy];
-        [baseurl appendFormat:@"board/%@.json?", _boardName];
-        [baseurl appendFormat:@"mode=%d&limit=30&start=%i", 2,[_singleSectionArr count]];
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
+        [baseurl appendFormat:@"mode=%d&limit=30&start=%d", 2, (int)[_singleSectionArr count]];
         
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    };
-    _footerView = footer;
+    }
+    //通过url来获得JSON数据
+    NSURL *myurl = [NSURL URLWithString:baseurl];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
+}
+
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    //NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+#pragma mark 监听刷新状态的改变
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma -mark asi Delegate
@@ -140,7 +135,9 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [_headerView endRefreshing];
+    [_footerView endRefreshing];
+    [ProgressHUD showError:@"网络连接有问题"];
 }
 
 //ASI委托函数，信息处理
@@ -207,17 +204,8 @@
 {
     
     return 66;
-    
-//    int returnHeight;
-//    
-//    Topic * topic = [self.singleSectionArr objectAtIndex:indexPath.row];
-//    UIFont *font = [UIFont systemFontOfSize:14.0];
-//    CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
-//    
-//    returnHeight = size1.height  + 40;
-//    
-//    return returnHeight;
 }
+
 
 #pragma -mark tableview Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

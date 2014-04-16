@@ -14,15 +14,16 @@
 #import "InputViewController.h"
 #import "UserInfoViewController.h"
 #import "MySectionsViewController.h"
+#import "NotificationViewController.h"
 #import "MenuCell.h"
 #import "Toolkit.h"
 
 #import "UIViewController+MMDrawerController.h"
 
 
-#define MYMAIL     201
-#define ATME       202
-#define REPLYME    203
+#define MYMAIL           201
+#define REPLYME          202
+#define COLLECTION       203
 
 @interface MenuViewController ()
 
@@ -57,6 +58,7 @@
 
     self.tableView.tableHeaderView = _headView;
     self.tableView.scrollEnabled = NO;
+
     [self addTapToHeadImageView];
     
     if ([Toolkit getID] != nil) {
@@ -253,10 +255,19 @@
                                                NSLog(@"finished animation");
                                            }];
             break;
-        case ATME:
-            NSLog(@"202");
-            break;
         case REPLYME:
+            if (!self.navReplymeViewController) {
+                NotificationViewController *replyMeVC = [[NotificationViewController alloc] init];
+                
+                self.navReplymeViewController = [[UINavigationController alloc] initWithRootViewController:replyMeVC];
+            }
+            
+            [self.mm_drawerController setCenterViewController:self.navReplymeViewController
+                                           withCloseAnimation:YES completion:^(BOOL finished){
+                                               NSLog(@"finished animation");
+                                           }];
+            break;
+        case COLLECTION:
             if (!self.navMyCollectViewController) {
                 MySectionsViewController *mySectionVC = [[MySectionsViewController alloc] init];
                 

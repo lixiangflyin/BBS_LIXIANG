@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "MBProgressHUD.h"
+#import "ProgressHUD.h"
 #import "JsonParseEngine.h"
 #import "Toolkit.h"
 
@@ -57,7 +57,7 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [ProgressHUD showSuccess:@"网络故障"];
 }
 
 //ASI委托函数，信息处理
@@ -74,7 +74,7 @@
         [Toolkit saveName:[dic objectForKey:@"name"]];
         [Toolkit saveToken:[dic objectForKey:@"token"]];
         
-        //[MBProgressHUD showSuccess:@"登陆成功"];
+        [ProgressHUD showSuccess:@"登陆成功"];
         [_delegate loginSuccess];
         [self back:self];
     }

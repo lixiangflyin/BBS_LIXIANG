@@ -1,5 +1,5 @@
 //
-//  HotBoardViewController.h
+//  JsonParseEngine.h.h
 //  BBS_LIXIANG
 //
 //  Created by apple on 14-4-9.
@@ -368,6 +368,77 @@
         
         [board.sectionBoards addObject:boardcach];
     }
+}
+
++(Notification *)parseNotification:(NSDictionary *)notificationDictionary
+{
+    BOOL success = [[notificationDictionary objectForKey:@"success"] boolValue];
+    
+    Notification * notification = [[Notification alloc] init];
+    if (success)
+    {
+        NSMutableArray * mails = [[NSMutableArray alloc] init];
+        NSArray *mail_array = [notificationDictionary objectForKey:@"mails"];
+        for (int i=0; i<[mail_array count]; i++) {
+            Mail * mail = [[Mail alloc] init];
+            
+            int ID = [[[[notificationDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"id"] intValue];
+            NSString * title = [[[notificationDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"title"];
+            NSString * author = [[[notificationDictionary objectForKey:@"mails"] objectAtIndex:i] objectForKey:@"sender"];
+            mail.ID = ID;
+            mail.title = title;
+            mail.author = author;
+            mail.type = 0;
+            mail.unread = YES;
+            [mails addObject:mail];
+        }
+        
+        NSMutableArray * ats = [[NSMutableArray alloc] init];
+        NSArray *ats_array = [notificationDictionary objectForKey:@"ats"];
+        for (int i=0; i<[ats_array count]; i++) {
+            Topic * topic = [[Topic alloc] init];
+            
+            int ID = [[[[notificationDictionary objectForKey:@"ats"] objectAtIndex:i] objectForKey:@"id"] intValue];
+            NSString * board = [[[notificationDictionary objectForKey:@"ats"] objectAtIndex:i] objectForKey:@"board"];
+            NSString * title = [[[notificationDictionary objectForKey:@"ats"] objectAtIndex:i] objectForKey:@"title"];
+            NSString * user = [[[notificationDictionary objectForKey:@"ats"] objectAtIndex:i] objectForKey:@"user"];
+            
+            topic.ID = ID;
+            topic.board = board;
+            topic.author = user;
+            topic.title = title;
+            
+            [ats addObject:topic];
+        }
+        
+        NSMutableArray * replies = [[NSMutableArray alloc] init];
+        NSArray *replies_array = [notificationDictionary objectForKey:@"replies"];
+        for (int i=0; i<[replies_array count]; i++) {
+            Topic * topic = [[Topic alloc] init];
+            
+            int ID = [[[[notificationDictionary objectForKey:@"replies"] objectAtIndex:i] objectForKey:@"id"] intValue];
+            NSString * board = [[[notificationDictionary objectForKey:@"replies"] objectAtIndex:i] objectForKey:@"board"];
+            NSString * title = [[[notificationDictionary objectForKey:@"replies"] objectAtIndex:i] objectForKey:@"title"];
+            NSString * user = [[[notificationDictionary objectForKey:@"replies"] objectAtIndex:i] objectForKey:@"user"];
+            
+            topic.ID = ID;
+            topic.board = board;
+            topic.author = user;
+            topic.title = title;
+            
+            [replies addObject:topic];
+        }
+        
+        notification.mails = mails;
+        notification.ats = ats;
+        notification.replies = replies;
+        
+        return notification;
+    }
+    else {
+        return nil;
+    }
+    return nil;
 }
 
 + (NSString *)dateToString:(NSDate *)date;

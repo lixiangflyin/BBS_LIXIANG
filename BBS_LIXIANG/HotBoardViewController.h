@@ -17,7 +17,7 @@
 
 @end
 
-@interface HotBoardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface HotBoardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, retain) UITableView *hotBoardTableView;
 

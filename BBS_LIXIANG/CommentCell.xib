@@ -55,7 +55,7 @@
                         <color key="textColor" red="0.28235295414924622" green="0.77647066116333008" blue="0.91372555494308472" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6MB-U9-daR">
+                    <button opaque="NO" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6MB-U9-daR">
                         <rect key="frame" x="269" y="122" width="30" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -71,6 +71,22 @@
                             <action selector="replyToTopic:" destination="N5X-o7-Kog" eventType="touchUpInside" id="44x-Xl-iRF"/>
                         </connections>
                     </button>
+                    <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05R-zf-vUc">
+                        <rect key="frame" x="226" y="122" width="30" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="N1g-KU-anW"/>
+                            <constraint firstAttribute="width" constant="30" id="cST-yl-KK5"/>
+                        </constraints>
+                        <state key="normal" title="改">
+                            <color key="titleColor" red="0.039215687659999998" green="0.97647064920000004" blue="0.28627452250000002" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="replyToTopic:" destination="N5X-o7-Kog" eventType="touchUpInside" id="XW2-v7-paF"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="6MB-U9-daR" secondAttribute="bottom" constant="6" id="35o-hi-8hu"/>
@@ -82,6 +98,8 @@
                     <constraint firstItem="J62-h6-PSG" firstAttribute="top" secondItem="Wcs-PO-Zj1" secondAttribute="bottom" constant="3" id="Ngu-ym-Qmk"/>
                     <constraint firstItem="n0k-Q8-ng0" firstAttribute="top" secondItem="PQs-mi-rKt" secondAttribute="top" constant="31" id="OoL-Qt-H6t"/>
                     <constraint firstAttribute="trailing" secondItem="n0k-Q8-ng0" secondAttribute="trailing" constant="20" id="Rej-GO-4Cp"/>
+                    <constraint firstItem="05R-zf-vUc" firstAttribute="top" secondItem="uVe-Ey-aVJ" secondAttribute="bottom" constant="3" id="SlB-4y-upR"/>
+                    <constraint firstItem="05R-zf-vUc" firstAttribute="leading" secondItem="PQs-mi-rKt" secondAttribute="leading" constant="226" id="YOm-mN-oTK"/>
                     <constraint firstAttribute="trailing" secondItem="6MB-U9-daR" secondAttribute="trailing" constant="21" id="Zba-Ul-eVR"/>
                     <constraint firstItem="Wcs-PO-Zj1" firstAttribute="leading" secondItem="pps-pQ-D5h" secondAttribute="trailing" constant="13" id="elc-1d-gV2"/>
                     <constraint firstItem="uVe-Ey-aVJ" firstAttribute="top" secondItem="keb-i1-XCi" secondAttribute="bottom" constant="5" id="ljt-hf-6fD"/>
@@ -92,6 +110,7 @@
             <connections>
                 <outlet property="commentToLabel" destination="uVe-Ey-aVJ" id="Ivr-pi-eSU"/>
                 <outlet property="contentLabel" destination="keb-i1-XCi" id="Zjh-Hz-7Rf"/>
+                <outlet property="editButton" destination="05R-zf-vUc" id="S5D-rU-cxs"/>
                 <outlet property="headPhotoImage" destination="pps-pQ-D5h" id="Ghi-fm-beh"/>
                 <outlet property="numLabel" destination="n0k-Q8-ng0" id="N6W-K6-8XO"/>
                 <outlet property="timeLabel" destination="J62-h6-PSG" id="yx6-3P-NLc"/>

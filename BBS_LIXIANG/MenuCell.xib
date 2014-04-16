@@ -24,9 +24,14 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="light_green.png" translatesAutoresizingMaskIntoConstraints="NO" id="uzD-2d-X88">
+                        <rect key="frame" x="0.0" y="0.0" width="15" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="edgeImageView" destination="uzD-2d-X88" id="oGT-Qw-adz"/>
                 <outlet property="titleImageView" destination="HXF-fZ-vXl" id="h9w-eb-gH7"/>
                 <outlet property="titleLabel" destination="ap2-T4-70Z" id="bnR-PW-u6m"/>
             </connections>
@@ -34,5 +39,6 @@
     </objects>
     <resources>
         <image name="avatar.jpg" width="420" height="420"/>
+        <image name="light_green.png" width="6" height="6"/>
     </resources>
 </document>

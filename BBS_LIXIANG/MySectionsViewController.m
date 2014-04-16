@@ -44,51 +44,52 @@
     _mySectionsTableView.delegate = self;    //表视图委托
     [self.view addSubview:_mySectionsTableView];
     
-    [self addHeaderView];
-}
-
-//添加下拉刷新
-- (void)addHeaderView
-{
+    //下拉刷新
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = _mySectionsTableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        _mySectionsArr = [Toolkit getCollectedSections];;
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-        [_mySectionsTableView reloadData];
-        [_headerView endRefreshing];
-        
-    };
-    
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    
+    header.scrollView = self.mySectionsTableView;
+    header.delegate = self;
+    // 自动刷新
     [header beginRefreshing];
     _headerView = header;
+}
+
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+{
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    //通过url来获得JSON数据
+    _mySectionsArr = [Toolkit getCollectedSections];
+    
+    [_mySectionsTableView reloadData];
+    [_headerView endRefreshing];
+}
+
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    //NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+#pragma mark 监听刷新状态的改变
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - Button Handlers

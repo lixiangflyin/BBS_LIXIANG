@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTopicCell" rowHeight="67" id="b6c-eJ-stA" customClass="SearchTopicCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b6c-eJ-stA" id="bWT-YP-Tf6">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lixiangflyin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9S-6y-X2Y">
+                        <rect key="frame" x="20" y="9" width="68" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.039215687659999998" green="0.97647064920000004" blue="0.28627452250000002" alpha="1" colorSpace="deviceRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scda" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gM-mr-egz">
+                        <rect key="frame" x="266" y="9" width="34" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试试看二十五个字怎么样能够放其看放其其" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="DHJ-hh-qXV">
+                        <rect key="frame" x="17" y="35" width="285" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="i9S-6y-X2Y" firstAttribute="leading" secondItem="bWT-YP-Tf6" secondAttribute="leading" constant="20" id="9vk-SV-UZ8"/>
+                    <constraint firstAttribute="trailing" secondItem="1gM-mr-egz" secondAttribute="trailing" constant="20" id="A9s-WP-KpA"/>
+                    <constraint firstItem="i9S-6y-X2Y" firstAttribute="top" secondItem="bWT-YP-Tf6" secondAttribute="top" constant="9" id="Fb1-SW-QFB"/>
+                    <constraint firstItem="1gM-mr-egz" firstAttribute="top" secondItem="bWT-YP-Tf6" secondAttribute="top" constant="9" id="Guo-Bi-Tpv"/>
+                    <constraint firstItem="DHJ-hh-qXV" firstAttribute="leading" secondItem="bWT-YP-Tf6" secondAttribute="leading" constant="17" id="UlB-MC-24X"/>
+                    <constraint firstItem="DHJ-hh-qXV" firstAttribute="top" secondItem="1gM-mr-egz" secondAttribute="bottom" constant="9" id="nZb-Vo-yp6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="authorLabel" destination="i9S-6y-X2Y" id="8ZU-LL-3DB"/>
+                <outlet property="sectionLabel" destination="1gM-mr-egz" id="bgE-Es-f2g"/>
+                <outlet property="titleLabel" destination="DHJ-hh-qXV" id="lCZ-Ok-jfD"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -15,15 +15,21 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 
-#import "ASIFormDataRequest.h"
 #import "JsonParseEngine.h"
+#import "MJRefresh.h"
+#import "ProgressHUD.h"
 
+#define EDITTOPIC     200
+#define REPLYTOPIC    201
 
 static int count;
 
-@interface SingleTopicViewController ()
-
-//@property (nonatomic, strong) CommentCell *prototypeCell;
+@interface SingleTopicViewController ()<MJRefreshBaseViewDelegate>
+{
+    MJRefreshHeaderView *_headerView;
+    MJRefreshFooterView *_footerView;
+    BOOL _isRefreshAgain;
+}
 
 @end
 
@@ -36,8 +42,8 @@ static int count;
     _singletopicTableView = nil;
     _topicsArray = nil;
     _usersInfo = nil;
-    _request = nil;
     _rootTopic = nil;
+    _request = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,117 +63,89 @@ static int count;
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *replyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(replyToTopic:)];
-    self.navigationItem.rightBarButtonItem = replyButton;
-    replyButton = nil;
-    
     _singletopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _singletopicTableView.dataSource = self;  //数据源代理
     _singletopicTableView.delegate = self;    //表视图委托
     [self.view addSubview:_singletopicTableView];
     
-    [self addHeaderView];
-    //[self addFooterView];
-}
-
-//添加下拉刷新
-- (void)addHeaderView
-{
+    //刷新和加载更多
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = _singletopicTableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        _isRefreshAgain = YES;
-        
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
-        [baseurl appendFormat:@"/%@",_rootTopic.board];
-        [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,0];
-        //通过url来获得JSON数据
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-    };
-    
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    
+    header.scrollView = self.singletopicTableView;
+    header.delegate = self;
+    // 自动刷新
     [header beginRefreshing];
     _headerView = header;
-    header = nil;
+    
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.singletopicTableView;
+    footer.delegate = self;
+    _footerView = footer;
+
 }
 
-//上拉加载更多
-- (void)addFooterView
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
-    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
-    footer.scrollView = _singletopicTableView;
-    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
+    [baseurl appendFormat:@"/%@",_rootTopic.board];
+    //判断是否是刷新还是加载更多
+    if ([refreshView isKindOfClass:[MJRefreshHeaderView class]]) {
+        
+        _isRefreshAgain = YES;
+        [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,0];
+        
+    } else {
         
         _isRefreshAgain = NO;
-        
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
-        [baseurl appendFormat:@"/%@",_rootTopic.board];
         [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,(int)[_topicsArray count]];
-        //通过url来获得JSON数据
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
         
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    };
-    
-    _footerView = footer;
-    footer = nil;
+    }
+    //通过url来获得JSON数据
+    NSURL *myurl = [NSURL URLWithString:baseurl];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
 }
 
-#pragma mark - Button Handlers
--(void)replyToTopic:(id)sender{
-    
-    //发表评论
-    PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
-    [postTopic setPostType:1];
-    [postTopic setRootTopic:_rootTopic];
-    [self.navigationController pushViewController:postTopic animated:YES];
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    //NSLog(@"%@----刷新完毕", refreshView.class);
 }
 
+#pragma mark 监听刷新状态的改变
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
+}
 
 #pragma -mark asi Delegate
 //ASI委托函数，错误处理
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [_headerView endRefreshing];
+    [_footerView endRefreshing];
+    [ProgressHUD showError:@"网络连接有问题"];
 }
 
 //ASI委托函数，信息处理
@@ -175,10 +153,8 @@ static int count;
 {
 
     NSDictionary *dic = [request.responseString objectFromJSONString];
-    //NSLog(@"dic %@",dic);
         
     NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
-    //NSLog(@"%@",objects);
     
     if (_isRefreshAgain) {
         //获取信息的记录,重新置0
@@ -213,6 +189,7 @@ static int count;
     }
         
     [_singletopicTableView reloadData];
+    
     [_headerView endRefreshing];
     [_footerView endRefreshing];
 
@@ -334,7 +311,7 @@ static int count;
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:15.0];
-        CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        CGSize size1 = [topic.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
         paragraphStyle = nil;
         
         //楼主那一cell
@@ -417,14 +394,20 @@ static int count;
     [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
 }
 
--(void)replyTheTopic:(int)indexRow
+-(void)replyTheTopic:(int)indexRow ButtonNum:(int)buttonNum
 {
     PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
-    if (indexRow == 1) {
-        [postTopic setPostType:2];  //修改帖子
+    
+    switch (buttonNum) {
+        case EDITTOPIC:
+            [postTopic setPostType:2];  //修改帖子
+            break;
+        case REPLYTOPIC:
+            [postTopic setPostType:1];  //发表对自己或对别人的跟帖
+            break;
+        default:
+            break;
     }
-    else
-        [postTopic setPostType:1];  //发表对自己或对别人的跟帖
     
     //各楼的帖子
     [postTopic setRootTopic:self.topicsArray[indexRow-1]];

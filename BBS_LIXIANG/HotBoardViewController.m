@@ -11,6 +11,7 @@
 #import "HotBoardCell.h"
 
 #import "JsonParseEngine.h"
+#import "ProgressHUD.h"
 
 @interface HotBoardViewController ()
 
@@ -37,74 +38,72 @@
     _hotBoardTableView.separatorStyle = NO;
     [self.view addSubview:_hotBoardTableView];
     
-    
     //下拉刷新
-    [self addHeaderView];
-}
-
-- (void)addHeaderView
-{
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = _hotBoardTableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        //通过url来获得JSON数据
-        NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/boards.json"];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-    };
-    
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    
+    header.scrollView = self.hotBoardTableView;
+    header.delegate = self;
+    // 自动刷新
     [header beginRefreshing];
     _headerView = header;
 }
+
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+{
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    //通过url来获得JSON数据
+    NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/boards.json"];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
+}
+
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    //NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+#pragma mark 监听刷新状态的改变
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
+}
+
 
 #pragma -mark asi Delegate
 //ASI委托函数，错误处理
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [_headerView endRefreshing];
+    [ProgressHUD showError:@"网络故障"];
 }
 
 //ASI委托函数，信息处理
 -(void) GetResult:(ASIHTTPRequest *)request
 {
     NSDictionary *dic = [request.responseString objectFromJSONString];
-    //NSLog(@"dic %@",dic);
     
     NSArray * objects = [JsonParseEngine parseBoards:dic];
-    //NSLog(@"%@",objects);
     
     [self.hotBoardArr removeAllObjects];
     self.hotBoardArr = [NSMutableArray arrayWithArray:objects];

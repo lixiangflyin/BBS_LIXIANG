@@ -40,7 +40,7 @@
 
     [self getdataFormLocation];
     
-    RATreeView *treeView = [[RATreeView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44)];
+    RATreeView *treeView = [[RATreeView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height- 64 - 44)];
     treeView.delegate = self;
     treeView.dataSource = self;
     treeView.separatorStyle = RATreeViewCellSeparatorStyleSingleLine;

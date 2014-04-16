@@ -1,5 +1,5 @@
 //
-//  HotBoardViewController.h
+//  JsonParseEngine.h
 //  BBS_LIXIANG
 //
 //  Created by apple on 14-4-9.
@@ -33,6 +33,8 @@
 +(NSArray *)parseBoards:(NSDictionary *)boardsDictionary;
 //解析版面分支
 +(NSArray *)parseSections:(NSDictionary *)sectionsDictionary;
+//解析通知
++(Notification *)parseNotification:(NSDictionary *)notificationDictionary;
 //时间转换
 + (NSString *)dateToString:(NSDate *)date;
 

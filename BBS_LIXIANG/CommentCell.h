@@ -16,7 +16,7 @@
 -(void)attachmentViewInCellTaped:(BOOL)isPhoto IndexRow:(int)indexRow IndexNum:(int)indexNum;
 //点击头像
 -(void)tapHeadPhoto:(int)indexRow;
--(void)replyTheTopic:(int)indexRow;
+-(void)replyTheTopic:(int)indexRow ButtonNum:(int)buttonNum;
 
 @end
 
@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *numLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentToLabel;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 @property(nonatomic, assign)int ID;
 @property(nonatomic, strong)NSString *name;

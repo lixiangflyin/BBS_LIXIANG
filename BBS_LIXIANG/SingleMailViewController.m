@@ -11,6 +11,7 @@
 
 #import "JsonParseEngine.h"
 #import "Toolkit.h"
+#import "ProgressHUD.h"
 
 @interface SingleMailViewController ()
 
@@ -53,7 +54,7 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [ProgressHUD showError:@"发送失败"];
 }
 
 //ASI委托函数，信息处理

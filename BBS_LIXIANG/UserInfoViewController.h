@@ -28,6 +28,7 @@
 
 
 
+- (IBAction)postMail:(id)sender;
 
 @end
 

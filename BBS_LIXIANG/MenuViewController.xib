@@ -34,21 +34,21 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="author.png" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-AS-hho">
-                    <rect key="frame" x="20" y="74" width="86" height="81"/>
+                    <rect key="frame" x="20" y="87" width="63" height="62"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="guest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="La8-cX-1ds">
-                    <rect key="frame" x="119" y="82" width="102" height="29"/>
+                    <rect key="frame" x="96" y="87" width="102" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="guest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pd-jv-5oL">
-                    <rect key="frame" x="119" y="119" width="102" height="29"/>
+                    <rect key="frame" x="96" y="120" width="102" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" tag="201" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3B-yr-70S">

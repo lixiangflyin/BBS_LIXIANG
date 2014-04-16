@@ -17,7 +17,7 @@
 
 @end
 
-@interface AllSectionTopViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface AllSectionTopViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, retain) UITableView *allTopicTableView;
 

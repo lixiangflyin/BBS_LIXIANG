@@ -9,7 +9,7 @@
 #import "AllSectionTopViewController.h"
 #import "SingleTopicViewController.h"
 #import "TopCell.h"
-//#import "ProgressHUD.h"
+#import "ProgressHUD.h"
 #import "JSONKit.h"
 #import "JsonParseEngine.h"
 
@@ -37,55 +37,55 @@
     _allTopicTableView.delegate = self;    //表视图委托
     [self.view addSubview:_allTopicTableView];
     
-    [self addHeaderView];
+    //刷新和加载更多
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = self.allTopicTableView;
+    header.delegate = self;
+    // 自动刷新
+    [header beginRefreshing];
+    _headerView = header;
    
 }
 
-- (void)addHeaderView
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
-    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = _allTopicTableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        //通过url来获得JSON数据
-        NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/topics.json"];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-    };
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    
-    [header beginRefreshing];
-    _headerView = header;
+    //通过url来获得JSON数据
+    NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/topics.json"];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
+}
+
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    //NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+#pragma mark 监听刷新状态的改变
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma -mark asi Delegate
@@ -93,7 +93,8 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [_headerView endRefreshing];
+    [ProgressHUD showError:@"网络连接有问题"];
 }
 
 //ASI委托函数，信息处理
@@ -156,7 +157,7 @@
     int returnHeight;
     
     Topic * topic = [self.allTopicsArr objectAtIndex:indexPath.row];
-    UIFont *font = [UIFont systemFontOfSize:14.0];
+    UIFont *font = [UIFont systemFontOfSize:15.0];
     CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 50, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
     
     returnHeight = size1.height  + 61;

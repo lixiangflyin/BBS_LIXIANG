@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MJRefresh.h"
 
-@interface MySectionsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MySectionsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, retain) UITableView *mySectionsTableView;
 

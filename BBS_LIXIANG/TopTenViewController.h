@@ -17,7 +17,7 @@
 
 @end
 
-@interface TopTenViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface TopTenViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, retain) UITableView *tentopicTableView;
 

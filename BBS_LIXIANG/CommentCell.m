@@ -9,6 +9,10 @@
 #import "CommentCell.h"
 #import "JsonParseEngine.h"
 #import "UIImageView+MJWebCache.h"
+#import "Toolkit.h"
+
+#define EDITTOPIC     200
+#define REPLYTOPIC    201
 
 @implementation CommentCell
 
@@ -42,10 +46,15 @@
 -(void)setReadyToShow
 {
     if (_isMan) {
-        [_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
+        [_headPhotoImage setImage:[UIImage imageNamed:@"man_byr.jpg"]];
     }
     else{
-        [_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
+        [_headPhotoImage setImage:[UIImage imageNamed:@"girl_byr.jpg"]];
+    }
+    
+    _editButton.hidden = YES;
+    if ([_author isEqualToString:[Toolkit getUserName]]) {
+        _editButton.hidden = NO;
     }
     
     [_numLabel setText:[NSString stringWithFormat:@"%@", _num]];
@@ -61,13 +70,24 @@
     NSString *str = [NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",_quoter,_name,_quote];
     [_commentToLabel setText:str];
     
+    //复用问题
+    if (_attachmentsViewArray != nil) {
+        UIView * view;
+        for (view in _attachmentsViewArray) {
+            [view removeFromSuperview];
+        }
+        self.attachmentsViewArray = [[NSMutableArray alloc] init];
+    }
+    else {
+        self.attachmentsViewArray = [[NSMutableArray alloc] init];
+    }
     //如果有附件，就加载
     if ([_attachments count] > 0) {
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:15.0];
-        CGSize size1 = [_content boundingRectWithSize:CGSizeMake(self.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        CGSize size1 = [_content boundingRectWithSize:CGSizeMake(self.frame.size.width - 35, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
         
         UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
         CGSize size2 = [str boundingRectWithSize:CGSizeMake(self.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
@@ -93,13 +113,18 @@
         //[_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
         
         NSURL *url =[NSURL URLWithString:_headPhotoUrl];
-        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"man.jpg"]];
+        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"man_byr.jpg"]];
     }
     else{
         //[_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
         
         NSURL *url =[NSURL URLWithString:_headPhotoUrl];
-        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"girl.jpg"]];
+        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"girl_byr.jpg"]];
+    }
+    
+    _editButton.hidden = YES;
+    if ([_author isEqualToString:[Toolkit getUserName]]) {
+        _editButton.hidden = NO;
     }
     
     [_numLabel setText:[NSString stringWithFormat:@"%@", _num]];
@@ -115,13 +140,24 @@
     //NSLog(@"CommentCell after frame: %@", NSStringFromCGRect(_contentLabel.frame));
     [_commentToLabel setText:@""];
     
+    
+    if (_attachmentsViewArray != nil) {
+        UIView * view;
+        for (view in _attachmentsViewArray) {
+            [view removeFromSuperview];
+        }
+        self.attachmentsViewArray = [[NSMutableArray alloc] init];
+    }
+    else {
+        self.attachmentsViewArray = [[NSMutableArray alloc] init];
+    }
     //如果有附件，就加载
     if ([_attachments count] > 0) {
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:15.0];
-        CGSize size1 = [_content boundingRectWithSize:CGSizeMake(self.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        CGSize size1 = [_content boundingRectWithSize:CGSizeMake(self.frame.size.width - 35, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
         
         NSArray * picArray = [self getPicList];
         for (int i = 0; i < [picArray count]; i++) {
@@ -164,7 +200,22 @@
 }
 
 - (IBAction)replyToTopic:(id)sender {
-    [_delegate replyTheTopic:_indexRow];
+    
+    UIButton *selectBtn = (UIButton *)sender;
+    
+    int tag = (int)selectBtn.tag;
+    
+    switch (tag) {
+        case EDITTOPIC:
+            [_delegate replyTheTopic:_indexRow ButtonNum:EDITTOPIC];
+            break;
+        case REPLYTOPIC:
+            [_delegate replyTheTopic:_indexRow ButtonNum:REPLYTOPIC];
+            break;
+        default:
+            break;
+    }
+    
 }
 
 

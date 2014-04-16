@@ -13,11 +13,17 @@
 #import "Toolkit.h"
 
 #import "MailCell.h"
-//#import "ProgressHUD.h"
+#import "ProgressHUD.h"
 #import "JSONKit.h"
 #import "JsonParseEngine.h"
+#import "MJRefresh.h"
 
-@interface MailViewController ()
+@interface MailViewController ()<MJRefreshBaseViewDelegate>
+{
+    MJRefreshHeaderView *_headerView;
+    MJRefreshFooterView *_footerView;
+    BOOL _isRefreshAgain;
+}
 
 @end
 
@@ -38,6 +44,8 @@
 	
     _mailsArr = [[NSMutableArray alloc]init];
     
+    NSLog(@"token: %@",[Toolkit getToken]);
+    
     self.title = @"我的信箱";
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(leftDrawerButtonPress:)];
     self.navigationItem.leftBarButtonItem = leftButton;
@@ -50,88 +58,78 @@
     _mailsTableView.delegate = self;    //表视图委托
     [self.view addSubview:_mailsTableView];
     
-    [self addHeaderView];
-    [self addFooterView];
-    
-    
-}
-
-//添加下拉刷新
-- (void)addHeaderView
-{
+    //刷新和加载更多
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = _mailsTableView;
-    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-        // 进入刷新状态就会回调这个Block
-        
-        _isRefreshAgain = YES;
-        
-        //发送请求
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
-        [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
-        [baseurl appendFormat:@"&type=%i",0];
-        [baseurl appendFormat:@"&limit=30&start=%i",0];
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
-        
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-        
-    };
-    
-    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
-        // 刷新完毕就会回调这个Block
-        NSLog(@"%@----刷新完毕", refreshView.class);
-    };
-    
-    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
-        // 控件的刷新状态切换了就会调用这个block
-        switch (state) {
-            case MJRefreshStateNormal:
-                NSLog(@"%@----切换到：普通状态", refreshView.class);
-                break;
-                
-            case MJRefreshStatePulling:
-                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-                break;
-                
-            case MJRefreshStateRefreshing:
-                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-                break;
-            default:
-                break;
-        }
-    };
-    
+    header.scrollView = self.mailsTableView;
+    header.delegate = self;
+    // 自动刷新
     [header beginRefreshing];
     _headerView = header;
+    
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.mailsTableView;
+    footer.delegate = self;
+    _footerView = footer;
+    
+    
 }
 
-- (void)addFooterView
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
-    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
-    footer.scrollView = _mailsTableView;
-    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
+    [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
+    [baseurl appendFormat:@"&type=%i",0];
+    [baseurl appendFormat:@"&limit=30&start=%i",0];
+    
+    //判断是否是刷新还是加载更多
+    if ([refreshView isKindOfClass:[MJRefreshHeaderView class]]) {
+        
+        _isRefreshAgain = YES;
+        [baseurl appendFormat:@"&limit=30&start=%i",0];
+        
+    } else {
         
         _isRefreshAgain = NO;
-        //发送请求
-        NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mailbox/get.json?" mutableCopy];
-        [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
-        [baseurl appendFormat:@"&type=%i",0];
         [baseurl appendFormat:@"&limit=30&start=%i",(int)[_mailsArr count]];
-        NSURL *myurl = [NSURL URLWithString:baseurl];
-        _request = [ASIFormDataRequest requestWithURL:myurl];
-        [_request setDelegate:self];
-        [_request setDidFinishSelector:@selector(GetResult:)];
-        [_request setDidFailSelector:@selector(GetErr:)];
-        [_request startAsynchronous];
         
-        NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    };
-    _footerView = footer;
+    }
+    //通过url来获得JSON数据
+    NSURL *myurl = [NSURL URLWithString:baseurl];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
+}
+
+#pragma mark 刷新完毕
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    //NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+#pragma mark 监听刷新状态的改变
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - Button Handlers
@@ -144,18 +142,18 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    
+    [_headerView endRefreshing];
+    [_footerView endRefreshing];
+    [ProgressHUD showError:@"网络故障"];
 }
 
 //ASI委托函数，信息处理
 -(void) GetResult:(ASIHTTPRequest *)request
 {
     NSDictionary *dic = [request.responseString objectFromJSONString];
-    NSLog(@"dic %@",dic);
     
     //我的收件箱
     NSArray * objects = [JsonParseEngine parseMails:dic Type:0];
-    NSLog(@"%@",objects);
     
     if (_isRefreshAgain) {
         [self.mailsArr removeAllObjects];
