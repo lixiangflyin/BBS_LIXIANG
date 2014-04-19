@@ -37,6 +37,8 @@
 		1830EB8118F43AC800EB59B2 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830EB6518F43AC800EB59B2 /* UIImage+WebP.m */; };
 		1830EB8218F43AC800EB59B2 /* UIImageView+MJWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830EB6718F43AC800EB59B2 /* UIImageView+MJWebCache.m */; };
 		1830EB8318F43AC800EB59B2 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830EB6918F43AC800EB59B2 /* UIImageView+WebCache.m */; };
+		1852220A190259D200FE3FAB /* HotBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18522209190259D200FE3FAB /* HotBoardViewController.xib */; };
+		1852220D1902604800FE3FAB /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852220C1902604800FE3FAB /* SettingViewController.m */; };
 		18739BB718F689F900DE590A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BB518F689F900DE590A /* SearchViewController.m */; };
 		18739BB818F689F900DE590A /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18739BB618F689F900DE590A /* SearchViewController.xib */; };
 		18739BBC18F6989100DE590A /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BBA18F6989100DE590A /* InputViewController.m */; };
@@ -263,6 +265,9 @@
 		1830EB6718F43AC800EB59B2 /* UIImageView+MJWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MJWebCache.m"; sourceTree = "<group>"; };
 		1830EB6818F43AC800EB59B2 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		1830EB6918F43AC800EB59B2 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
+		18522209190259D200FE3FAB /* HotBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotBoardViewController.xib; sourceTree = "<group>"; };
+		1852220B1902604800FE3FAB /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		1852220C1902604800FE3FAB /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		18739BB418F689F900DE590A /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		18739BB518F689F900DE590A /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		18739BB618F689F900DE590A /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
@@ -543,6 +548,7 @@
 			children = (
 				181BB66B18F593E9004DB55E /* HotBoardViewController.h */,
 				181BB66C18F593E9004DB55E /* HotBoardViewController.m */,
+				18522209190259D200FE3FAB /* HotBoardViewController.xib */,
 				18E64A2F18F7D917004BEFF0 /* HotBoardCell.h */,
 				18E64A3018F7D917004BEFF0 /* HotBoardCell.m */,
 				18E64A3218F7D92A004BEFF0 /* HotBoardCell.xib */,
@@ -632,6 +638,15 @@
 				1830EB6918F43AC800EB59B2 /* UIImageView+WebCache.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		185222081902583300FE3FAB /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1852220B1902604800FE3FAB /* SettingViewController.h */,
+				1852220C1902604800FE3FAB /* SettingViewController.m */,
+			);
+			name = SettingViewController;
 			sourceTree = "<group>";
 		};
 		187FFDE118FA77DE00E5731F /* PullingRefresh */ = {
@@ -761,6 +776,7 @@
 		18A9224318F1478F002D9EAB /* LeftView */ = {
 			isa = PBXGroup;
 			children = (
+				185222081902583300FE3FAB /* SettingViewController */,
 				18EB8DEA18FE7ABD00A6BCC6 /* LeftViewController */,
 				1899E02C18FD0D8600083AF8 /* NotificationViewController */,
 				1899E01618FCD56000083AF8 /* MyColletedViewController */,
@@ -1309,6 +1325,7 @@
 				187FFDF518FACE8000E5731F /* SectionCell.xib in Resources */,
 				18E64A2E18F7CC00004BEFF0 /* MenuCell.xib in Resources */,
 				18A9225C18F19658002D9EAB /* MailCell.xib in Resources */,
+				1852220A190259D200FE3FAB /* HotBoardViewController.xib in Resources */,
 				18824FF2190020AF00C296B4 /* main2_msg.png in Resources */,
 				18CBF62E18F033AE0036C03B /* Balloon.png in Resources */,
 				18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */,
@@ -1412,6 +1429,7 @@
 				181BB66E18F593E9004DB55E /* HotBoardViewController.m in Sources */,
 				18A9223E18F138F7002D9EAB /* PostTopicViewController.m in Sources */,
 				187FFDEE18FA77DE00E5731F /* MJRefreshConst.m in Sources */,
+				1852220D1902604800FE3FAB /* SettingViewController.m in Sources */,
 				189205C918F538880023F993 /* UIViewController+MMDrawerController.m in Sources */,
 				18CBF62618F029190036C03B /* RATreeView+Private.m in Sources */,
 				187FFDF318FACE6800E5731F /* SectionCell.m in Sources */,

@@ -30,7 +30,6 @@
 {
     _sectionsArr = nil;
     _pictureArr = nil;
-    _request = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

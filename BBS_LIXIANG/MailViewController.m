@@ -29,6 +29,16 @@
 
 @implementation MailViewController
 
+-(void)dealloc
+{
+    [_headerView free];
+    [_footerView free];
+    _mailsArr = nil;
+    _selectMail = nil;
+    _request = nil;
+    _mailsTableView = nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -110,6 +120,7 @@
     [_request setDidFinishSelector:@selector(GetResult:)];
     [_request setDidFailSelector:@selector(GetErr:)];
     [_request startAsynchronous];
+
 }
 
 #pragma mark 刷新完毕

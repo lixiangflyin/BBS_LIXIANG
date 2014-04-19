@@ -15,6 +15,7 @@
 #import "UserInfoViewController.h"
 #import "MySectionsViewController.h"
 #import "NotificationViewController.h"
+#import "SettingViewController.h"
 #import "MenuCell.h"
 #import "Toolkit.h"
 
@@ -93,6 +94,7 @@
     UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
     [userInfor setUserDictionary:[Toolkit getUserDictionary]];
     [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
+    userInfor = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,7 +181,16 @@
                 break;
             }
             case 1:
-               
+                if (!self.navSettingViewController) {
+                    SettingViewController *settingVC = [[SettingViewController alloc] init];
+                    
+                    self.navSettingViewController = [[UINavigationController alloc] initWithRootViewController:settingVC];
+                }
+                
+                [self.mm_drawerController setCenterViewController:self.navSettingViewController
+                                               withCloseAnimation:YES completion:^(BOOL finished){
+                                                   NSLog(@"finished animation");
+                                               }];
                 break;
             case 2:{
                 if ([Toolkit getUserName] != nil) {

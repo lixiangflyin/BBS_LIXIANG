@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "ProgressHUD.h"
 
 @protocol SectionsDelegate <NSObject>
 
@@ -21,8 +21,6 @@
 @property (nonatomic, strong) NSMutableArray *sectionsArr;
 
 @property (nonatomic, strong) NSArray *pictureArr;
-
-@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, assign) id delegate;
 

@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UINavigationController *navSearchViewController;
 @property (nonatomic, strong) UINavigationController *navMyCollectViewController;
 @property (nonatomic, strong) UINavigationController *navReplymeViewController;
+@property (nonatomic, strong) UINavigationController *navSettingViewController;
 
 @property (nonatomic, strong) ASIFormDataRequest *request;
 

@@ -7,6 +7,7 @@
 //
 
 #import "SectionCell.h"
+#import "ProgressHUD.h"
 #import "Toolkit.h"
 
 @implementation SectionCell
@@ -73,12 +74,14 @@
         [Toolkit saveCollectedSections:array];
         
         [_collectButton setBackgroundImage:[UIImage imageNamed:@"select_not.png"] forState:UIControlStateNormal];
+        [ProgressHUD showSuccess:@"取消收藏"];
     }
     else{
         [array addObject:_sectionDic];
         [Toolkit saveCollectedSections:array];
         
         [_collectButton setBackgroundImage:[UIImage imageNamed:@"select.png"] forState:UIControlStateNormal];
+        [ProgressHUD showSuccess:@"收藏成功"];
     }
     
     array = nil;

@@ -45,16 +45,20 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *replyButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(reply:)];
+    //屏幕大小适配
+    CGSize size_screen = [[UIScreen mainScreen]bounds].size;
+    [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
+    
+    UIBarButtonItem *replyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(reply:)];
     self.navigationItem.rightBarButtonItem = replyButton;
+    replyButton = nil;
     
     [_titleLabel setText:nil];
     [_contentLabel setText:nil];
     [_timeLabel setText:nil];
     
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mail/get.json?" mutableCopy];
-    //[baseurl appendFormat:@"token=%@",[Toolkit getToken]];
-    [baseurl appendFormat:@"token=%@",@"bGl4aWFuZ2ZseWlu%3A%3D%3DwxN2Rp0T%2B4FOVeCJCmo7cu"];
+    [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
     [baseurl appendFormat:@"&type=%i",_rootMail.type];
     [baseurl appendFormat:@"&id=%i",_rootMail.ID];
     NSURL *myurl = [NSURL URLWithString:baseurl];
@@ -78,7 +82,6 @@
 -(void) GetResult:(ASIHTTPRequest *)request
 {
     NSDictionary *dic = [request.responseString objectFromJSONString];
-    NSLog(@"dic %@",dic);
     
     _mail = [JsonParseEngine parseSingleMail:dic Type:_rootMail.type];
     
@@ -118,6 +121,7 @@
     postMailVC.rootMail = _mail;
     postMailVC.postType = 1;
     [self presentViewController:postMailVC animated:YES completion:nil];
+    postMailVC = nil;
 }
 
 

@@ -43,11 +43,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGRect rect = [[UIScreen mainScreen] bounds];
     
+    //屏幕大小适配
+    CGRect size_screen = [[UIScreen mainScreen]bounds];
+    [self.view setFrame:CGRectMake(0, 0, size_screen.size.width, size_screen.size.height)];
     
     _postScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)];
-    _postScrollView.contentSize = CGSizeMake(rect.size.width, self.view.frame.size.height - 64 + 1);
+    _postScrollView.contentSize = CGSizeMake(size_screen.size.width, self.view.frame.size.height - 64 + 1);
     _postScrollView.delegate = self;
     
     UILabel * userLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5+5, 40, 21)];

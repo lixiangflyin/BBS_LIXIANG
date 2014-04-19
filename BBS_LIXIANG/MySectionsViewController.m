@@ -32,8 +32,11 @@
 {
     [super viewDidLoad];
     
-    _mySectionsArr = [Toolkit getCollectedSections];;
+    //屏幕大小适配
+    CGSize size_screen = [[UIScreen mainScreen]bounds].size;
+    [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
     
+    _mySectionsArr = [Toolkit getCollectedSections];;
     
     self.title = @"我的收藏";
     UIImage* image= [UIImage imageNamed:@"t1.png"];

@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"userInformation: %@",_userDictionary);
+    //NSLog(@"userInformation: %@",_userDictionary);
     
     [self refreshView];
 }
@@ -60,8 +60,6 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
-    //NSString * lastloginstring = [dateFormatter stringFromDate:user.lastlogin];
-    //[_lastlogin setText:[NSString stringWithFormat:@"%@",lastloginstring]];
     
     [_level setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"level"]]];
     [_posts setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"posts"]]];

@@ -49,13 +49,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"root content %@",_rootTopic.content);
+    //NSLog(@"root content %@",_rootTopic.content);
+    
+    //屏幕大小适配
+    CGSize size_screen = [[UIScreen mainScreen]bounds].size;
+    [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
     
     UIBarButtonItem *replyButton =[[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(postTopic:)];
     self.navigationItem.rightBarButtonItem = replyButton;
     replyButton = nil;
-    
-    //[_postTitleLabel addTarget:self action:@selector(inputTitle) forControlEvents:UIControlEventEditingChanged];
     
     if (_postType == 0) {
         self.title = @"发新帖";

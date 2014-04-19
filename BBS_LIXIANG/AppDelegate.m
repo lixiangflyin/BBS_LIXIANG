@@ -45,7 +45,7 @@ static const CGFloat kPublicLeftMenuWidth = 260.0f;
                                             leftDrawerViewController:leftVC
                                             rightDrawerViewController:nil];
     [drawerController setMaximumLeftDrawerWidth:kPublicLeftMenuWidth];
-    //[drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [drawerController setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
         MMDrawerControllerDrawerVisualStateBlock block;

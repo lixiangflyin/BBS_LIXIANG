@@ -38,7 +38,7 @@
                         <rect key="frame" x="178" y="33" width="122" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.039215687662363052" green="0.97647064924240112" blue="0.28627452254295349" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.18039216101169586" green="0.87450987100601196" blue="0.92941182851791382" alpha="1" colorSpace="deviceRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>

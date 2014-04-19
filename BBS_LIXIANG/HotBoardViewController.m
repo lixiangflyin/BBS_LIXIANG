@@ -40,8 +40,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //屏幕大小适配
+    CGSize size_screen = [[UIScreen mainScreen]bounds].size;
+    [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
     
-    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _hotBoardTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _hotBoardTableView.dataSource = self;  //数据源代理
     _hotBoardTableView.delegate = self;    //表视图委托

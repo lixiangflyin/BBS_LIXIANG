@@ -37,6 +37,10 @@
 {
     [super viewDidLoad];
     
+    //屏幕大小适配
+    CGSize size_screen = [[UIScreen mainScreen]bounds].size;
+    [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
+    
     self.title = @"我的消息";
     UIImage* image= [UIImage imageNamed:@"t1.png"];
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
