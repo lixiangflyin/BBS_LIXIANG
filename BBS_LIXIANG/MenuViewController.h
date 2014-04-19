@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+MJPopupViewController.h"
 
+#import "ASIFormDataRequest.h"
 #import "InputViewController.h"  //输入搜索文字
 #import "LoginViewController.h"
 
-@interface MenuViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate,InputSearchStrDelegate,LoginDelegate>
+@interface MenuViewController : UITableViewController<InputSearchStrDelegate,LoginDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *headPhotoView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
@@ -26,7 +27,10 @@
 @property (nonatomic, strong) UINavigationController *navMyCollectViewController;
 @property (nonatomic, strong) UINavigationController *navReplymeViewController;
 
+@property (nonatomic, strong) ASIFormDataRequest *request;
+
 @property (nonatomic, strong) InputViewController *inputSearchVC;
+
 
 - (IBAction)clickButton:(id)sender;
 

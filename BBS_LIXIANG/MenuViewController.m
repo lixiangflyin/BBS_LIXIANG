@@ -20,6 +20,8 @@
 
 #import "UIViewController+MMDrawerController.h"
 
+#import "ProgressHUD.h"
+#import "JsonParseEngine.h"
 
 #define MYMAIL           201
 #define REPLYME          202
@@ -77,12 +79,19 @@
     UITapGestureRecognizer *clickHeadPhoto = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHeadPhoto)];
     _headPhotoView.userInteractionEnabled = YES;
     [_headPhotoView addGestureRecognizer: clickHeadPhoto];
+    clickHeadPhoto = nil;
     
 }
 
 -(void)clickHeadPhoto
 {
+    //是否登录
+    if ([Toolkit getUserName] == nil) {
+        return;
+    }
+    
     UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
+    [userInfor setUserDictionary:[Toolkit getUserDictionary]];
     [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
 }
 
@@ -173,6 +182,19 @@
                
                 break;
             case 2:{
+                if ([Toolkit getUserName] != nil) {
+                    //注销用户
+                    UIActionSheet *cameraSheet = [[UIActionSheet alloc] initWithTitle:@"登出虎踞龙盘？"
+                                                                             delegate:self
+                                                                    cancelButtonTitle:@"取消"
+                                                               destructiveButtonTitle:nil
+                                                                    otherButtonTitles:@"确定",nil];
+                    //cameraSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+                    [cameraSheet showInView:self.view];
+                    cameraSheet = nil;
+                    break;
+                }
+                
                 LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
                 login.delegate = self;
                 [self presentViewController:login animated:YES completion:nil];
@@ -182,6 +204,36 @@
                 break;
         } //滑动切换视图
     }
+}
+
+#pragma action delegate
+//******************************************
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 0) {
+        
+        [_name1Label setText:@"quest"];
+        [_name2Label setText:@"quest"];
+        
+        [Toolkit saveUserName:nil];
+        [Toolkit saveID:nil];
+        [Toolkit saveName:nil];
+        [Toolkit saveToken:nil];
+        [Toolkit saveUserDictionary:nil];
+        
+        //UI变化
+        NSIndexPath * index = [NSIndexPath indexPathForItem:2 inSection:1];
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:index];
+        for(UIView *label in [cell.contentView subviews]){
+            if ([label isKindOfClass:[UILabel class]]) {
+                [(UILabel *)label setText:@"登录"];
+            }
+        }
+		
+	} else if (buttonIndex == 1) {
+		
+
+	}
 }
 
 #pragma mark -
@@ -219,13 +271,21 @@
     }
     
     if (indexPath.section == 0) {
+        
         NSArray *titles = @[@"热门话题"];
-        //NSLog(@"%ld",(long)indexPath.row);
         cell.titleLabel.text = titles[indexPath.row];
         cell.titleImageView.image = [UIImage imageNamed:@"menu_top.png"];
     }
     else {
-        NSArray *titles = @[@"搜索", @"设置", @"登录"];
+        
+        NSArray *titles;
+        if ([Toolkit getUserName] == nil) {
+            titles = @[@"搜索", @"设置", @"登录"];
+        }
+        else{
+            titles = @[@"搜索", @"设置", @"注销"];
+        }
+        
         NSArray *images = @[@"menu_search.png",@"menu_setting",@"menu_logout"];
         cell.titleString = titles[indexPath.row];
         cell.imageName = images[indexPath.row];
@@ -238,6 +298,12 @@
 
 #pragma -mark button handle
 - (IBAction)clickButton:(id)sender {
+    
+    //判断是否登录
+    if ([Toolkit getUserName] == nil) {
+        [ProgressHUD showError:@"请先登录"];
+        return;
+    }
     
     UIButton *button = (UIButton *)sender;
     int tag = (int)button.tag;
@@ -317,6 +383,46 @@
 {
     [_name1Label setText:[Toolkit getID]];
     [_name2Label setText:[Toolkit getName]];
+    
+    //通过url来获得JSON数据
+    NSString *str = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",[Toolkit getUserName]];
+    NSURL *myurl = [NSURL URLWithString:str];
+    _request = [ASIFormDataRequest requestWithURL:myurl];
+    [_request setDelegate:self];
+    [_request setDidFinishSelector:@selector(GetResult:)];
+    [_request setDidFailSelector:@selector(GetErr:)];
+    [_request startAsynchronous];
+}
+
+#pragma -mark asi Delegate
+//ASI委托函数，错误处理
+-(void) GetErr:(ASIHTTPRequest *)request
+{
+    NSLog(@"error!");
+}
+
+//ASI委托函数，信息处理
+-(void) GetResult:(ASIHTTPRequest *)request
+{
+    NSDictionary *dic = [request.responseString objectFromJSONString];
+    
+    [Toolkit saveUserDictionary:dic];
+    
+    //UI变化
+    NSIndexPath * index = [NSIndexPath indexPathForItem:2 inSection:1];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:index];
+    for(UIView *label in [cell.contentView subviews]){
+        if ([label isKindOfClass:[UILabel class]]) {
+            [(UILabel *)label setText:@"注销"];
+        }
+    }
+    
+    //用户类
+    //User * my = [JsonParseEngine parseUserInfo:dic];
+    //NSLog(@"user: %@",my);
+    
+    
+    
 }
 
 @end

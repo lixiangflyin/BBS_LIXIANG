@@ -7,12 +7,29 @@
 //
 
 #import "PostMailViewController.h"
+#import "ASIFormDataRequest.h"
+#import "ProgressHUD.h"
+#import "Toolkit.h"
+#import "JsonParseEngine.h"
+#import "WBUtil.h"
 
 @interface PostMailViewController ()
 
 @end
 
 @implementation PostMailViewController
+
+
+-(void)dealloc
+{
+    _postContent = nil;
+    _postScrollView = nil;
+    _postTitle = nil;
+    _postUser = nil;
+    _rootMail = nil;
+    _sentToUser = nil;
+    
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -121,7 +138,52 @@
 - (IBAction)sendMail:(id)sender {
     
     //发送情况
+    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mail/send.json?" mutableCopy];
+    [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
+    [baseurl appendFormat:@"&user=%@",_postUser.text];
+    [baseurl appendFormat:@"&title=%@",_postTitle.text];
+    [baseurl appendFormat:@"&content=%@",[_postContent.text URLEncodedString]];
+    if (_rootMail == nil) {
+        [baseurl appendFormat:@"&reid=%i",0];
+        
+    }else{
+        [baseurl appendFormat:@"&reid=%i",_rootMail.ID];
+    }
+    
+    //同步
+    NSURL *myurl = [NSURL URLWithString:baseurl];
+    ASIFormDataRequest *_request = [ASIFormDataRequest requestWithURL:myurl];
+    
+    [_request startSynchronous];
+    
+    NSError *error = [_request error];
+    if (!error) {
+        
+        NSString *response = [_request responseString];
+        
+        NSDictionary *dictionary = [response objectFromJSONString];
+        
+        BOOL success = [[dictionary objectForKey:@"success"] boolValue];
+        
+        if (success) {
+            [ProgressHUD showSuccess:@"发送成功"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else{
+            [ProgressHUD showError:@"发送失败"];
+        }
+    }
+    else{
+        [ProgressHUD showError:@"网络故障"];
+    }
+    
+    _request = nil;
+
 }
+
+
+
+
 
 #pragma mark -
 #pragma mark Responding to keyboard events

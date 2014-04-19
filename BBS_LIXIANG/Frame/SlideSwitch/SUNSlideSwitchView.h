@@ -35,12 +35,12 @@
     __weak id<SUNSlideSwitchViewDelegate> _slideSwitchViewDelegate;
 }
 
-@property (nonatomic, strong) IBOutlet UIScrollView *rootScrollView;
-@property (nonatomic, strong) IBOutlet UIScrollView *topScrollView;
+@property (nonatomic, strong) UIScrollView *rootScrollView;
+@property (nonatomic, strong) UIScrollView *topScrollView;
 @property (nonatomic, assign) CGFloat userContentOffsetX;
 @property (nonatomic, assign) NSInteger userSelectedChannelID;
 @property (nonatomic, assign) NSInteger scrollViewSelectedChannelID;
-@property (nonatomic, weak) IBOutlet id<SUNSlideSwitchViewDelegate> slideSwitchViewDelegate;
+@property (nonatomic, weak) id<SUNSlideSwitchViewDelegate> slideSwitchViewDelegate;
 @property (nonatomic, strong) UIColor *tabItemNormalColor;
 @property (nonatomic, strong) UIColor *tabItemSelectedColor;
 @property (nonatomic, strong) UIImage *tabItemNormalBackgroundImage;

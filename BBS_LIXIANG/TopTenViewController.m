@@ -23,6 +23,10 @@
 {
     NSLog(@"MJTableViewController--dealloc---");
     [_headerView free];
+    _tentopicTableView = nil;
+    _tentopicsArr = nil;
+    _request = nil;
+    _selectTopic = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,6 +45,7 @@
     _tentopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _tentopicTableView.dataSource = self;  //数据源代理
     _tentopicTableView.delegate = self;    //表视图委托
+    _tentopicTableView.separatorStyle = NO;
     [self.view addSubview:_tentopicTableView];
     
     //下拉刷新
@@ -143,6 +148,8 @@
         NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"TopTenCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
+        
+        [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
     }
         
     Topic * topic = [self.tentopicsArr objectAtIndex:indexPath.row];
@@ -161,6 +168,11 @@
     int returnHeight;
     
     Topic * topic = [self.tentopicsArr objectAtIndex:indexPath.row];
+    
+    if ([topic.title isEqualToString:nil]) {
+        NSLog(@"you meet a bug!");
+    }
+    
     UIFont *font = [UIFont systemFontOfSize:15.0];
     CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
     

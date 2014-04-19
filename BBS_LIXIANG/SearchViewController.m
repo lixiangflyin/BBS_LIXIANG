@@ -57,12 +57,18 @@
     
     _searchTopicsArr = [[NSMutableArray alloc]init];
     
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(leftDrawerButtonPress:)];
+    UIImage* image= [UIImage imageNamed:@"t1.png"];
+    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
+                                   initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = leftButton;
     
     _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _searchTableView.dataSource = self;  //数据源代理
     _searchTableView.delegate = self;    //表视图委托
+    _searchTableView.separatorStyle = NO;
     [self.view addSubview:_searchTableView];
     
     //刷新和加载更多
@@ -198,6 +204,8 @@
         NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"SearchTopicCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
+        
+        [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
     }
     
     Topic * topic = [self.searchTopicsArr objectAtIndex:indexPath.row];

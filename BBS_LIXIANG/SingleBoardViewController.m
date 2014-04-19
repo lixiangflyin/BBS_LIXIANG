@@ -54,10 +54,12 @@
     
     UIBarButtonItem *newTopicButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(postNewTopic:)];
     self.navigationItem.rightBarButtonItem = newTopicButton;
+    newTopicButton = nil;
 	
     _singleSectionTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _singleSectionTableView.dataSource = self;  //数据源代理
     _singleSectionTableView.delegate = self;    //表视图委托
+    _singleSectionTableView.separatorStyle = NO;
     [self.view addSubview:_singleSectionTableView];
     
     //刷新和加载更多
@@ -67,11 +69,13 @@
     // 自动刷新
     [header beginRefreshing];
     _headerView = header;
+    header = nil;
     
     MJRefreshFooterView *footer = [MJRefreshFooterView footer];
     footer.scrollView = self.singleSectionTableView;
     footer.delegate = self;
     _footerView = footer;
+    footer = nil;
 }
 
 #pragma mark - 刷新控件的代理方法
@@ -186,6 +190,8 @@
         NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"BoardTopicCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
+        
+        [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
     }
     
     Topic * topic = [self.singleSectionArr objectAtIndex:indexPath.row];
@@ -203,7 +209,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 66;
+    return 69;
 }
 
 
@@ -227,7 +233,7 @@
 -(void)postNewTopic:(id)sender
 {
     PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
-    //[self presentViewController:postTopic animated:YES completion:Nil];
+    [postTopic setBoardName:_boardName];
     [self.navigationController pushViewController:postTopic animated:YES];
     postTopic = nil;
 }

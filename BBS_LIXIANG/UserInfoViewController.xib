@@ -18,6 +18,7 @@
                 <outlet property="name" destination="JOM-2U-RJ7" id="FT9-6A-TsA"/>
                 <outlet property="perform" destination="HjH-ee-Gjk" id="RGA-p3-JsY"/>
                 <outlet property="posts" destination="d1Y-fT-m8R" id="yxq-d2-J1E"/>
+                <outlet property="replyMailBtn" destination="gny-kc-mai" id="TQ3-ga-VLF"/>
                 <outlet property="view" destination="HzO-nG-PjK" id="x0k-Do-04j"/>
             </connections>
         </placeholder>

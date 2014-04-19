@@ -12,6 +12,12 @@
 @synthesize mDelegate;
 @synthesize indexNum;
 
+-(void)dealloc
+{
+    imageView = nil;
+    nameLabel = nil;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -37,6 +43,7 @@
     UITapGestureRecognizer* recognizer;
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taped)];
     [self addGestureRecognizer:recognizer];
+    recognizer = nil;
 }
 
 -(void)taped

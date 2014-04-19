@@ -13,6 +13,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_white.png" translatesAutoresizingMaskIntoConstraints="NO" id="3JF-K5-WnL">
+                        <rect key="frame" x="9" y="4" width="302" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试试看二十五个字怎么样能够放其实二十五" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="4q1-KA-anj">
                         <rect key="frame" x="15" y="8" width="285" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -29,10 +33,14 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="3JF-K5-WnL" secondAttribute="trailing" constant="9" id="5dp-zF-7Tn"/>
+                    <constraint firstItem="3JF-K5-WnL" firstAttribute="top" secondItem="1Av-Y9-LGk" secondAttribute="top" constant="4" id="GT7-x2-uVT"/>
                     <constraint firstItem="4q1-KA-anj" firstAttribute="leading" secondItem="1Av-Y9-LGk" secondAttribute="leading" constant="15" id="MGF-70-ECd"/>
+                    <constraint firstItem="3JF-K5-WnL" firstAttribute="leading" secondItem="1Av-Y9-LGk" secondAttribute="leading" constant="9" id="Uh6-MF-d0Q"/>
                     <constraint firstItem="fFI-xy-35p" firstAttribute="top" secondItem="4q1-KA-anj" secondAttribute="bottom" constant="2" id="m73-tY-E7Q"/>
                     <constraint firstAttribute="trailing" secondItem="fFI-xy-35p" secondAttribute="trailing" constant="20" id="ruY-bm-Zoi"/>
                     <constraint firstItem="4q1-KA-anj" firstAttribute="top" secondItem="1Av-Y9-LGk" secondAttribute="top" constant="8" id="uCq-wa-nZI"/>
+                    <constraint firstAttribute="bottom" secondItem="3JF-K5-WnL" secondAttribute="bottom" constant="6" id="v8p-lI-lS8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -41,4 +49,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="color_white.png" width="1" height="1"/>
+    </resources>
 </document>

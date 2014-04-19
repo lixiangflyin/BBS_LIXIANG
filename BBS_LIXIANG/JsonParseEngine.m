@@ -441,6 +441,48 @@
     return nil;
 }
 
++(User *)parseUserInfo:(NSDictionary *)loginDictionary2
+{
+    BOOL success = [[loginDictionary2 objectForKey:@"success"] boolValue];
+    NSDictionary * loginDictionary = [loginDictionary2 objectForKey:@"user"];
+    if (success)
+    {
+        User * user = [[User alloc] init];
+        user.ID = [loginDictionary objectForKey:@"id"];
+        user.name = [loginDictionary objectForKey:@"name"];
+        NSString * avatarString = [loginDictionary objectForKey:@"avatar"];
+        if ([avatarString hasSuffix:@".png"] || [avatarString hasSuffix:@".jpeg"] || [avatarString hasSuffix:@".jpg"] || [avatarString hasSuffix:@".tiff"] || [avatarString hasSuffix:@".bmp"])
+        {
+            user.avatar = [NSURL URLWithString:[loginDictionary objectForKey:@"avatar"]];
+        }
+        else {
+            user.avatar = nil;
+        }
+        
+        NSTimeInterval interval = [[loginDictionary objectForKey:@"lastlogin"] doubleValue];
+        NSDate *time = [NSDate dateWithTimeIntervalSince1970:interval];
+        user.lastlogin = time;
+        
+        user.level = [loginDictionary objectForKey:@"level"];
+        
+        user.posts = [[loginDictionary objectForKey:@"posts"] intValue];
+        user.perform = [[loginDictionary objectForKey:@"perform"] intValue];
+        user.experience = [[loginDictionary objectForKey:@"experience"] intValue];
+        user.medals = [[loginDictionary objectForKey:@"medals"] intValue];
+        user.logins = [[loginDictionary objectForKey:@"logins"] intValue];
+        user.life = [[loginDictionary objectForKey:@"life"] intValue];
+        
+        user.gender = [loginDictionary objectForKey:@"gender"];
+        user.astro = [loginDictionary objectForKey:@"astro"];
+        user.mode = [loginDictionary objectForKey:@"mode"];
+        
+        return user;
+    }
+    else {
+        return nil;
+    }
+}
+
 + (NSString *)dateToString:(NSDate *)date;
 {
     NSMutableString * dateString = [[NSMutableString alloc] init];

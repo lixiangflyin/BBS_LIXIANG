@@ -992,6 +992,12 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
             newFrame = CGRectIntegral(newFrame);
             CGFloat xOffset = newFrame.origin.x;
             
+            //NSLog(@"滑动 frame: %@", NSStringFromCGRect(newFrame));
+            //如果是一个NaN值，就直接返回
+            if (isnan(newFrame.origin.x)) {
+                break;
+            }
+            
             MMDrawerSide visibleSide = MMDrawerSideNone;
             CGFloat percentVisible = 0.0;
             if(xOffset > 0){

@@ -13,8 +13,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_white.png" translatesAutoresizingMaskIntoConstraints="NO" id="f5S-fn-UWC">
+                        <rect key="frame" x="8" y="7" width="304" height="67"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main2_msg.png" translatesAutoresizingMaskIntoConstraints="NO" id="vK8-8g-Fgw">
+                        <rect key="frame" x="266" y="55" width="15" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="5cZ-9V-JRj"/>
+                            <constraint firstAttribute="width" constant="15" id="VOr-qE-VGC"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体栏目具体栏" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5a-xW-rYD">
-                        <rect key="frame" x="14" y="8" width="84" height="15"/>
+                        <rect key="frame" x="14" y="7" width="84" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.4274510145" green="0.90980398650000005" blue="0.46666669849999998" alpha="1" colorSpace="deviceRGB"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -22,35 +34,62 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试试看二十五个字怎么样能够放其看放其" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" minimumFontSize="7" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="lhu-lZ-s5U">
-                        <rect key="frame" x="27" y="31" width="270" height="18"/>
+                        <rect key="frame" x="27" y="30" width="270" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者：lixiangflyin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0p-ZB-fzJ">
-                        <rect key="frame" x="27" y="57" width="95" height="15"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lixiangflyin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0p-ZB-fzJ">
+                        <rect key="frame" x="49" y="56" width="59" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恢复0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzT-15-nj7">
-                        <rect key="frame" x="269" y="57" width="31" height="15"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzT-15-nj7">
+                        <rect key="frame" x="286" y="56" width="14" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h04-DU-NPT">
+                        <rect key="frame" x="8" y="51" width="304" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.92941182851791382" green="0.96078437566757202" blue="0.9803922176361084" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="imi-Af-Pgu"/>
+                            <constraint firstAttribute="width" constant="304" id="kfO-3y-MCa"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main2_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="S08-8B-Zxs">
+                        <rect key="frame" x="27" y="53" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="tnj-KG-eiR"/>
+                            <constraint firstAttribute="height" constant="20" id="w1n-TR-cdB"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="f5a-xW-rYD" firstAttribute="top" secondItem="AWP-PZ-sHW" secondAttribute="top" constant="8" id="26l-eA-u2x"/>
+                    <constraint firstItem="f5a-xW-rYD" firstAttribute="top" secondItem="AWP-PZ-sHW" secondAttribute="top" constant="7" id="26l-eA-u2x"/>
                     <constraint firstItem="K0p-ZB-fzJ" firstAttribute="top" secondItem="lhu-lZ-s5U" secondAttribute="bottom" constant="8" id="36z-qa-sH1"/>
                     <constraint firstItem="lhu-lZ-s5U" firstAttribute="top" secondItem="f5a-xW-rYD" secondAttribute="bottom" constant="8" id="6CC-no-HEV"/>
+                    <constraint firstItem="gzT-15-nj7" firstAttribute="top" secondItem="h04-DU-NPT" secondAttribute="bottom" constant="4" id="9S1-xs-aMb"/>
                     <constraint firstAttribute="trailing" secondItem="gzT-15-nj7" secondAttribute="trailing" constant="20" id="H96-Ao-8g4"/>
+                    <constraint firstItem="S08-8B-Zxs" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="27" id="KMT-Rd-wgE"/>
                     <constraint firstItem="f5a-xW-rYD" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="14" id="Nbw-N5-5p8"/>
+                    <constraint firstAttribute="trailing" secondItem="f5S-fn-UWC" secondAttribute="trailing" constant="8" id="OZb-JH-123"/>
                     <constraint firstItem="gzT-15-nj7" firstAttribute="top" secondItem="lhu-lZ-s5U" secondAttribute="bottom" constant="8" id="Uog-tu-Vea"/>
-                    <constraint firstItem="K0p-ZB-fzJ" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="27" id="eQR-qm-VcL"/>
+                    <constraint firstAttribute="bottom" secondItem="f5S-fn-UWC" secondAttribute="bottom" constant="3" id="WhQ-QZ-UM7"/>
+                    <constraint firstItem="gzT-15-nj7" firstAttribute="leading" secondItem="vK8-8g-Fgw" secondAttribute="trailing" constant="5" id="dNn-ot-2kz"/>
+                    <constraint firstItem="K0p-ZB-fzJ" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="49" id="eQR-qm-VcL"/>
+                    <constraint firstAttribute="bottom" secondItem="S08-8B-Zxs" secondAttribute="bottom" constant="4" id="fNb-KM-wee"/>
+                    <constraint firstItem="f5S-fn-UWC" firstAttribute="top" secondItem="AWP-PZ-sHW" secondAttribute="top" constant="7" id="mxa-D8-xq8"/>
+                    <constraint firstAttribute="bottom" secondItem="vK8-8g-Fgw" secondAttribute="bottom" constant="7" id="q5Y-9h-Fbz"/>
                     <constraint firstItem="lhu-lZ-s5U" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="27" id="qAq-c3-UcE"/>
+                    <constraint firstItem="f5S-fn-UWC" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="8" id="qV0-vH-RMx"/>
+                    <constraint firstItem="h04-DU-NPT" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="8" id="tLv-0P-b6I"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -61,4 +100,9 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="color_white.png" width="1" height="1"/>
+        <image name="main2_msg.png" width="25" height="25"/>
+        <image name="main2_user.png" width="30" height="30"/>
+    </resources>
 </document>

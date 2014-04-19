@@ -11,6 +11,17 @@
 
 @implementation BoardTopicCell
 
+-(void)dealloc
+{
+    _timeLabel = nil;
+    _titleLabel = nil;
+    _authorLabel = nil;
+    _replyLabel = nil;
+    _time = nil;
+    _title = nil;
+    _author = nil;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -25,7 +36,7 @@
     [_authorLabel setText: _author];
     [_titleLabel setText:_title];
     [_timeLabel setText:[JsonParseEngine dateToString:_time]];
-    [_replyLabel setText:[NSString stringWithFormat:@"回%i", _replies]];
+    [_replyLabel setText:[NSString stringWithFormat:@"%i", _replies]];
     
 }
 

@@ -11,6 +11,14 @@
 
 @implementation MailCell
 
+
+-(void)dealloc
+{
+    _authorLabel = nil;
+    _titleLabel = nil;
+    _timeLabel = nil;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

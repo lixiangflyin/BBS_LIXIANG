@@ -20,6 +20,7 @@
 @property(nonatomic, strong) NSString * author;
 @property(nonatomic, assign) int replies;
 
+@property(nonatomic, retain) NSMutableArray *array;
 //数据显示在cell
 -(void)setReadyToShow;
 

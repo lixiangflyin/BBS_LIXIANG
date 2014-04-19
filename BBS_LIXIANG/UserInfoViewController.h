@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *logins;
 @property (weak, nonatomic) IBOutlet UILabel *life;
 @property (weak, nonatomic) IBOutlet UILabel *medals;
+@property (weak, nonatomic) IBOutlet UIButton *replyMailBtn;
 
 
 @property (nonatomic, strong) NSDictionary *userDictionary;

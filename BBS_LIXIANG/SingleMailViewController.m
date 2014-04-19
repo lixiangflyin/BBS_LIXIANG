@@ -28,12 +28,29 @@
     return self;
 }
 
+-(void)dealloc
+{
+    _authorLabel = nil;
+    _timeLabel = nil;
+    _titleLabel = nil;
+    _contentLabel = nil;
+    _scollView = nil;
+    _realView = nil;
+    _request = nil;
+    _mail = nil;
+    _rootMail = nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     UIBarButtonItem *replyButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(reply:)];
     self.navigationItem.rightBarButtonItem = replyButton;
+    
+    [_titleLabel setText:nil];
+    [_contentLabel setText:nil];
+    [_timeLabel setText:nil];
     
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mail/get.json?" mutableCopy];
     //[baseurl appendFormat:@"token=%@",[Toolkit getToken]];
@@ -54,7 +71,7 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
-    [ProgressHUD showError:@"发送失败"];
+    [ProgressHUD showError:@"网络故障"];
 }
 
 //ASI委托函数，信息处理
@@ -81,14 +98,14 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     UIFont *font = [UIFont systemFontOfSize:16.0];
-    CGSize size = [_mail.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 60, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+    CGSize size = [_mail.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 40, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
     
-    [_contentLabel setFrame:CGRectMake(_contentLabel.frame.origin.x, _contentLabel.frame.origin.y, self.view.frame.size.width - 60, size.height)];
+    [_contentLabel setFrame:CGRectMake(_contentLabel.frame.origin.x, _contentLabel.frame.origin.y, self.view.frame.size.width - 40, size.height)];
     
     [_realView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _contentLabel.frame.origin.y + size.height)];
-    [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, _contentLabel.frame.origin.y + size.height+10 + 64)];
-    if (_contentLabel.frame.origin.y + size.height+10 <= self.view.frame.size.height) {
-        [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 10)];
+    [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, _contentLabel.frame.origin.y + size.height+ 10 + 64 + 80)];
+    if (_contentLabel.frame.origin.y + size.height + 10 <= self.view.frame.size.height) {
+        [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 20)];
     }
     
 }

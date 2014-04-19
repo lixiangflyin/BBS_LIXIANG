@@ -10,6 +10,18 @@
 
 @implementation TopCell
 
+-(void)dealloc
+{
+    _sectionLabel = nil;
+    _titleLabel = nil;
+    _timeLabel = nil;
+    _section = nil;
+    _replyLabel = nil;
+    _section = nil;
+    _title = nil;
+    _author = nil;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -30,9 +42,21 @@
 {
     
     [_titleLabel setText:_title];
+    
     [_sectionLabel setText:_section];
-    [_timeLabel setText:[NSString stringWithFormat:@"作者:%@", _author]];
-    [_replyLabel setText:[NSString stringWithFormat:@"回复%i", _replies]];
+    for(NSArray *arr in _array)
+    {
+        for (int i=0; i<[arr count]; i++) {
+            NSDictionary *dic = arr[i];
+            if ([[dic objectForKey:@"sectionName"] isEqualToString:_section]) {
+                [_sectionLabel setText:[dic objectForKey:@"description"]];
+                break;
+            }
+        }
+    }
+    
+    [_timeLabel setText:[NSString stringWithFormat:@"%@", _author]];
+    [_replyLabel setText:[NSString stringWithFormat:@"%i", _replies]];
 }
 
 

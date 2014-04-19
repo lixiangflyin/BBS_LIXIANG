@@ -15,12 +15,13 @@
 + (void)saveName:(NSString *)name;
 + (void)saveToken:(NSString *)token;
 + (void)saveCollectedSections:(NSMutableArray *)sections;
-
++ (void)saveUserDictionary:(NSDictionary *)user_dic;
 
 + (NSString *)getUserName;
 + (NSString *)getID;
 + (NSString *)getName;
 + (NSString *)getToken;
 + (NSMutableArray *)getCollectedSections;
++ (NSDictionary *)getUserDictionary;
 
 @end

@@ -12,6 +12,8 @@
 #import "Toolkit.h"
 #import "WBUtil.h"
 
+#import "ProgressHUD.h"
+
 #define XLoc  70
 #define YLoc  70
 
@@ -24,6 +26,14 @@
 -(void)dealloc
 {
     _picArray = nil;
+    _postTypeLabel = nil;
+    _postTitleField = nil;
+    _postContentView = nil;
+    _pictureScrollView = nil;
+    _request = nil;
+    _rootTopic = nil;
+    _boardName = nil;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,19 +51,28 @@
     [super viewDidLoad];
     NSLog(@"root content %@",_rootTopic.content);
     
-    UIBarButtonItem *replyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(postTopic:)];
+    UIBarButtonItem *replyButton =[[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(postTopic:)];
     self.navigationItem.rightBarButtonItem = replyButton;
     replyButton = nil;
     
+    //[_postTitleLabel addTarget:self action:@selector(inputTitle) forControlEvents:UIControlEventEditingChanged];
+    
     if (_postType == 0) {
         self.title = @"发新帖";
-        [_postTypeLabel setText:@"新帖:"];
+        [_postTypeLabel setText:@"标题:"];
+        [_postTitleField setPlaceholder:@"请输入话题"];
+        [_postTitleField setText:@""];
         [_postContentView setText:@""];
     }
     if (_postType == 1) {
         self.title = @"回帖";
-        [_postTypeLabel setText:@"回帖:"];
-        [_postTitleLabel setText:_rootTopic.title];
+        [_postTypeLabel setText:@"回复:"];
+        if ([_rootTopic.title length] >=4 && [[_rootTopic.title substringToIndex:4] isEqualToString:@"Re: "]) {
+            [_postTitleField setText:[NSString stringWithFormat:@"%@", _rootTopic.title]];
+        }
+        else {
+            [_postTitleField setText:[NSString stringWithFormat:@"Re: %@", _rootTopic.title]];
+        }
         [_postContentView setText:@""];
 
     }
@@ -61,7 +80,7 @@
     if (_postType == 2) {
         self.title = @"修改帖子";
         [_postTypeLabel setText:@"修改:"];
-        [_postTitleLabel setText:_rootTopic.title];
+        [_postTitleField setText:_rootTopic.title];
         [_postContentView setText:_rootTopic.content];
     }
     
@@ -73,18 +92,25 @@
 {
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic/post.json?" mutableCopy];
     [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
-    [baseurl appendFormat:@"&board=%@",_boardName];
-    [baseurl appendFormat:@"&title=%@",[_postTitleLabel.text URLEncodedString]];
+    
+    if (_boardName == nil) {
+        [baseurl appendFormat:@"&board=%@",_rootTopic.board];  //回帖和修改获得的
+    }
+    else{
+        [baseurl appendFormat:@"&board=%@",_boardName];     //版面发新帖获得的
+    }
+    
+    [baseurl appendFormat:@"&title=%@",[_postTitleField.text URLEncodedString]];
     [baseurl appendFormat:@"&content=%@",[_postContentView.text URLEncodedString]];
     
     if (_postType == 0) {
         [baseurl appendFormat:@"&reid=%i",0]; //新帖阅读数为0
     }
     if (_postType == 1) {
-        [baseurl appendFormat:@"&reid=%i",_rootTopic.read];
+        [baseurl appendFormat:@"&reid=%i",_rootTopic.ID];
     }
     if (_postType == 2) {
-        [baseurl appendFormat:@"&reid=%i",_rootTopic.read];
+        [baseurl appendFormat:@"&reid=%i",_rootTopic.ID];
     }
     [baseurl appendFormat:@"&type=%i",3];
     
@@ -102,6 +128,7 @@
 -(void) GetErr:(ASIHTTPRequest *)request
 {
     NSLog(@"error!");
+    [ProgressHUD showError:@"网络故障"];
     
 }
 
@@ -112,10 +139,22 @@
     NSDictionary *dic = [request.responseString objectFromJSONString];
     //NSLog(@"dic %@",dic);
     
-    NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
-    //NSLog(@"%@",objects);
+    BOOL success = [[dic objectForKey:@"success"] boolValue];
     
-    //同步请求,其用户信息
+    if (success) {
+        [ProgressHUD showSuccess:@"发送成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else{
+        [ProgressHUD showError:@"发送失败"];
+    }
+    
+    
+    //上传图片
+    if(_picArray == nil)
+        return;
+    
+    
 
     
 }
@@ -131,6 +170,12 @@
     //cameraSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [cameraSheet showInView:self.view];
     cameraSheet = nil;
+}
+
+- (IBAction)cancelKeyboard:(id)sender {
+    
+    [_postTitleField resignFirstResponder];
+    [_postContentView resignFirstResponder];
 }
 
 #pragma action delegate
@@ -179,6 +224,7 @@
         imagePicker = nil;
 	}
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker  {
 
     [picker dismissViewControllerAnimated:YES completion:nil];

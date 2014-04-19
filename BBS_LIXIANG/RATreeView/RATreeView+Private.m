@@ -112,6 +112,8 @@
   
   UITableViewRowAnimation tableViewRowAnimation = [RATreeView tableViewRowAnimationForTreeViewRowAnimation:rowAnimation];
   [self.tableView insertRowsAtIndexPaths:indexes withRowAnimation:tableViewRowAnimation];
+    NSLog(@"%@",indexes);
+    
   [self.tableView endUpdates];
 
 }

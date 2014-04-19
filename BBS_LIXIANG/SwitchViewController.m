@@ -18,6 +18,15 @@
 
 @implementation SwitchViewController
 
+-(void)dealloc
+{
+    _slideSwitchView = nil;
+    _toptenViewContrller = nil;
+    _allSectionViewController = nil;
+    _boardViewController = nil;
+    _hotBoardViewController = nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,11 +42,11 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation_color.png"] forBarMetrics:UIBarMetricsDefault];
+    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation_color.png"] forBarMetrics:UIBarMetricsDefault];
 
 
     //自制ui
-    UIImage* image= [UIImage imageNamed:@"bbs_section.png"];
+    UIImage* image= [UIImage imageNamed:@"t1.png"];
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
     [button setBackgroundImage:image forState:UIControlStateNormal];
     [button addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
@@ -66,6 +75,8 @@
     _hotBoardViewController = [[HotBoardViewController alloc]init];
     _hotBoardViewController.title = @"人气版面";
     _hotBoardViewController.delegate = self;
+    
+    
     
     UIButton *rightSideButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightSideButton setImage:[UIImage imageNamed:@"icon_rightarrow.png"] forState:UIControlStateNormal];
@@ -114,6 +125,7 @@
     }
 }
 
+//向左滑动的结果
 - (void)slideSwitchView:(SUNSlideSwitchView *)view panLeftEdge:(UIPanGestureRecognizer *)panParam
 {
     LCViewController *drawerController = (LCViewController *)self.navigationController.mm_drawerController;
@@ -122,27 +134,28 @@
 
 - (void)slideSwitchView:(SUNSlideSwitchView *)view didselectTab:(NSUInteger)number
 {
+    UIViewController *vc = nil;
     if (number == 0)
     {
-        TopTenViewController *vc = nil;
+        //TopTenViewController *vc = nil;
         vc = self.toptenViewContrller;
         //[vc viewDidCurrentView];
     }
     else if (number == 1)
     {
-        AllSectionTopViewController *vc = nil;
+        //AllSectionTopViewController *vc = nil;
         vc = self.allSectionViewController;
         //[vc viewDidCurrentView];
     }
     else if (number == 2)
     {
-        HotBoardViewController *vc = nil;
+        //HotBoardViewController *vc = nil;
         vc = self.hotBoardViewController;
         //[vc viewDidCurrentView];
     }
     else if (number == 3)
     {
-        SectionsViewController *vc = nil;
+        //SectionsViewController *vc = nil;
         vc = self.boardViewController;
     }
 }
@@ -154,7 +167,7 @@
     SingleTopicViewController *single = [[SingleTopicViewController alloc]init];
     [single setRootTopic:topic];
     [self.navigationController pushViewController:single animated:YES];
-    //single = nil;
+    single = nil;
 }
 
 #pragma -mark TopTenTopicsDelegate
@@ -164,7 +177,7 @@
     SingleBoardViewController *single = [[SingleBoardViewController alloc]init];
     [single setBoardName:boardName];
     [self.navigationController pushViewController:single animated:YES];
-    //single = nil;
+    single = nil;
 }
 
 
@@ -174,7 +187,7 @@
 
     SingleBoardViewController *single = [[SingleBoardViewController alloc]init];
     [self.navigationController pushViewController:single animated:YES];
-    //single = nil;
+    single = nil;
 }
 
 - (void)didReceiveMemoryWarning

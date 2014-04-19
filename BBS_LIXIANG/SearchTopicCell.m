@@ -10,6 +10,16 @@
 
 @implementation SearchTopicCell
 
+-(void)dealloc
+{
+    _authorLabel = nil;
+    _sectionLabel = nil;
+    _titleLabel = nil;
+    _author = nil;
+    _section = nil;
+    _title = nil;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

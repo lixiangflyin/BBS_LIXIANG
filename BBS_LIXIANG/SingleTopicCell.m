@@ -10,6 +10,16 @@
 
 @implementation SingleTopicCell
 
+-(void)dealloc
+{
+    _titleLabel = nil;
+    _sectionLabel = nil;
+    _replyLabel = nil;
+    _time = nil;
+    _title = nil;
+    _section = nil;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -32,12 +42,13 @@
     CGSize size1 = [_title boundingRectWithSize:CGSizeMake(self.frame.size.width - 30, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
     [_titleLabel setFrame:CGRectMake(_titleLabel.frame.origin.x, _titleLabel.frame.origin.y, self.frame.size.width - 35, size1.height)];
     [_titleLabel setText:_title];
+    font = nil;
     
     [_sectionLabel setFrame:CGRectMake(_sectionLabel.frame.origin.x, _titleLabel.frame.origin.y + size1.height + 1, 118, 21)];
     [_sectionLabel setText:_section];
     
     [_replyLabel setFrame:CGRectMake(237, _titleLabel.frame.origin.y + size1.height + 1, 71, 21)];
-    NSLog(@"frame: %@", NSStringFromCGRect(_replyLabel.frame));
+    //NSLog(@"frame: %@", NSStringFromCGRect(_replyLabel.frame));
     [_replyLabel setText:[NSString stringWithFormat:@"回复(%i)", _replies]];
 }
 

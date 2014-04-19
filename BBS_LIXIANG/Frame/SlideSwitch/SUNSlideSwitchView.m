@@ -45,6 +45,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     
     _viewArray = [[NSMutableArray alloc] init];
     
+    //还未创建主UI
     _isBuildUI = NO;
     
 }
@@ -62,6 +63,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        //初始化UI，之后通过buildUI正式创建
         [self initValues];
     }
     return self;
@@ -123,16 +125,21 @@ static const NSUInteger kTagOfRightSideButton = 999;
  */
 - (void)buildUI
 {
+    //获取委托的计算
     NSUInteger number = [self.slideSwitchViewDelegate numberOfTab:self];
     for (int i=0; i<number; i++) {
+        //获取相关控制器的指针用来创建
         UIViewController *vc = [self.slideSwitchViewDelegate slideSwitchView:self viewOfTab:i];
         [_viewArray addObject:vc];
+        //添加相关的控制器视图
         [_rootScrollView addSubview:vc.view];
     }
+    //创建按钮
     [self createNameButtons];
     
     //选中第一个view
     if (self.slideSwitchViewDelegate && [self.slideSwitchViewDelegate respondsToSelector:@selector(slideSwitchView:didselectTab:)]) {
+        //_userSelectedChannelID初始值为100 所以选中的是0
         [self.slideSwitchViewDelegate slideSwitchView:self didselectTab:_userSelectedChannelID - 100];
     }
     
@@ -151,7 +158,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
  */
 - (void)createNameButtons
 {
-    
+    //添加imageView
     _shadowImageView = [[UIImageView alloc] init];
     [_shadowImageView setImage:_shadowImage];
     [_topScrollView addSubview:_shadowImageView];
@@ -276,6 +283,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
 {
     if (scrollView == _rootScrollView) {
         _userContentOffsetX = scrollView.contentOffset.x;
+        NSLog(@"move x=%f",_userContentOffsetX);
     }
 }
 

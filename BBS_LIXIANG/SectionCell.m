@@ -11,6 +11,13 @@
 
 @implementation SectionCell
 
+-(void)dealloc
+{
+    _sectionLabel = nil;
+    _collectButton = nil;
+    _sectionDic = nil;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -37,10 +44,10 @@
     }
     
     if (isCollected) {
-        [_collectButton setImage:[UIImage imageNamed:@"select.png"] forState:UIControlStateNormal];
+        [_collectButton setBackgroundImage:[UIImage imageNamed:@"select.png"] forState:UIControlStateNormal];
     }
     else{
-        [_collectButton setImage:[UIImage imageNamed:@"select_not.png"] forState:UIControlStateNormal];
+        [_collectButton setBackgroundImage:[UIImage imageNamed:@"select_not.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -65,13 +72,13 @@
         [array removeObject:_sectionDic];
         [Toolkit saveCollectedSections:array];
         
-        [_collectButton setImage:[UIImage imageNamed:@"select_not.png"] forState:UIControlStateNormal];
+        [_collectButton setBackgroundImage:[UIImage imageNamed:@"select_not.png"] forState:UIControlStateNormal];
     }
     else{
         [array addObject:_sectionDic];
         [Toolkit saveCollectedSections:array];
         
-        [_collectButton setImage:[UIImage imageNamed:@"select.png"] forState:UIControlStateNormal];
+        [_collectButton setBackgroundImage:[UIImage imageNamed:@"select.png"] forState:UIControlStateNormal];
     }
     
     array = nil;

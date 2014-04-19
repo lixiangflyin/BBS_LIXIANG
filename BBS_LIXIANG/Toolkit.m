@@ -42,6 +42,12 @@
 }
 
 
++ (void)saveUserDictionary:(NSDictionary *)user_dic
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:user_dic forKey:@"user_dic"];
+}
+
 
 + (NSString *)getUserName
 {
@@ -73,7 +79,10 @@
     return (NSMutableArray *)[defaults objectForKey:@"collect_sections"];
 }
 
-
-
++ (NSDictionary *)getUserDictionary
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return (NSDictionary *)[defaults objectForKey:@"user_dic"];
+}
 
 @end

@@ -19,6 +19,15 @@
 
 @implementation HotBoardViewController
 
+-(void)dealloc
+{
+    _hotBoardTableView = nil;
+    _request = nil;
+    _headerView = nil;
+    _hotBoardArr = nil;
+    _selectBoard = nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,6 +41,7 @@
 {
     [super viewDidLoad];
     
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _hotBoardTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _hotBoardTableView.dataSource = self;  //数据源代理
     _hotBoardTableView.delegate = self;    //表视图委托
@@ -136,10 +146,7 @@
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
         
-        UIImage *backgroundImage = [UIImage imageNamed:@"abs__ab_solid_light_holo.9.png"];
-        backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 320, 14, 0)];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        [cell setBackgroundView:imageView];
+        [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
     }
     
     Board * b = [self.hotBoardArr objectAtIndex:indexPath.row];

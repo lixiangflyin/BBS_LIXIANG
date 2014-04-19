@@ -13,6 +13,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="color_white.png" translatesAutoresizingMaskIntoConstraints="NO" id="KQL-Bb-NzY">
+                        <rect key="frame" x="8" y="4" width="304" height="59"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lixiangflyin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9S-6y-X2Y">
                         <rect key="frame" x="20" y="9" width="68" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -38,9 +42,13 @@
                     <constraint firstItem="i9S-6y-X2Y" firstAttribute="leading" secondItem="bWT-YP-Tf6" secondAttribute="leading" constant="20" id="9vk-SV-UZ8"/>
                     <constraint firstAttribute="trailing" secondItem="1gM-mr-egz" secondAttribute="trailing" constant="20" id="A9s-WP-KpA"/>
                     <constraint firstItem="i9S-6y-X2Y" firstAttribute="top" secondItem="bWT-YP-Tf6" secondAttribute="top" constant="9" id="Fb1-SW-QFB"/>
+                    <constraint firstItem="KQL-Bb-NzY" firstAttribute="top" secondItem="bWT-YP-Tf6" secondAttribute="top" constant="4" id="G4p-vR-RRh"/>
                     <constraint firstItem="1gM-mr-egz" firstAttribute="top" secondItem="bWT-YP-Tf6" secondAttribute="top" constant="9" id="Guo-Bi-Tpv"/>
                     <constraint firstItem="DHJ-hh-qXV" firstAttribute="leading" secondItem="bWT-YP-Tf6" secondAttribute="leading" constant="17" id="UlB-MC-24X"/>
+                    <constraint firstAttribute="trailing" secondItem="KQL-Bb-NzY" secondAttribute="trailing" constant="8" id="k3l-wi-PMN"/>
+                    <constraint firstAttribute="bottom" secondItem="KQL-Bb-NzY" secondAttribute="bottom" constant="3" id="lRy-NY-b04"/>
                     <constraint firstItem="DHJ-hh-qXV" firstAttribute="top" secondItem="1gM-mr-egz" secondAttribute="bottom" constant="9" id="nZb-Vo-yp6"/>
+                    <constraint firstItem="KQL-Bb-NzY" firstAttribute="leading" secondItem="bWT-YP-Tf6" secondAttribute="leading" constant="8" id="pp9-la-jGl"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -50,4 +58,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="color_white.png" width="1" height="1"/>
+    </resources>
 </document>

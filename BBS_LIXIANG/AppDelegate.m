@@ -13,6 +13,9 @@
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
 static const CGFloat kPublicLeftMenuWidth = 260.0f;
 
 @implementation AppDelegate
@@ -20,6 +23,19 @@ static const CGFloat kPublicLeftMenuWidth = 260.0f;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                           shadow, NSShadowAttributeName,
+                                                           [UIFont systemFontOfSize:18.0], NSFontAttributeName, nil]];
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x1E90FF)];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"t2.png"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"t2.png"]];
+
     
     MenuViewController *leftVC = [[MenuViewController alloc]
                                          initWithNibName:@"MenuViewController"
@@ -29,7 +45,7 @@ static const CGFloat kPublicLeftMenuWidth = 260.0f;
                                             leftDrawerViewController:leftVC
                                             rightDrawerViewController:nil];
     [drawerController setMaximumLeftDrawerWidth:kPublicLeftMenuWidth];
-    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    //[drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     [drawerController setDrawerVisualStateBlock:^(MMDrawerController *drawerController, MMDrawerSide drawerSide, CGFloat percentVisible) {
         MMDrawerControllerDrawerVisualStateBlock block;
@@ -42,6 +58,8 @@ static const CGFloat kPublicLeftMenuWidth = 260.0f;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+    
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

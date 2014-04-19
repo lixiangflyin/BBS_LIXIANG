@@ -19,6 +19,17 @@
 
 @implementation AllSectionTopViewController
 
+-(void)dealloc
+{
+    _allTopicTableView = nil;
+    _request = nil;
+    _allTopicsArr = nil;
+    [_headerView free];
+    _selectTopic = nil;
+    _sectionsArr = nil;
+    
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,9 +43,13 @@
 {
     [super viewDidLoad];
     
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sections_info" ofType:@"plist"];
+    _sectionsArr = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
+    
     _allTopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _allTopicTableView.dataSource = self;  //数据源代理
     _allTopicTableView.delegate = self;    //表视图委托
+    _allTopicTableView.separatorStyle = NO;
     [self.view addSubview:_allTopicTableView];
     
     //刷新和加载更多
@@ -137,6 +152,8 @@
         NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"TopCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
+        
+        [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
     }
     
     Topic * topic = [self.allTopicsArr objectAtIndex:indexPath.row];
@@ -144,6 +161,7 @@
     cell.title = topic.title;
     cell.author = topic.author;
     cell.replies = topic.replies;
+    cell.array = _sectionsArr;
     
     [cell setReadyToShow];
     

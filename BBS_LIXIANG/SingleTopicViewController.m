@@ -18,6 +18,7 @@
 #import "JsonParseEngine.h"
 #import "MJRefresh.h"
 #import "ProgressHUD.h"
+#import "Toolkit.h"
 
 #define EDITTOPIC     200
 #define REPLYTOPIC    201
@@ -59,13 +60,30 @@ static int count;
     return self;
 }
 
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.title = @"阅读文章";
+    
+//    //自制ui
+//    UIImage* image= [UIImage imageNamed:@"t2.png"];
+//    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
+//    [button setBackgroundImage:image forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
+//                                   initWithCustomView:button];
+//    self.navigationItem.leftBarButtonItem = leftButton;
+    
     _singletopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _singletopicTableView.dataSource = self;  //数据源代理
     _singletopicTableView.delegate = self;    //表视图委托
+    _singletopicTableView.separatorStyle = NO;
     [self.view addSubview:_singletopicTableView];
     
     //刷新和加载更多
@@ -219,8 +237,11 @@ static int count;
         if (cell == nil) {
             NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"SingleTopicCell" owner:self options:nil];
             cell = [array objectAtIndex:0];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         
         cell.section = _rootTopic.board;
         cell.title = _rootTopic.title;
@@ -237,12 +258,9 @@ static int count;
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell addTapToImageView];
+            
+            [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//         for(UIView *subView in cell.contentView) {
-//             //这里要进行判断，该移除哪个View
-//             [subView removeFromSuperView];
-//         }
         
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];
         
@@ -298,7 +316,7 @@ static int count;
         UIFont *font = [UIFont systemFontOfSize:14.0];
         CGSize size1 = [_rootTopic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
         
-        returnHeight = size1.height  + 35;
+        returnHeight = size1.height  + 39;
     }
     else {
         
@@ -352,6 +370,7 @@ static int count;
 
 #pragma -mark tableview Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
  
 }
@@ -396,6 +415,11 @@ static int count;
 
 -(void)replyTheTopic:(int)indexRow ButtonNum:(int)buttonNum
 {
+    if([Toolkit getUserName] == nil){
+        [ProgressHUD showError:@"请先登录"];
+        return;
+    }
+    
     PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
     
     switch (buttonNum) {

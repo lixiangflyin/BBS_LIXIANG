@@ -13,7 +13,7 @@
 @interface PostTopicViewController : UIViewController<UITextViewDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *postTypeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *postTitleLabel;
+@property (weak, nonatomic) IBOutlet UITextField * postTitleField;
 @property (weak, nonatomic) IBOutlet UITextView *postContentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *pictureScrollView;
 
@@ -28,4 +28,5 @@
 @property(nonatomic, assign) int postType;   //发表类型，0发表新文章，1回帖，2修改文章
 
 - (IBAction)getPostPicture:(id)sender;
+- (IBAction)cancelKeyboard:(id)sender;
 @end

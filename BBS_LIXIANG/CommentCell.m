@@ -16,6 +16,26 @@
 
 @implementation CommentCell
 
+-(void)dealloc
+{
+    _headPhotoImage = nil;
+    _userLabel = nil;
+    _timeLabel = nil;
+    _numLabel = nil;
+    _contentLabel = nil;
+    _commentToLabel = nil;
+    _editButton = nil;
+    _name = nil;
+    _num = nil;
+    _time = nil;
+    _author = nil;
+    _content = nil;
+    _quote = nil;
+    _quoter = nil;
+    _attachments = nil;
+    _attachmentsViewArray = nil;
+    _headPhotoUrl = nil;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -33,6 +53,7 @@
     UITapGestureRecognizer *clickHeadPhoto = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHeadPhoto:)];
     _headPhotoImage.userInteractionEnabled = YES;
     [_headPhotoImage addGestureRecognizer: clickHeadPhoto];
+    clickHeadPhoto = nil;
     
 }
 
@@ -88,9 +109,11 @@
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:15.0];
         CGSize size1 = [_content boundingRectWithSize:CGSizeMake(self.frame.size.width - 35, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        font = nil;
         
         UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
         CGSize size2 = [str boundingRectWithSize:CGSizeMake(self.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
+        font2 = nil;
         
         NSArray * picArray = [self getPicList];
         for (int i = 0; i < [picArray count]; i++) {

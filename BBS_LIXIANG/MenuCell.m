@@ -10,6 +10,16 @@
 
 @implementation MenuCell
 
+-(void)dealloc
+{
+    _titleImageView = nil;
+    _titleLabel = nil;
+    _edgeImageView = nil;
+    _imageName = nil;
+    _titleString = nil;
+    
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

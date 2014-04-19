@@ -17,6 +17,14 @@
 
 @implementation LoginViewController
 
+
+-(void)dealloc
+{
+    _request =nil;
+    _nameTextField = nil;
+    _pwdTextField = nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,6 +41,9 @@
 }
 
 - (IBAction)login:(id)sender {
+    
+    [_nameTextField resignFirstResponder];
+    [_pwdTextField resignFirstResponder];
     
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/token.json?" mutableCopy];
     [baseurl appendFormat:@"user=%@", _nameTextField.text];
@@ -77,6 +88,10 @@
         [ProgressHUD showSuccess:@"登陆成功"];
         [_delegate loginSuccess];
         [self back:self];
+    }
+    else{
+        
+       [ProgressHUD showError:@"输入有误"];
     }
     
 }

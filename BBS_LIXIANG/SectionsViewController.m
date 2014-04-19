@@ -9,6 +9,7 @@
 #import "SectionsViewController.h"
 #import "RATreeView.h"
 #import "RADataObject.h"
+#import "BoardCell.h"
 #import "SectionCell.h"
 #import "Toolkit.h"
 #import "JsonParseEngine.h"
@@ -25,6 +26,13 @@
 
 @implementation SectionsViewController
 
+-(void)dealloc
+{
+    _sectionsArr = nil;
+    _pictureArr = nil;
+    _request = nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,10 +48,12 @@
 
     [self getdataFormLocation];
     
+    _pictureArr = @[@"home.png",@"amuse.png",@"fasion.png",@"science.png",@"art.png",@"society.png",@"game.png",@"art.png",@"fasion.png",@"game.png",@"fasion.png",@"art.png"];
+    
     RATreeView *treeView = [[RATreeView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height- 64 - 44)];
     treeView.delegate = self;
     treeView.dataSource = self;
-    treeView.separatorStyle = RATreeViewCellSeparatorStyleSingleLine;
+    treeView.separatorStyle = RATreeViewCellSeparatorStyleNone;
     //加载数据
     [treeView reloadData];
     //[treeView expandRowForItem:phone withRowAnimation:RATreeViewRowAnimationLeft]; //expands Row
@@ -179,26 +189,19 @@
 {
     [super viewWillAppear:animated];
     
-    if([[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."][0] intValue] >= 7) {
-        CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-        float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-        self.treeView.contentInset = UIEdgeInsetsMake(heightPadding, 0.0, 0.0, 0.0);
-        self.treeView.contentOffset = CGPointMake(0.0, -heightPadding);
-    }
-    
-    self.treeView.frame = self.view.bounds;
+//    if([[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."][0] intValue] >= 7) {
+//        CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+//        float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+//        self.treeView.contentInset = UIEdgeInsetsMake(heightPadding, 0.0, 0.0, 0.0);
+//        self.treeView.contentOffset = CGPointMake(0.0, -heightPadding);
+//    }
+//    
+//    self.treeView.frame = self.view.bounds;
 }
 
 #pragma mark TreeView Delegate methods
 - (CGFloat)treeView:(RATreeView *)treeView heightForRowForItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
 {
-    if (treeNodeInfo.treeDepthLevel == 0) {
-        return 40;
-    } else if (treeNodeInfo.treeDepthLevel == 1) {
-        return 34;
-    } else if (treeNodeInfo.treeDepthLevel == 2) {
-        return 40;
-    }
     return 44;
 }
 
@@ -215,7 +218,7 @@
 - (BOOL)treeView:(RATreeView *)treeView shouldItemBeExpandedAfterDataReload:(id)item treeDepthLevel:(NSInteger)treeDepthLevel
 {
     if ([item isEqual:self.expanded]) {
-        return NO;
+        return YES;
     }
     
     return NO;
@@ -224,9 +227,9 @@
 - (void)treeView:(RATreeView *)treeView willDisplayCell:(UITableViewCell *)cell forItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
 {
     if (treeNodeInfo.treeDepthLevel == 0) {
-        //cell.backgroundColor = UIColorFromRGB(0xF7F7F7);
+        cell.backgroundColor = UIColorFromRGB(0xD1EEFC);
     } else if (treeNodeInfo.treeDepthLevel == 1) {
-        //cell.backgroundColor = UIColorFromRGB(0xD1EEFC);
+        cell.backgroundColor = UIColorFromRGB(0xD1EEFC);
     } else if (treeNodeInfo.treeDepthLevel == 2) {
         cell.backgroundColor = UIColorFromRGB(0xE0F8D8);
     }
@@ -239,14 +242,17 @@
     NSLog(@"item：%@",((RADataObject *)item).name);
     NSString *title = ((RADataObject *)item).name;
     if ([title isEqualToString:@"本站系统"] | [title isEqualToString:@"东南大学"] | [title isEqualToString:@"电脑技术"] | [title isEqualToString:@"学术科学"] | [title isEqualToString:@"艺术文化"] | [title isEqualToString:@"乡情校意"] | [title isEqualToString:@"休闲娱乐"] | [title isEqualToString:@"知性感性"] | [title isEqualToString:@"人文信息"] | [title isEqualToString:@"体坛风暴"] | [title isEqualToString:@"校务信箱"] | [title isEqualToString:@"社团群体"]) {
-        return;
+        
+        NSLog(@"do nothing!");
     }
+    else{
     
-    NSArray *selectArr = [self.sectionsArr objectAtIndex:treeNodeInfo.parent.positionInSiblings];
-    NSDictionary *detailDic = [selectArr objectAtIndex:treeNodeInfo.positionInSiblings];
-    NSString *boardName = [detailDic objectForKey:@"sectionName"];
+        NSArray *selectArr = [self.sectionsArr objectAtIndex:treeNodeInfo.parent.positionInSiblings];
+        NSDictionary *detailDic = [selectArr objectAtIndex:treeNodeInfo.positionInSiblings];
+        NSString *boardName = [detailDic objectForKey:@"sectionName"];
     
-    [_delegate pushToNextSingleSectionViewWithValue:boardName];
+        [_delegate pushToNextSingleSectionViewWithValue:boardName];
+    }
 }
 
 
@@ -256,9 +262,18 @@
     
     if (treeNodeInfo.treeDepthLevel == 0) {
         
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-        cell.textLabel.text = ((RADataObject *)item).name;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        static NSString * identi = @"BoardCell";
+        //第一次需要分配内存
+        BoardCell * cell = (BoardCell *)[treeView dequeueReusableCellWithIdentifier:identi];
+        if (cell == nil) {
+            NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"BoardCell" owner:self options:nil];
+            cell = [array objectAtIndex:0];
+            cell.selectionStyle = UITableViewCellEditingStyleNone;
+            
+        }
+        
+        [cell.boardLabel setText:((RADataObject *)item).name];
+        [cell.titleImageView setImage:[UIImage imageNamed:_pictureArr[treeNodeInfo.positionInSiblings]]];
         
         return cell;
     }

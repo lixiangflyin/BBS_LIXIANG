@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
-#import "SectionCell.h"
 
 @protocol SectionsDelegate <NSObject>
 
@@ -20,6 +19,8 @@
 @interface SectionsViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray *sectionsArr;
+
+@property (nonatomic, strong) NSArray *pictureArr;
 
 @property (nonatomic, retain) ASIFormDataRequest *request;
 

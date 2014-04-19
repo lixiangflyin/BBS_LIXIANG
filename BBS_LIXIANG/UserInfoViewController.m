@@ -8,6 +8,7 @@
 
 #import "UserInfoViewController.h"
 #import "PostMailViewController.h"
+#import "Toolkit.h"
 
 #import "UIViewController+MJPopupViewController.h"
 
@@ -16,6 +17,22 @@
 @end
 
 @implementation UserInfoViewController
+
+-(void)dealloc
+{
+    _ID = nil;
+    _name = nil;
+    _logins = nil;
+    _level = nil;
+    _posts = nil;
+    _perform = nil;
+    _experience = nil;
+    _medals = nil;
+    _logins = nil;
+    _life = nil;
+    _gender = nil;
+    _astro = nil;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,6 +83,11 @@
         [_gender setText:@"保密"];
         [_astro setText:@"保密"];
     }
+
+    if ([Toolkit getUserName] == nil) {
+        _replyMailBtn.hidden = YES;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

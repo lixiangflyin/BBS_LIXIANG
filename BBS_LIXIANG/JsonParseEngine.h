@@ -35,6 +35,8 @@
 +(NSArray *)parseSections:(NSDictionary *)sectionsDictionary;
 //解析通知
 +(Notification *)parseNotification:(NSDictionary *)notificationDictionary;
+//解析用户信息
++(User *)parseUserInfo:(NSDictionary *)loginDictionary2;
 //时间转换
 + (NSString *)dateToString:(NSDate *)date;
 
