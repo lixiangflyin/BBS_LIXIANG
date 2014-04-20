@@ -33,6 +33,10 @@
 {
     [_sectionLabel setText:[_sectionDic objectForKey:@"description"]];
     
+    if ([Toolkit getToken] == nil) {
+        _collectButton.hidden = YES;
+    }
+    
     //获取保存的收藏版面
     NSMutableArray *array = [Toolkit getCollectedSections];
     

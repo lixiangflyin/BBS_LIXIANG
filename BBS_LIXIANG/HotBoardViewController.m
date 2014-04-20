@@ -8,7 +8,7 @@
 
 #import "HotBoardViewController.h"
 #import "SingleBoardViewController.h"
-#import "HotBoardCell.h"
+#import "BoardCell.h"
 
 #import "JsonParseEngine.h"
 #import "ProgressHUD.h"
@@ -22,7 +22,6 @@
 -(void)dealloc
 {
     _hotBoardTableView = nil;
-    _request = nil;
     _headerView = nil;
     _hotBoardArr = nil;
     _selectBoard = nil;
@@ -43,6 +42,8 @@
     //屏幕大小适配
     CGSize size_screen = [[UIScreen mainScreen]bounds].size;
     [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
+    
+    _pictureArr = @[@"home.png",@"amuse.png",@"fasion.png",@"science.png",@"art.png",@"society.png",@"game.png",@"art.png",@"fasion.png",@"game.png",@"fasion.png",@"art.png"];
     
     _hotBoardTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _hotBoardTableView.dataSource = self;  //数据源代理
@@ -65,13 +66,27 @@
 {
     NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/boards.json"];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://bbs.seu.edu.cn/api/hot/boards.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        NSArray * objects = [JsonParseEngine parseBoards:dic];
+        
+        [self.hotBoardArr removeAllObjects];
+        self.hotBoardArr = [NSMutableArray arrayWithArray:objects];
+        
+        [_hotBoardTableView reloadData];
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_headerView endRefreshing];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [_headerView endRefreshing];
+        [ProgressHUD showError:@"网络故障"];
+    }];
+    
 }
 
 #pragma mark 刷新完毕
@@ -101,31 +116,6 @@
 }
 
 
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [_headerView endRefreshing];
-    [ProgressHUD showError:@"网络故障"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    
-    NSArray * objects = [JsonParseEngine parseBoards:dic];
-    
-    [self.hotBoardArr removeAllObjects];
-    self.hotBoardArr = [NSMutableArray arrayWithArray:objects];
-    
-    [_hotBoardTableView reloadData];
-    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [_headerView endRefreshing];
-    
-}
-
 #pragma mark - 数据源协议
 #pragma mark tableViewDelegate
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -140,11 +130,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString * identi = @"HotBoardCell";
+    static NSString * identi = @"BoardCell";
     //第一次需要分配内存
-    HotBoardCell * cell = (HotBoardCell *)[tableView dequeueReusableCellWithIdentifier:identi];
+    BoardCell * cell = (BoardCell *)[tableView dequeueReusableCellWithIdentifier:identi];
     if (cell == nil) {
-        NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"HotBoardCell" owner:self options:nil];
+        NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"BoardCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
         
@@ -152,8 +142,11 @@
     }
     
     Board * b = [self.hotBoardArr objectAtIndex:indexPath.row];
-    cell.nameLabel.text = b.name;
-    cell.descriptionLabel.text = b.description;
+    
+    [cell.boardLabel setText:b.description];
+    
+    int randomNum = arc4random_uniform(12);
+    [cell.titleImageView setImage:[UIImage imageNamed:_pictureArr[randomNum]]];
 
     return cell;
 }
@@ -161,7 +154,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 63;
+    return 44;
 }
 
 #pragma -mark tableview Delegate

@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 #import "Mail.h"
 
 
 @interface MailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView *mailsTableView;
-
-@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, retain) NSMutableArray *mailsArr;
 

@@ -30,7 +30,6 @@
     _postTitleField = nil;
     _postContentView = nil;
     _pictureScrollView = nil;
-    _request = nil;
     _rootTopic = nil;
     _boardName = nil;
     
@@ -116,50 +115,32 @@
     }
     [baseurl appendFormat:@"&type=%i",3];
     
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        BOOL success = [[dic objectForKey:@"success"] boolValue];
+        
+        if (success) {
+            [ProgressHUD showSuccess:@"发送成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else{
+            [ProgressHUD showError:@"发送失败"];
+        }
+        
+        //上传图片
+        if(_picArray == nil)
+            return;
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [ProgressHUD showError:@"网络故障"];
+    }];
 }
 
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [ProgressHUD showError:@"网络故障"];
-    
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    //NSLog(@"dic %@",dic);
-    
-    BOOL success = [[dic objectForKey:@"success"] boolValue];
-    
-    if (success) {
-        [ProgressHUD showSuccess:@"发送成功"];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else{
-        [ProgressHUD showError:@"发送失败"];
-    }
-    
-    
-    //上传图片
-    if(_picArray == nil)
-        return;
-    
-    
-
-    
-}
 
 #pragma -mark 获取上传图片
 - (IBAction)getPostPicture:(id)sender {

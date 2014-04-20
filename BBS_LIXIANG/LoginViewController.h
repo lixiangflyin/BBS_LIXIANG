@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 
 @protocol LoginDelegate <NSObject>
 
@@ -17,7 +18,7 @@
 
 @interface LoginViewController : UIViewController
 
-@property (nonatomic, retain) ASIFormDataRequest *request;
+//@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, assign) id delegate;
 

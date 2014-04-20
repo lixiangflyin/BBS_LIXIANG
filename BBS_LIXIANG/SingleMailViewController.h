@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 #import "Mail.h"
 
 @interface SingleMailViewController : UIViewController
@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scollView;
 @property (weak, nonatomic) IBOutlet UIView *realView;
-
-@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property(nonatomic, retain)Mail * rootMail;  //前一个传的值
 @property(nonatomic, retain)Mail * mail;

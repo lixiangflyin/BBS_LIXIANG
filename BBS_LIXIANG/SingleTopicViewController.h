@@ -17,7 +17,7 @@
 
 @property (nonatomic, retain) UITableView *singletopicTableView;
 
-@property (nonatomic, retain) ASIFormDataRequest *request;
+//@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, retain) NSMutableArray *topicsArray;
 

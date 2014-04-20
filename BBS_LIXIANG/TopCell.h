@@ -14,11 +14,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;  //authorLabel
 @property (weak, nonatomic) IBOutlet UILabel *replyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *colorBackgroudLabel;
 
 @property(nonatomic, strong) NSString * section;
 @property(nonatomic, strong) NSString * title;
 @property(nonatomic, strong) NSString * author;
 @property(nonatomic, assign) int replies;
+
+@property(nonatomic, strong) NSString * colorStr;
 
 @property(nonatomic, retain) NSMutableArray *array;
 //数据显示在cell

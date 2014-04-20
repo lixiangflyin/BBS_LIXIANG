@@ -45,7 +45,7 @@
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="在这里写下你的评论" translatesAutoresizingMaskIntoConstraints="NO" id="spD-ha-Shd">
                     <rect key="frame" x="29" y="114" width="263" height="169"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.2823529541" green="0.77647066119999997" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <connections>

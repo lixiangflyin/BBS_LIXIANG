@@ -22,9 +22,20 @@
 -(void)setReadyToShow
 {
     [_titleLabel setText:_title];
-    [_sectionLabel setText:_section];
+    //[_sectionLabel setText:_section];
     
-    //NSLog(@"frame: %@", NSStringFromCGRect(_sectionLabel.frame));
+    //遍历获得中文名
+    for(NSArray *arr in _array)
+    {
+        for (int i=0; i<[arr count]; i++) {
+            NSDictionary *dic = arr[i];
+            if ([[dic objectForKey:@"sectionName"] isEqualToString:_section]) {
+                [_sectionLabel setText:[dic objectForKey:@"description"]];
+                break;
+            }
+        }
+    }
+
 
 }
 

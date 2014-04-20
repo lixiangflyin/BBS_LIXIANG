@@ -76,15 +76,14 @@
                         </connections>
                     </button>
                     <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="05R-zf-vUc">
-                        <rect key="frame" x="226" y="122" width="30" height="28"/>
+                        <rect key="frame" x="226" y="125" width="26" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="Hai-3r-CT9"/>
-                            <constraint firstAttribute="height" constant="28" id="f7N-ab-WEf"/>
+                            <constraint firstAttribute="width" constant="26" id="Hai-3r-CT9"/>
+                            <constraint firstAttribute="height" constant="26" id="f7N-ab-WEf"/>
                         </constraints>
-                        <state key="normal" title="改">
-                            <color key="titleColor" red="0.039215687659999998" green="0.97647064920000004" blue="0.28627452250000002" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="tintColor" red="0.2823529541" green="0.77647066119999997" blue="0.91372555489999996" alpha="1" colorSpace="deviceRGB"/>
+                        <state key="normal" backgroundImage="new-24-128.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -126,7 +125,7 @@
                     <constraint firstItem="05R-zf-vUc" firstAttribute="leading" secondItem="PQs-mi-rKt" secondAttribute="leading" constant="226" id="Tx7-eg-n4N"/>
                     <constraint firstItem="hC7-ES-kza" firstAttribute="leading" secondItem="PQs-mi-rKt" secondAttribute="leading" constant="6" id="Xx4-M4-aza"/>
                     <constraint firstAttribute="trailing" secondItem="6MB-U9-daR" secondAttribute="trailing" constant="21" id="Zba-Ul-eVR"/>
-                    <constraint firstAttribute="bottom" secondItem="05R-zf-vUc" secondAttribute="bottom" constant="6" id="cEG-VU-y6r"/>
+                    <constraint firstAttribute="bottom" secondItem="05R-zf-vUc" secondAttribute="bottom" constant="5" id="cEG-VU-y6r"/>
                     <constraint firstItem="Wcs-PO-Zj1" firstAttribute="leading" secondItem="pps-pQ-D5h" secondAttribute="trailing" constant="13" id="elc-1d-gV2"/>
                     <constraint firstItem="uVe-Ey-aVJ" firstAttribute="top" secondItem="keb-i1-XCi" secondAttribute="bottom" constant="5" id="ljt-hf-6fD"/>
                     <constraint firstItem="tUl-Uu-vsp" firstAttribute="leading" secondItem="PQs-mi-rKt" secondAttribute="leading" constant="17" id="nlD-8L-d6N"/>
@@ -150,6 +149,7 @@
     </objects>
     <resources>
         <image name="color_white.png" width="1" height="1"/>
+        <image name="new-24-128.png" width="128" height="128"/>
         <image name="reply.png" width="100" height="100"/>
     </resources>
 </document>

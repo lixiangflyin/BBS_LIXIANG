@@ -37,7 +37,6 @@
     _searchTopicsArr = nil;
     _searchString = nil;
     _selectTopic = nil;
-    _request = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -111,13 +110,36 @@
         [baseurl appendFormat:@"&limit=30&start=%d", (int)[_searchTopicsArr count]];
         
     }
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        NSArray * objects = [JsonParseEngine parseSearchTopics:dic];
+        NSLog(@"%@",objects);
+        
+        if (_isRefreshAgain) {
+            [self.searchTopicsArr removeAllObjects];
+            [self.searchTopicsArr addObjectsFromArray:objects];
+            
+            [_searchTableView reloadData];
+            [_headerView endRefreshing];
+        }
+        else{
+            [self.searchTopicsArr addObjectsFromArray:objects];
+            
+            [_searchTableView reloadData];
+            [_footerView endRefreshing];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [_headerView endRefreshing];
+        [_footerView endRefreshing];
+        [ProgressHUD showError:@"网络故障"];
+    }];
 }
 
 #pragma mark 刷新完毕
@@ -151,40 +173,6 @@
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [_headerView endRefreshing];
-    [_footerView endRefreshing];
-    [ProgressHUD showError:@"网络故障"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    NSLog(@"dic %@",dic);
-    
-    NSArray * objects = [JsonParseEngine parseSearchTopics:dic];
-    NSLog(@"%@",objects);
-    
-    if (_isRefreshAgain) {
-        [self.searchTopicsArr removeAllObjects];
-        [self.searchTopicsArr addObjectsFromArray:objects];
-        
-        [_searchTableView reloadData];
-        [_headerView endRefreshing];
-    }
-    else{
-        [self.searchTopicsArr addObjectsFromArray:objects];
-        
-        [_searchTableView reloadData];
-        [_footerView endRefreshing];
-    }
-    
-}
 
 #pragma mark - 数据源协议
 #pragma mark tableViewDelegate

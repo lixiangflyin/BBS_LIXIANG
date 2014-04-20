@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 #import "Topic.h"
 #import "MJRefresh.h"
 
 @interface NotificationViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, retain) UITableView *mynotiTableView;
-
-@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, retain) MJRefreshHeaderView *headerView;
 

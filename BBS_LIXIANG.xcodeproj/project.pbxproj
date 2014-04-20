@@ -39,6 +39,25 @@
 		1830EB8318F43AC800EB59B2 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1830EB6918F43AC800EB59B2 /* UIImageView+WebCache.m */; };
 		1852220A190259D200FE3FAB /* HotBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18522209190259D200FE3FAB /* HotBoardViewController.xib */; };
 		1852220D1902604800FE3FAB /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852220C1902604800FE3FAB /* SettingViewController.m */; };
+		1852222219029FFE00FE3FAB /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221019029FFE00FE3FAB /* AFHTTPRequestOperation.m */; };
+		1852222319029FFE00FE3FAB /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221219029FFE00FE3FAB /* AFHTTPRequestOperationManager.m */; };
+		1852222419029FFE00FE3FAB /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221419029FFE00FE3FAB /* AFHTTPSessionManager.m */; };
+		1852222519029FFE00FE3FAB /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221719029FFE00FE3FAB /* AFNetworkReachabilityManager.m */; };
+		1852222619029FFE00FE3FAB /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221919029FFE00FE3FAB /* AFSecurityPolicy.m */; };
+		1852222719029FFE00FE3FAB /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221B19029FFE00FE3FAB /* AFURLConnectionOperation.m */; };
+		1852222819029FFE00FE3FAB /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221D19029FFE00FE3FAB /* AFURLRequestSerialization.m */; };
+		1852222919029FFE00FE3FAB /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221F19029FFE00FE3FAB /* AFURLResponseSerialization.m */; };
+		1852222A19029FFE00FE3FAB /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852222119029FFE00FE3FAB /* AFURLSessionManager.m */; };
+		185222331902B7F900FE3FAB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222B1902B7F900FE3FAB /* icon.png */; };
+		185222341902B7F900FE3FAB /* 76.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222C1902B7F900FE3FAB /* 76.png */; };
+		185222351902B7F900FE3FAB /* 152.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222D1902B7F900FE3FAB /* 152.png */; };
+		185222361902B7F900FE3FAB /* 72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222E1902B7F900FE3FAB /* 72.png */; };
+		185222371902B7F900FE3FAB /* 144.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222F1902B7F900FE3FAB /* 144.png */; };
+		185222381902B7F900FE3FAB /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 185222301902B7F900FE3FAB /* 114.png */; };
+		185222391902B7F900FE3FAB /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = 185222311902B7F900FE3FAB /* 57.png */; };
+		1852223A1902B7F900FE3FAB /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185222321902B7F900FE3FAB /* icon@2x.png */; };
+		1852223D1902BA6100FE3FAB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852223B1902BA6100FE3FAB /* Default@2x.png */; };
+		1852223E1902BA6100FE3FAB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852223C1902BA6100FE3FAB /* Default.png */; };
 		18739BB718F689F900DE590A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BB518F689F900DE590A /* SearchViewController.m */; };
 		18739BB818F689F900DE590A /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18739BB618F689F900DE590A /* SearchViewController.xib */; };
 		18739BBC18F6989100DE590A /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BBA18F6989100DE590A /* InputViewController.m */; };
@@ -66,6 +85,17 @@
 		18824FF01900084A00C296B4 /* art.png in Resources */ = {isa = PBXBuildFile; fileRef = 18824FEF1900084A00C296B4 /* art.png */; };
 		18824FF2190020AF00C296B4 /* main2_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 18824FF1190020AF00C296B4 /* main2_msg.png */; };
 		18824FF4190020B400C296B4 /* main2_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 18824FF3190020B400C296B4 /* main2_user.png */; };
+		18871E921903FBBC00609A71 /* hot1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E891903FBBC00609A71 /* hot1.png */; };
+		18871E931903FBBC00609A71 /* hot2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8A1903FBBC00609A71 /* hot2.png */; };
+		18871E941903FBBC00609A71 /* hot3.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8B1903FBBC00609A71 /* hot3.png */; };
+		18871E951903FBBC00609A71 /* hot4.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8C1903FBBC00609A71 /* hot4.png */; };
+		18871E961903FBBC00609A71 /* hot5.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8D1903FBBC00609A71 /* hot5.png */; };
+		18871E971903FBBC00609A71 /* hot6.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8E1903FBBC00609A71 /* hot6.png */; };
+		18871E981903FBBC00609A71 /* hot7.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8F1903FBBC00609A71 /* hot7.png */; };
+		18871E991903FBBC00609A71 /* hot8.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E901903FBBC00609A71 /* hot8.png */; };
+		18871E9A1903FBBC00609A71 /* hot9.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E911903FBBC00609A71 /* hot9.png */; };
+		18871E9D19040DAF00609A71 /* new-24-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E9B19040DAF00609A71 /* new-24-128.png */; };
+		18871E9E19040DAF00609A71 /* reply-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E9C19040DAF00609A71 /* reply-icon.png */; };
 		189205C618F538880023F993 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205B718F538880023F993 /* MMDrawerBarButtonItem.m */; };
 		189205C718F538880023F993 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BA18F538880023F993 /* MMDrawerController.m */; };
 		189205C818F538880023F993 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BC18F538880023F993 /* MMDrawerVisualState.m */; };
@@ -268,6 +298,35 @@
 		18522209190259D200FE3FAB /* HotBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotBoardViewController.xib; sourceTree = "<group>"; };
 		1852220B1902604800FE3FAB /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		1852220C1902604800FE3FAB /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		1852220F19029FFE00FE3FAB /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		1852221019029FFE00FE3FAB /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		1852221119029FFE00FE3FAB /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		1852221219029FFE00FE3FAB /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		1852221319029FFE00FE3FAB /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		1852221419029FFE00FE3FAB /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		1852221519029FFE00FE3FAB /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		1852221619029FFE00FE3FAB /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		1852221719029FFE00FE3FAB /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		1852221819029FFE00FE3FAB /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		1852221919029FFE00FE3FAB /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		1852221A19029FFE00FE3FAB /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		1852221B19029FFE00FE3FAB /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		1852221C19029FFE00FE3FAB /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		1852221D19029FFE00FE3FAB /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		1852221E19029FFE00FE3FAB /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		1852221F19029FFE00FE3FAB /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		1852222019029FFE00FE3FAB /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		1852222119029FFE00FE3FAB /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		1852222B1902B7F900FE3FAB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		1852222C1902B7F900FE3FAB /* 76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 76.png; sourceTree = "<group>"; };
+		1852222D1902B7F900FE3FAB /* 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152.png; sourceTree = "<group>"; };
+		1852222E1902B7F900FE3FAB /* 72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 72.png; sourceTree = "<group>"; };
+		1852222F1902B7F900FE3FAB /* 144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144.png; sourceTree = "<group>"; };
+		185222301902B7F900FE3FAB /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
+		185222311902B7F900FE3FAB /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
+		185222321902B7F900FE3FAB /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		1852223B1902BA6100FE3FAB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1852223C1902BA6100FE3FAB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		18739BB418F689F900DE590A /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		18739BB518F689F900DE590A /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		18739BB618F689F900DE590A /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
@@ -308,6 +367,17 @@
 		18824FEF1900084A00C296B4 /* art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = art.png; sourceTree = "<group>"; };
 		18824FF1190020AF00C296B4 /* main2_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main2_msg.png; sourceTree = "<group>"; };
 		18824FF3190020B400C296B4 /* main2_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main2_user.png; sourceTree = "<group>"; };
+		18871E891903FBBC00609A71 /* hot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot1.png; sourceTree = "<group>"; };
+		18871E8A1903FBBC00609A71 /* hot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot2.png; sourceTree = "<group>"; };
+		18871E8B1903FBBC00609A71 /* hot3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot3.png; sourceTree = "<group>"; };
+		18871E8C1903FBBC00609A71 /* hot4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot4.png; sourceTree = "<group>"; };
+		18871E8D1903FBBC00609A71 /* hot5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot5.png; sourceTree = "<group>"; };
+		18871E8E1903FBBC00609A71 /* hot6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot6.png; sourceTree = "<group>"; };
+		18871E8F1903FBBC00609A71 /* hot7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot7.png; sourceTree = "<group>"; };
+		18871E901903FBBC00609A71 /* hot8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot8.png; sourceTree = "<group>"; };
+		18871E911903FBBC00609A71 /* hot9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot9.png; sourceTree = "<group>"; };
+		18871E9B19040DAF00609A71 /* new-24-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-24-128.png"; sourceTree = "<group>"; };
+		18871E9C19040DAF00609A71 /* reply-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reply-icon.png"; sourceTree = "<group>"; };
 		189205B618F538880023F993 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		189205B718F538880023F993 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		189205B818F538880023F993 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -649,6 +719,33 @@
 			name = SettingViewController;
 			sourceTree = "<group>";
 		};
+		1852220E19029FFE00FE3FAB /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				1852220F19029FFE00FE3FAB /* AFHTTPRequestOperation.h */,
+				1852221019029FFE00FE3FAB /* AFHTTPRequestOperation.m */,
+				1852221119029FFE00FE3FAB /* AFHTTPRequestOperationManager.h */,
+				1852221219029FFE00FE3FAB /* AFHTTPRequestOperationManager.m */,
+				1852221319029FFE00FE3FAB /* AFHTTPSessionManager.h */,
+				1852221419029FFE00FE3FAB /* AFHTTPSessionManager.m */,
+				1852221519029FFE00FE3FAB /* AFNetworking.h */,
+				1852221619029FFE00FE3FAB /* AFNetworkReachabilityManager.h */,
+				1852221719029FFE00FE3FAB /* AFNetworkReachabilityManager.m */,
+				1852221819029FFE00FE3FAB /* AFSecurityPolicy.h */,
+				1852221919029FFE00FE3FAB /* AFSecurityPolicy.m */,
+				1852221A19029FFE00FE3FAB /* AFURLConnectionOperation.h */,
+				1852221B19029FFE00FE3FAB /* AFURLConnectionOperation.m */,
+				1852221C19029FFE00FE3FAB /* AFURLRequestSerialization.h */,
+				1852221D19029FFE00FE3FAB /* AFURLRequestSerialization.m */,
+				1852221E19029FFE00FE3FAB /* AFURLResponseSerialization.h */,
+				1852221F19029FFE00FE3FAB /* AFURLResponseSerialization.m */,
+				1852222019029FFE00FE3FAB /* AFURLSessionManager.h */,
+				1852222119029FFE00FE3FAB /* AFURLSessionManager.m */,
+			);
+			name = AFNetworking;
+			path = BBS_LIXIANG/AFNetworking;
+			sourceTree = "<group>";
+		};
 		187FFDE118FA77DE00E5731F /* PullingRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -889,6 +986,16 @@
 		18CBF56918F021440036C03B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1852223B1902BA6100FE3FAB /* Default@2x.png */,
+				1852223C1902BA6100FE3FAB /* Default.png */,
+				1852222B1902B7F900FE3FAB /* icon.png */,
+				1852222C1902B7F900FE3FAB /* 76.png */,
+				1852222D1902B7F900FE3FAB /* 152.png */,
+				1852222E1902B7F900FE3FAB /* 72.png */,
+				1852222F1902B7F900FE3FAB /* 144.png */,
+				185222301902B7F900FE3FAB /* 114.png */,
+				185222311902B7F900FE3FAB /* 57.png */,
+				185222321902B7F900FE3FAB /* icon@2x.png */,
 				18AC9F8318F98301001AC520 /* sections_info.plist */,
 				18CBF56A18F021440036C03B /* BBS_LIXIANG-Info.plist */,
 				18CBF56B18F021440036C03B /* InfoPlist.strings */,
@@ -945,6 +1052,17 @@
 		18CBF5B318F027830036C03B /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				18871E9B19040DAF00609A71 /* new-24-128.png */,
+				18871E9C19040DAF00609A71 /* reply-icon.png */,
+				18871E891903FBBC00609A71 /* hot1.png */,
+				18871E8A1903FBBC00609A71 /* hot2.png */,
+				18871E8B1903FBBC00609A71 /* hot3.png */,
+				18871E8C1903FBBC00609A71 /* hot4.png */,
+				18871E8D1903FBBC00609A71 /* hot5.png */,
+				18871E8E1903FBBC00609A71 /* hot6.png */,
+				18871E8F1903FBBC00609A71 /* hot7.png */,
+				18871E901903FBBC00609A71 /* hot8.png */,
+				18871E911903FBBC00609A71 /* hot9.png */,
 				1899F99B19011910000D0BD1 /* menu_at.png */,
 				1899F99C19011910000D0BD1 /* menu_comment.png */,
 				1899F99D19011910000D0BD1 /* menu_mailbox.png */,
@@ -1183,6 +1301,7 @@
 		18EB8DEB18FE7B0300A6BCC6 /* openSource */ = {
 			isa = PBXGroup;
 			children = (
+				1852220E19029FFE00FE3FAB /* AFNetworking */,
 				18EB8DE418FE313600A6BCC6 /* HUD */,
 				187FFDE118FA77DE00E5731F /* PullingRefresh */,
 				189205B418F538880023F993 /* Frame */,
@@ -1285,17 +1404,22 @@
 				18F04E7F18F2E1CD007E9373 /* PostMailViewController.xib in Resources */,
 				18CBF5BE18F027FF0036C03B /* TopTenCell.xib in Resources */,
 				1830EB6B18F43AC800EB59B2 /* MBProgressHUD.bundle in Resources */,
+				185222331902B7F900FE3FAB /* icon.png in Resources */,
+				18871E961903FBBC00609A71 /* hot5.png in Resources */,
 				18B245B618FC272000AD86F4 /* navigation_color.png in Resources */,
 				1899E02718FCD93600083AF8 /* MySectionCell.xib in Resources */,
 				1899F99E19011910000D0BD1 /* menu_at.png in Resources */,
 				18739BBD18F6989100DE590A /* InputViewController.xib in Resources */,
+				185222361902B7F900FE3FAB /* 72.png in Resources */,
 				18964FC418F3EA9300F7ECDB /* SwitchViewController.xib in Resources */,
 				189205CB18F538880023F993 /* icon_rightarrow@2x.png in Resources */,
 				18B2459A18FBF65200AD86F4 /* menu_top.png in Resources */,
 				18E64A3318F7D92A004BEFF0 /* HotBoardCell.xib in Resources */,
 				18B2459418FBF5CA00AD86F4 /* select_not.png in Resources */,
+				18871E971903FBBC00609A71 /* hot6.png in Resources */,
 				18739BB818F689F900DE590A /* SearchViewController.xib in Resources */,
 				18B2459018FBF42E00AD86F4 /* author.png in Resources */,
+				185222381902B7F900FE3FAB /* 114.png in Resources */,
 				18CBF5AD18F0221C0036C03B /* avatar.jpg in Resources */,
 				18CBF56D18F021440036C03B /* InfoPlist.strings in Resources */,
 				18EB8DE818FE313600A6BCC6 /* ProgressHUD.bundle in Resources */,
@@ -1303,8 +1427,10 @@
 				1899E02B18FD0C6B00083AF8 /* light_green.png in Resources */,
 				18B2459E18FBF7E900AD86F4 /* menu_setting.png in Resources */,
 				18CBF5C918F0280F0036C03B /* SingleTopicCell.xib in Resources */,
+				185222371902B7F900FE3FAB /* 144.png in Resources */,
 				18824FE61900080F00C296B4 /* game.png in Resources */,
 				18EB8DED18FE9BFC00A6BCC6 /* t1.png in Resources */,
+				18871E981903FBBC00609A71 /* hot7.png in Resources */,
 				1830EB6E18F43AC800EB59B2 /* MJPhotoBrowser.bundle in Resources */,
 				189205E518F57C320023F993 /* SingleMailViewController.xib in Resources */,
 				18B245B218FC08F400AD86F4 /* bbs_section.png in Resources */,
@@ -1314,23 +1440,34 @@
 				18A9225318F18A2F002D9EAB /* girl.jpg in Resources */,
 				189205CA18F538880023F993 /* icon_rightarrow.png in Resources */,
 				1899E03118FD0E1B00083AF8 /* NotificationViewController.xib in Resources */,
+				185222391902B7F900FE3FAB /* 57.png in Resources */,
 				18AC9F8418F98301001AC520 /* sections_info.plist in Resources */,
+				18871E9A1903FBBC00609A71 /* hot9.png in Resources */,
 				18CBF5AB18F021D00036C03B /* MenuViewController.xib in Resources */,
 				1899E01B18FCD5BA00083AF8 /* MySectionsViewController.xib in Resources */,
 				18824FEE1900084100C296B4 /* amuse.png in Resources */,
+				18871E951903FBBC00609A71 /* hot4.png in Resources */,
+				185222351902B7F900FE3FAB /* 152.png in Resources */,
 				181BB67118F5959A004DB55E /* icon_rightarrow.png in Resources */,
 				18824FEC1900083400C296B4 /* home.png in Resources */,
+				18871E941903FBBC00609A71 /* hot3.png in Resources */,
 				18B2458E18FBDFDF00AD86F4 /* profile_bg.jpg in Resources */,
 				18A9225118F18A1A002D9EAB /* man.jpg in Resources */,
 				187FFDF518FACE8000E5731F /* SectionCell.xib in Resources */,
+				1852223A1902B7F900FE3FAB /* icon@2x.png in Resources */,
 				18E64A2E18F7CC00004BEFF0 /* MenuCell.xib in Resources */,
 				18A9225C18F19658002D9EAB /* MailCell.xib in Resources */,
 				1852220A190259D200FE3FAB /* HotBoardViewController.xib in Resources */,
+				1852223E1902BA6100FE3FAB /* Default.png in Resources */,
 				18824FF2190020AF00C296B4 /* main2_msg.png in Resources */,
 				18CBF62E18F033AE0036C03B /* Balloon.png in Resources */,
 				18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */,
 				18F04E7A18F2D638007E9373 /* BoardTopicCell.xib in Resources */,
+				1852223D1902BA6100FE3FAB /* Default@2x.png in Resources */,
 				18B2459318FBF5CA00AD86F4 /* select.png in Resources */,
+				18871E9D19040DAF00609A71 /* new-24-128.png in Resources */,
+				185222341902B7F900FE3FAB /* 76.png in Resources */,
+				18871E921903FBBC00609A71 /* hot1.png in Resources */,
 				18B245AE18FC050900AD86F4 /* reply.png in Resources */,
 				18B245A818FBFEBB00AD86F4 /* color_white.png in Resources */,
 				18CBF57518F021440036C03B /* Images.xcassets in Resources */,
@@ -1338,12 +1475,15 @@
 				18B245A018FBFD2F00AD86F4 /* blue.png in Resources */,
 				18EB8DEF18FE9E2500A6BCC6 /* t2.png in Resources */,
 				18A9222E18F0F6CC002D9EAB /* UserInfoViewController.xib in Resources */,
+				18871E931903FBBC00609A71 /* hot2.png in Resources */,
 				18824FE018FF70FC00C296B4 /* fasion.png in Resources */,
 				18B2459818FBF65200AD86F4 /* menu_search.png in Resources */,
 				1899F99F19011910000D0BD1 /* menu_comment.png in Resources */,
 				18B2459918FBF65200AD86F4 /* menu_section.png in Resources */,
 				18CBF5CB18F0280F0036C03B /* CommentCell.xib in Resources */,
 				18A9224A18F147CD002D9EAB /* LoginViewController.xib in Resources */,
+				18871E991903FBBC00609A71 /* hot8.png in Resources */,
+				18871E9E19040DAF00609A71 /* reply-icon.png in Resources */,
 				1899E03C18FD322A00083AF8 /* girl_byr.jpg in Resources */,
 				1899E03918FD233300083AF8 /* SearchTopicCell.xib in Resources */,
 				18CBF5D318F0281F0036C03B /* TopCell.xib in Resources */,
@@ -1389,6 +1529,7 @@
 				18CBF61918F029190036C03B /* ASIDataDecompressor.m in Sources */,
 				18CBF61A18F029190036C03B /* ASIDownloadCache.m in Sources */,
 				18CBF5E318F028C60036C03B /* Attachment.m in Sources */,
+				1852222719029FFE00FE3FAB /* AFURLConnectionOperation.m in Sources */,
 				187FFDED18FA77DE00E5731F /* MJRefreshBaseView.m in Sources */,
 				18CBF5E618F028C60036C03B /* Topic.m in Sources */,
 				18A9225718F1959E002D9EAB /* MailViewController.m in Sources */,
@@ -1412,8 +1553,11 @@
 				1830EB7F18F43AC800EB59B2 /* UIImage+GIF.m in Sources */,
 				18CBF61C18F029190036C03B /* ASIHTTPRequest.m in Sources */,
 				1830EB7218F43AC800EB59B2 /* MJPhotoToolbar.m in Sources */,
+				1852222219029FFE00FE3FAB /* AFHTTPRequestOperation.m in Sources */,
+				1852222519029FFE00FE3FAB /* AFNetworkReachabilityManager.m in Sources */,
 				18739BB718F689F900DE590A /* SearchViewController.m in Sources */,
 				187FFDEF18FA77DE00E5731F /* MJRefreshFooterView.m in Sources */,
+				1852222919029FFE00FE3FAB /* AFURLResponseSerialization.m in Sources */,
 				18A9225A18F19647002D9EAB /* MailCell.m in Sources */,
 				18CBF62118F029190036C03B /* RATreeNode.m in Sources */,
 				18A9224918F147CD002D9EAB /* LoginViewController.m in Sources */,
@@ -1444,6 +1588,7 @@
 				1899E03418FD1D2B00083AF8 /* Notification.m in Sources */,
 				18CBF5CA18F0280F0036C03B /* CommentCell.m in Sources */,
 				18F04E7818F2D61B007E9373 /* BoardTopicCell.m in Sources */,
+				1852222419029FFE00FE3FAB /* AFHTTPSessionManager.m in Sources */,
 				1830EB8018F43AC800EB59B2 /* UIImage+MultiFormat.m in Sources */,
 				18CBF62418F029190036C03B /* RATreeNodeInfo.m in Sources */,
 				18CBF61E18F029190036C03B /* ASINetworkQueue.m in Sources */,
@@ -1453,6 +1598,7 @@
 				1830EB6F18F43AC800EB59B2 /* MJPhotoBrowser.m in Sources */,
 				18CBF61F18F029190036C03B /* Reachability.m in Sources */,
 				18A9223818F0FBBA002D9EAB /* MJPopupBackgroundView.m in Sources */,
+				1852222619029FFE00FE3FAB /* AFSecurityPolicy.m in Sources */,
 				18CBF5C818F0280F0036C03B /* SingleTopicCell.m in Sources */,
 				18CBF5CE18F028160036C03B /* AllSectionTopViewController.m in Sources */,
 				189205CD18F538880023F993 /* SUNSlideSwitchView.m in Sources */,
@@ -1468,8 +1614,11 @@
 				18964FBF18F3EA4600F7ECDB /* LCViewController.m in Sources */,
 				1830EB7618F43AC800EB59B2 /* SDImageCache.m in Sources */,
 				1899E02118FCD8B400083AF8 /* MySectionCell.m in Sources */,
+				1852222819029FFE00FE3FAB /* AFURLRequestSerialization.m in Sources */,
+				1852222A19029FFE00FE3FAB /* AFURLSessionManager.m in Sources */,
 				1899E03018FD0E1B00083AF8 /* NotificationViewController.m in Sources */,
 				187FFDF018FA77DE00E5731F /* MJRefreshHeaderView.m in Sources */,
+				1852222319029FFE00FE3FAB /* AFHTTPRequestOperationManager.m in Sources */,
 				18AC9F8018F8D7BA001AC520 /* ImageAttachmentView.m in Sources */,
 				1830EB6C18F43AC800EB59B2 /* MBProgressHUD.m in Sources */,
 				18CBF61718F029190036C03B /* ASIAuthenticationDialog.m in Sources */,

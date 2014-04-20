@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 #import "Topic.h"
 
 @interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
@@ -15,8 +15,6 @@
 @property (nonatomic, retain) NSString *searchString;
 
 @property (nonatomic, retain) UITableView *searchTableView;
-
-@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, retain) NSMutableArray *searchTopicsArr;
 

@@ -239,7 +239,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.08235294371843338" green="0.18823531270027161" blue="0.36078432202339172" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.08235294371843338" green="0.34509804844856262" blue="0.30588236451148987" alpha="1" colorSpace="deviceRGB"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jD7-N1-fgp">
                     <rect key="frame" x="20" y="5" width="240" height="38"/>

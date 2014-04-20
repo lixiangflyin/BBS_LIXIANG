@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 #import "Topic.h"
 
 @interface PostTopicViewController : UIViewController<UITextViewDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate>
@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *pictureScrollView;
 
 @property(nonatomic, retain)NSMutableArray *picArray;//picture upoaded array
-
-@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property(nonatomic, strong) Topic * rootTopic;   //传值 话题
 

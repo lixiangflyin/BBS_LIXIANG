@@ -25,12 +25,19 @@
                             <constraint firstAttribute="width" constant="15" id="VOr-qE-VGC"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体栏目具体栏" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5a-xW-rYD">
-                        <rect key="frame" x="14" y="7" width="84" height="15"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70j-xH-YUC">
+                        <rect key="frame" x="8" y="7" width="304" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.4274510145" green="0.90980398650000005" blue="0.46666669849999998" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.180392161" green="0.87450987099999999" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体栏目具体栏" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5a-xW-rYD">
+                        <rect key="frame" x="20" y="9" width="84" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                        <color key="textColor" red="0.27843138575553894" green="0.054901964962482452" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试试看二十五个字怎么样能够放其看放其" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" minimumFontSize="7" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="lhu-lZ-s5U">
@@ -72,15 +79,15 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="f5a-xW-rYD" firstAttribute="top" secondItem="AWP-PZ-sHW" secondAttribute="top" constant="7" id="26l-eA-u2x"/>
                     <constraint firstItem="K0p-ZB-fzJ" firstAttribute="top" secondItem="lhu-lZ-s5U" secondAttribute="bottom" constant="8" id="36z-qa-sH1"/>
-                    <constraint firstItem="lhu-lZ-s5U" firstAttribute="top" secondItem="f5a-xW-rYD" secondAttribute="bottom" constant="8" id="6CC-no-HEV"/>
                     <constraint firstItem="gzT-15-nj7" firstAttribute="top" secondItem="h04-DU-NPT" secondAttribute="bottom" constant="4" id="9S1-xs-aMb"/>
+                    <constraint firstItem="f5a-xW-rYD" firstAttribute="top" secondItem="AWP-PZ-sHW" secondAttribute="top" constant="9" id="GjY-zi-Q5l"/>
                     <constraint firstAttribute="trailing" secondItem="gzT-15-nj7" secondAttribute="trailing" constant="20" id="H96-Ao-8g4"/>
                     <constraint firstItem="S08-8B-Zxs" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="27" id="KMT-Rd-wgE"/>
-                    <constraint firstItem="f5a-xW-rYD" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="14" id="Nbw-N5-5p8"/>
+                    <constraint firstItem="f5a-xW-rYD" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="20" id="M4M-Iw-UEU"/>
                     <constraint firstAttribute="trailing" secondItem="f5S-fn-UWC" secondAttribute="trailing" constant="8" id="OZb-JH-123"/>
                     <constraint firstItem="gzT-15-nj7" firstAttribute="top" secondItem="lhu-lZ-s5U" secondAttribute="bottom" constant="8" id="Uog-tu-Vea"/>
+                    <constraint firstItem="lhu-lZ-s5U" firstAttribute="top" secondItem="f5a-xW-rYD" secondAttribute="bottom" constant="6" id="UqZ-1I-zcv"/>
                     <constraint firstAttribute="bottom" secondItem="f5S-fn-UWC" secondAttribute="bottom" constant="3" id="WhQ-QZ-UM7"/>
                     <constraint firstItem="gzT-15-nj7" firstAttribute="leading" secondItem="vK8-8g-Fgw" secondAttribute="trailing" constant="5" id="dNn-ot-2kz"/>
                     <constraint firstItem="K0p-ZB-fzJ" firstAttribute="leading" secondItem="AWP-PZ-sHW" secondAttribute="leading" constant="49" id="eQR-qm-VcL"/>
@@ -93,6 +100,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="colorBackgroudLabel" destination="70j-xH-YUC" id="FTf-UE-fYB"/>
                 <outlet property="replyLabel" destination="gzT-15-nj7" id="M3q-AD-JHj"/>
                 <outlet property="sectionLabel" destination="f5a-xW-rYD" id="oRU-yT-BhO"/>
                 <outlet property="timeLabel" destination="K0p-ZB-fzJ" id="TRc-gk-kHo"/>

@@ -16,6 +16,7 @@
 @property(nonatomic, strong) NSString * section;
 @property(nonatomic, strong) NSString * title;
 
+@property(nonatomic, retain) NSMutableArray *array;
 //数据显示在cell
 -(void)setReadyToShow;
 

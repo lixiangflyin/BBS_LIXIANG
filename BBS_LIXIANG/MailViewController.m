@@ -35,7 +35,6 @@
     [_footerView free];
     _mailsArr = nil;
     _selectMail = nil;
-    _request = nil;
     _mailsTableView = nil;
 }
 
@@ -113,13 +112,36 @@
         [baseurl appendFormat:@"&limit=30&start=%i",(int)[_mailsArr count]];
         
     }
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        //我的收件箱
+        NSArray * objects = [JsonParseEngine parseMails:dic Type:0];
+        
+        if (_isRefreshAgain) {
+            [self.mailsArr removeAllObjects];
+            [self.mailsArr addObjectsFromArray:objects];
+            
+            [_mailsTableView reloadData];
+            [_headerView endRefreshing];
+        }
+        else{
+            [self.mailsArr addObjectsFromArray:objects];
+            
+            [_mailsTableView reloadData];
+            [_footerView endRefreshing];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [_headerView endRefreshing];
+        [_footerView endRefreshing];
+        [ProgressHUD showError:@"网络故障"];
+    }];
 
 }
 

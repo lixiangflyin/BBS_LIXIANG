@@ -71,14 +71,29 @@
 {
     NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
-    //通过url来获得JSON数据
     NSString *baseUrlStr = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/notifications.json?token=%@",[Toolkit getToken]];
-    NSURL *myurl = [NSURL URLWithString:baseUrlStr];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseUrlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        Notification * notification = [JsonParseEngine parseNotification:dic];
+        
+        NSArray *objects = notification.replies;
+        
+        self.notificationsArr = [NSMutableArray arrayWithArray:objects];
+        
+        [_mynotiTableView reloadData];
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_headerView endRefreshing];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [ProgressHUD showError:@"网络故障"];
+    }];
+    
 }
 
 #pragma mark 刷新完毕
@@ -112,32 +127,6 @@
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
-
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [_headerView endRefreshing];
-    [ProgressHUD showError:@"网络故障"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    
-    Notification * notification = [JsonParseEngine parseNotification:dic];
-    
-    NSArray *objects = notification.replies;
-    
-    self.notificationsArr = [NSMutableArray arrayWithArray:objects];
-    
-    [_mynotiTableView reloadData];
-    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [_headerView endRefreshing];
-    
-}
 
 #pragma mark - 数据源协议
 #pragma mark tableViewDelegate

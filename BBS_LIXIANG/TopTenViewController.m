@@ -25,7 +25,6 @@
     [_headerView free];
     _tentopicTableView = nil;
     _tentopicsArr = nil;
-    _request = nil;
     _selectTopic = nil;
 }
 
@@ -42,6 +41,9 @@
 {
     [super viewDidLoad];
 	
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sections_info" ofType:@"plist"];
+    _sectionsArr = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
+    
     _tentopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _tentopicTableView.dataSource = self;  //数据源代理
     _tentopicTableView.delegate = self;    //表视图委托
@@ -64,13 +66,30 @@
 {
     NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/topten.json"];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://bbs.seu.edu.cn/api/hot/topten.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        NSArray * objects = [JsonParseEngine parseTopics:dic];
+        
+        [self.tentopicsArr removeAllObjects];
+        self.tentopicsArr = [NSMutableArray arrayWithArray:objects];
+        
+        // 刷新表格
+        [_tentopicTableView reloadData];
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_headerView endRefreshing];
+        
+        [ProgressHUD showSuccess:@"refreshing"];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [_headerView endRefreshing];
+        [ProgressHUD showError:@"网络故障"];
+    }];
+    
 }
 
 #pragma mark 刷新完毕
@@ -99,33 +118,6 @@
     }
 }
 
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [_headerView endRefreshing];
-    [ProgressHUD showError:@"网络连接有问题"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-
-    NSArray * objects = [JsonParseEngine parseTopics:dic];
-    
-    [self.tentopicsArr removeAllObjects];
-    self.tentopicsArr = [NSMutableArray arrayWithArray:objects];
-    
-    // 刷新表格
-    [_tentopicTableView reloadData];
-    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [_headerView endRefreshing];
-    
-    [ProgressHUD showSuccess:@"refreshing"];
-    
-}
 
 #pragma mark - 数据源协议
 #pragma mark tableViewDelegate
@@ -155,6 +147,7 @@
     Topic * topic = [self.tentopicsArr objectAtIndex:indexPath.row];
     cell.section = topic.board;
     cell.title = topic.title;
+    cell.array = _sectionsArr;  //已获取中文名
         
     [cell setReadyToShow];
     

@@ -39,5 +39,7 @@
 +(User *)parseUserInfo:(NSDictionary *)loginDictionary2;
 //时间转换
 + (NSString *)dateToString:(NSDate *)date;
+//色值转换
++(UIColor *) colorWithHexString:(NSString *)stringToConvert;
 
 @end

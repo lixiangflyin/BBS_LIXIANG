@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 #import "Board.h"
 #import "Topic.h"
 
 @interface SingleBoardViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) UITableView *singleSectionTableView;
-
-@property (nonatomic, retain) ASIFormDataRequest *request;
 
 @property (nonatomic, retain) NSMutableArray *singleSectionArr;
 

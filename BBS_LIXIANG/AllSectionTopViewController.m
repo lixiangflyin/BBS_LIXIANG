@@ -22,7 +22,6 @@
 -(void)dealloc
 {
     _allTopicTableView = nil;
-    _request = nil;
     _allTopicsArr = nil;
     [_headerView free];
     _selectTopic = nil;
@@ -43,8 +42,12 @@
 {
     [super viewDidLoad];
     
+    _colorArr = [NSArray arrayWithObjects:@"0XFDBD2C",@"0X89D1F3",@"0X52BCEC",@"0X009EE5",@"0X86C82D", nil];
+    
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"sections_info" ofType:@"plist"];
     _sectionsArr = [[NSMutableArray alloc]initWithContentsOfFile:plistPath];
+    //颜色数组
+    
     
     _allTopicTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-44) style:UITableViewStylePlain];
     _allTopicTableView.dataSource = self;  //数据源代理
@@ -68,13 +71,28 @@
 {
     NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:@"http://bbs.seu.edu.cn/api/hot/topics.json"];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://bbs.seu.edu.cn/api/hot/topics.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        NSArray * objects = [JsonParseEngine parseSectionsTopics:dic];
+        //NSLog(@"%@",objects);
+        
+        [self.allTopicsArr removeAllObjects];
+        self.allTopicsArr = [NSMutableArray arrayWithArray:objects];
+        
+        [_allTopicTableView reloadData];
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_headerView endRefreshing];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [_headerView endRefreshing];
+        [ProgressHUD showError:@"网络故障"];
+    }];
+    
 }
 
 #pragma mark 刷新完毕
@@ -101,33 +119,6 @@
         default:
             break;
     }
-}
-
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [_headerView endRefreshing];
-    [ProgressHUD showError:@"网络连接有问题"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    //NSLog(@"dic %@",dic);
-    
-    NSArray * objects = [JsonParseEngine parseSectionsTopics:dic];
-    //NSLog(@"%@",objects);
-    
-    [self.allTopicsArr removeAllObjects];
-    self.allTopicsArr = [NSMutableArray arrayWithArray:objects];
-
-    [_allTopicTableView reloadData];
-    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [_headerView endRefreshing];
-    
 }
 
 #pragma mark - 数据源协议
@@ -161,7 +152,10 @@
     cell.title = topic.title;
     cell.author = topic.author;
     cell.replies = topic.replies;
-    cell.array = _sectionsArr;
+    cell.array = _sectionsArr;  //已获取中文名
+    
+    int randomNum = arc4random_uniform(5);
+    cell.colorStr = _colorArr[randomNum];
     
     [cell setReadyToShow];
     

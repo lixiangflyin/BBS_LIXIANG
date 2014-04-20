@@ -36,7 +36,6 @@
     _contentLabel = nil;
     _scollView = nil;
     _realView = nil;
-    _request = nil;
     _mail = nil;
     _rootMail = nil;
 }
@@ -53,6 +52,7 @@
     self.navigationItem.rightBarButtonItem = replyButton;
     replyButton = nil;
     
+    //全置空
     [_titleLabel setText:nil];
     [_contentLabel setText:nil];
     [_timeLabel setText:nil];
@@ -61,55 +61,44 @@
     [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
     [baseurl appendFormat:@"&type=%i",_rootMail.type];
     [baseurl appendFormat:@"&id=%i",_rootMail.ID];
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
     
-}
-
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [ProgressHUD showError:@"网络故障"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    
-    _mail = [JsonParseEngine parseSingleMail:dic Type:_rootMail.type];
-    
-    if (_mail.type == 0)
-        [_authorLabel setText:[NSString stringWithFormat:@"%@", _mail.author]];
-    if (_mail.type == 1)
-        [_authorLabel setText:[NSString stringWithFormat:@"%@", _mail.author]];
-    if (_mail.type == 2)
-        [_authorLabel setText:[NSString stringWithFormat:@"%@", _mail.author]];
-    
-    [_titleLabel setText:_mail.title];
-    [_contentLabel setText:_mail.content];
-    [_timeLabel setText:[JsonParseEngine dateToString:_mail.time]];
-    
-    [_scollView addSubview:_realView];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    UIFont *font = [UIFont systemFontOfSize:16.0];
-    CGSize size = [_mail.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 40, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
-    
-    [_contentLabel setFrame:CGRectMake(_contentLabel.frame.origin.x, _contentLabel.frame.origin.y, self.view.frame.size.width - 40, size.height)];
-    
-    [_realView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _contentLabel.frame.origin.y + size.height)];
-    [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, _contentLabel.frame.origin.y + size.height+ 10 + 64 + 80)];
-    if (_contentLabel.frame.origin.y + size.height + 10 <= self.view.frame.size.height) {
-        [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 20)];
-    }
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        _mail = [JsonParseEngine parseSingleMail:dic Type:_rootMail.type];
+        
+        if (_mail.type == 0)
+            [_authorLabel setText:[NSString stringWithFormat:@"%@", _mail.author]];
+        if (_mail.type == 1)
+            [_authorLabel setText:[NSString stringWithFormat:@"%@", _mail.author]];
+        if (_mail.type == 2)
+            [_authorLabel setText:[NSString stringWithFormat:@"%@", _mail.author]];
+        
+        [_titleLabel setText:_mail.title];
+        [_contentLabel setText:_mail.content];
+        [_timeLabel setText:[JsonParseEngine dateToString:_mail.time]];
+        
+        [_scollView addSubview:_realView];
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        UIFont *font = [UIFont systemFontOfSize:16.0];
+        CGSize size = [_mail.content boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 40, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font, NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+        
+        [_contentLabel setFrame:CGRectMake(_contentLabel.frame.origin.x, _contentLabel.frame.origin.y, self.view.frame.size.width - 40, size.height)];
+        
+        [_realView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _contentLabel.frame.origin.y + size.height)];
+        [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, _contentLabel.frame.origin.y + size.height+ 10 + 64 + 80)];
+        if (_contentLabel.frame.origin.y + size.height + 10 <= self.view.frame.size.height) {
+            [_scollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 20)];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [ProgressHUD showSuccess:@"网络故障"];
+    }];
     
 }
 

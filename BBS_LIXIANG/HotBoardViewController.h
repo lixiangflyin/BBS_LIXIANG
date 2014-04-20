@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASIFormDataRequest.h"
+#import "AFNetworking.h"
 #import "Board.h"
 #import "MJRefresh.h"
 
@@ -21,11 +21,11 @@
 
 @property (nonatomic, retain) UITableView *hotBoardTableView;
 
-@property (nonatomic, retain) ASIFormDataRequest *request;
-
 @property (nonatomic, retain) MJRefreshHeaderView *headerView;
 
 @property (nonatomic, retain) NSMutableArray *hotBoardArr;
+
+@property (nonatomic, strong) NSArray *pictureArr;
 
 @property (nonatomic, retain) Board *selectBoard;
 

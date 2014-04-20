@@ -44,7 +44,7 @@ static int count;
     _topicsArray = nil;
     _usersInfo = nil;
     _rootTopic = nil;
-    _request = nil;
+    //_request = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -121,13 +121,67 @@ static int count;
         [baseurl appendFormat:@"/%i.json?start=%i&limit=10",_rootTopic.ID,(int)[_topicsArray count]];
         
     }
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
+        
+        if (_isRefreshAgain) {
+            //获取信息的记录,重新置0
+            count = 0;
+            
+            [self.topicsArray removeAllObjects];
+            [self.usersInfo removeAllObjects];
+            
+            [self.topicsArray addObjectsFromArray:objects];
+        }
+        else{
+            [self.topicsArray addObjectsFromArray:objects];
+        }
+        
+        //同步请求,其用户信息 可以用afnetworking
+        for ( ; count<[_topicsArray count]; count++) {
+            Topic *topic = [_topicsArray objectAtIndex:count];
+            NSString *str = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",topic.author];
+            NSURL *myurl = [NSURL URLWithString:str];
+            ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:myurl];
+            [request startSynchronous];
+            NSError *error = [request error];
+            if (!error) {
+                
+                NSString *response = [request responseString];
+                
+                NSDictionary *dictionary = [response objectFromJSONString];
+                [_usersInfo addObject:dictionary];
+            }
+            
+            request = nil;
+        }
+        
+        [_singletopicTableView reloadData];
+        
+        [_headerView endRefreshing];
+        [_footerView endRefreshing];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"error!");
+        [_headerView endRefreshing];
+        [_footerView endRefreshing];
+        [ProgressHUD showError:@"网络故障"];
+    }];
+    
+//    //通过url来获得JSON数据
+//    NSURL *myurl = [NSURL URLWithString:baseurl];
+//    _request = [ASIFormDataRequest requestWithURL:myurl];
+//    [_request setDelegate:self];
+//    [_request setDidFinishSelector:@selector(GetResult:)];
+//    [_request setDidFailSelector:@selector(GetErr:)];
+//    [_request startAsynchronous];
 }
 
 #pragma mark 刷新完毕
@@ -167,52 +221,52 @@ static int count;
 }
 
 //ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-        
-    NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
-    
-    if (_isRefreshAgain) {
-        //获取信息的记录,重新置0
-        count = 0;
-        
-        [self.topicsArray removeAllObjects];
-        [self.usersInfo removeAllObjects];
-        
-        [self.topicsArray addObjectsFromArray:objects];
-    }
-    else{
-        [self.topicsArray addObjectsFromArray:objects];
-    }
-
-    //同步请求,其用户信息
-    for ( ; count<[_topicsArray count]; count++) {
-        Topic *topic = [_topicsArray objectAtIndex:count];
-        NSString *str = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",topic.author];
-        NSURL *myurl = [NSURL URLWithString:str];
-        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:myurl];
-        [request startSynchronous];
-        NSError *error = [request error];
-        if (!error) {
-            
-            NSString *response = [request responseString];
-    
-            NSDictionary *dictionary = [response objectFromJSONString];
-            [_usersInfo addObject:dictionary];
-        }
-        
-        request = nil;
-    }
-        
-    [_singletopicTableView reloadData];
-    
-    [_headerView endRefreshing];
-    [_footerView endRefreshing];
-
-    
-}
+//-(void) GetResult:(ASIHTTPRequest *)request
+//{
+//
+//    NSDictionary *dic = [request.responseString objectFromJSONString];
+//        
+//    NSArray * objects = [JsonParseEngine parseSingleTopic:dic];
+//    
+//    if (_isRefreshAgain) {
+//        //获取信息的记录,重新置0
+//        count = 0;
+//        
+//        [self.topicsArray removeAllObjects];
+//        [self.usersInfo removeAllObjects];
+//        
+//        [self.topicsArray addObjectsFromArray:objects];
+//    }
+//    else{
+//        [self.topicsArray addObjectsFromArray:objects];
+//    }
+//
+//    //同步请求,其用户信息
+//    for ( ; count<[_topicsArray count]; count++) {
+//        Topic *topic = [_topicsArray objectAtIndex:count];
+//        NSString *str = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",topic.author];
+//        NSURL *myurl = [NSURL URLWithString:str];
+//        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:myurl];
+//        [request startSynchronous];
+//        NSError *error = [request error];
+//        if (!error) {
+//            
+//            NSString *response = [request responseString];
+//    
+//            NSDictionary *dictionary = [response objectFromJSONString];
+//            [_usersInfo addObject:dictionary];
+//        }
+//        
+//        request = nil;
+//    }
+//        
+//    [_singletopicTableView reloadData];
+//    
+//    [_headerView endRefreshing];
+//    [_footerView endRefreshing];
+//
+//    
+//}
 
 #pragma mark - 数据源协议
 #pragma mark tableViewDelegate

@@ -31,7 +31,6 @@
     _singleSectionTableView = nil;
     [_headerView free];
     [_footerView free];
-    _request = nil;
     _selectTopic = nil;
 }
 
@@ -99,13 +98,37 @@
         [baseurl appendFormat:@"mode=%d&limit=30&start=%d", 2, (int)[_singleSectionArr count]];
         
     }
-    //通过url来获得JSON数据
-    NSURL *myurl = [NSURL URLWithString:baseurl];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        NSArray * objects = [JsonParseEngine parseTopics:dic];
+        //NSLog(@"%@",objects);
+        
+        if (_isRefreshAgain) {
+            [self.singleSectionArr removeAllObjects];
+            [self.singleSectionArr addObjectsFromArray:objects];
+            
+            [_singleSectionTableView reloadData];
+            [_headerView endRefreshing];
+        }
+        else{
+            [self.singleSectionArr addObjectsFromArray:objects];
+            
+            [_singleSectionTableView reloadData];
+            [_footerView endRefreshing];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error!");
+        [_headerView endRefreshing];
+        [_footerView endRefreshing];
+        [ProgressHUD showError:@"网络故障"];
+    }];
+    
 }
 
 #pragma mark 刷新完毕
@@ -134,40 +157,6 @@
     }
 }
 
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [_headerView endRefreshing];
-    [_footerView endRefreshing];
-    [ProgressHUD showError:@"网络连接有问题"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    //NSLog(@"dic %@",dic);
-    
-    NSArray * objects = [JsonParseEngine parseTopics:dic];
-    //NSLog(@"%@",objects);
-    
-    if (_isRefreshAgain) {
-        [self.singleSectionArr removeAllObjects];
-        [self.singleSectionArr addObjectsFromArray:objects];
-        
-        [_singleSectionTableView reloadData];
-        [_headerView endRefreshing];
-    }
-    else{
-        [self.singleSectionArr addObjectsFromArray:objects];
-        
-        [_singleSectionTableView reloadData];
-        [_footerView endRefreshing];
-    }
-    
-}
 
 #pragma mark - 数据源协议
 #pragma mark tableViewDelegate

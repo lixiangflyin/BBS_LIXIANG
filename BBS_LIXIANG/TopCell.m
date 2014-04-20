@@ -7,6 +7,7 @@
 //
 
 #import "TopCell.h"
+#import "JsonParseEngine.h"
 
 @implementation TopCell
 
@@ -26,7 +27,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        
+        
     }
     return self;
 }
@@ -44,6 +46,10 @@
     [_titleLabel setText:_title];
     
     [_sectionLabel setText:_section];
+    
+    [_colorBackgroudLabel setBackgroundColor:[JsonParseEngine colorWithHexString:_colorStr]];
+    
+    //遍历获得中文名
     for(NSArray *arr in _array)
     {
         for (int i=0; i<[arr count]; i++) {
