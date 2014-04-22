@@ -94,8 +94,6 @@
 		18871E981903FBBC00609A71 /* hot7.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8F1903FBBC00609A71 /* hot7.png */; };
 		18871E991903FBBC00609A71 /* hot8.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E901903FBBC00609A71 /* hot8.png */; };
 		18871E9A1903FBBC00609A71 /* hot9.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E911903FBBC00609A71 /* hot9.png */; };
-		18871E9D19040DAF00609A71 /* new-24-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E9B19040DAF00609A71 /* new-24-128.png */; };
-		18871E9E19040DAF00609A71 /* reply-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E9C19040DAF00609A71 /* reply-icon.png */; };
 		189205C618F538880023F993 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205B718F538880023F993 /* MMDrawerBarButtonItem.m */; };
 		189205C718F538880023F993 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BA18F538880023F993 /* MMDrawerController.m */; };
 		189205C818F538880023F993 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BC18F538880023F993 /* MMDrawerVisualState.m */; };
@@ -125,6 +123,8 @@
 		1899F99E19011910000D0BD1 /* menu_at.png in Resources */ = {isa = PBXBuildFile; fileRef = 1899F99B19011910000D0BD1 /* menu_at.png */; };
 		1899F99F19011910000D0BD1 /* menu_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 1899F99C19011910000D0BD1 /* menu_comment.png */; };
 		1899F9A019011910000D0BD1 /* menu_mailbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1899F99D19011910000D0BD1 /* menu_mailbox.png */; };
+		18A49B8119054F42008A1650 /* new-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A49B7F19054F42008A1650 /* new-blue.png */; };
+		18A49B8219054F42008A1650 /* reply-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A49B8019054F42008A1650 /* reply-blue.png */; };
 		18A9222D18F0F6CC002D9EAB /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9222B18F0F6CC002D9EAB /* UserInfoViewController.m */; };
 		18A9222E18F0F6CC002D9EAB /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9222C18F0F6CC002D9EAB /* UserInfoViewController.xib */; };
 		18A9223818F0FBBA002D9EAB /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223518F0FBBA002D9EAB /* MJPopupBackgroundView.m */; };
@@ -376,8 +376,6 @@
 		18871E8F1903FBBC00609A71 /* hot7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot7.png; sourceTree = "<group>"; };
 		18871E901903FBBC00609A71 /* hot8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot8.png; sourceTree = "<group>"; };
 		18871E911903FBBC00609A71 /* hot9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot9.png; sourceTree = "<group>"; };
-		18871E9B19040DAF00609A71 /* new-24-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-24-128.png"; sourceTree = "<group>"; };
-		18871E9C19040DAF00609A71 /* reply-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reply-icon.png"; sourceTree = "<group>"; };
 		189205B618F538880023F993 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		189205B718F538880023F993 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		189205B818F538880023F993 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -421,6 +419,8 @@
 		1899F99B19011910000D0BD1 /* menu_at.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_at.png; sourceTree = "<group>"; };
 		1899F99C19011910000D0BD1 /* menu_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_comment.png; sourceTree = "<group>"; };
 		1899F99D19011910000D0BD1 /* menu_mailbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_mailbox.png; sourceTree = "<group>"; };
+		18A49B7F19054F42008A1650 /* new-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-blue.png"; sourceTree = "<group>"; };
+		18A49B8019054F42008A1650 /* reply-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reply-blue.png"; sourceTree = "<group>"; };
 		18A9222A18F0F6CC002D9EAB /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		18A9222B18F0F6CC002D9EAB /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		18A9222C18F0F6CC002D9EAB /* UserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoViewController.xib; sourceTree = "<group>"; };
@@ -1052,8 +1052,8 @@
 		18CBF5B318F027830036C03B /* picture */ = {
 			isa = PBXGroup;
 			children = (
-				18871E9B19040DAF00609A71 /* new-24-128.png */,
-				18871E9C19040DAF00609A71 /* reply-icon.png */,
+				18A49B7F19054F42008A1650 /* new-blue.png */,
+				18A49B8019054F42008A1650 /* reply-blue.png */,
 				18871E891903FBBC00609A71 /* hot1.png */,
 				18871E8A1903FBBC00609A71 /* hot2.png */,
 				18871E8B1903FBBC00609A71 /* hot3.png */,
@@ -1401,6 +1401,7 @@
 			files = (
 				18824FE218FFA9A100C296B4 /* main2_blue.png in Resources */,
 				18824FF01900084A00C296B4 /* art.png in Resources */,
+				18A49B8219054F42008A1650 /* reply-blue.png in Resources */,
 				18F04E7F18F2E1CD007E9373 /* PostMailViewController.xib in Resources */,
 				18CBF5BE18F027FF0036C03B /* TopTenCell.xib in Resources */,
 				1830EB6B18F43AC800EB59B2 /* MBProgressHUD.bundle in Resources */,
@@ -1461,11 +1462,11 @@
 				1852223E1902BA6100FE3FAB /* Default.png in Resources */,
 				18824FF2190020AF00C296B4 /* main2_msg.png in Resources */,
 				18CBF62E18F033AE0036C03B /* Balloon.png in Resources */,
+				18A49B8119054F42008A1650 /* new-blue.png in Resources */,
 				18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */,
 				18F04E7A18F2D638007E9373 /* BoardTopicCell.xib in Resources */,
 				1852223D1902BA6100FE3FAB /* Default@2x.png in Resources */,
 				18B2459318FBF5CA00AD86F4 /* select.png in Resources */,
-				18871E9D19040DAF00609A71 /* new-24-128.png in Resources */,
 				185222341902B7F900FE3FAB /* 76.png in Resources */,
 				18871E921903FBBC00609A71 /* hot1.png in Resources */,
 				18B245AE18FC050900AD86F4 /* reply.png in Resources */,
@@ -1483,7 +1484,6 @@
 				18CBF5CB18F0280F0036C03B /* CommentCell.xib in Resources */,
 				18A9224A18F147CD002D9EAB /* LoginViewController.xib in Resources */,
 				18871E991903FBBC00609A71 /* hot8.png in Resources */,
-				18871E9E19040DAF00609A71 /* reply-icon.png in Resources */,
 				1899E03C18FD322A00083AF8 /* girl_byr.jpg in Resources */,
 				1899E03918FD233300083AF8 /* SearchTopicCell.xib in Resources */,
 				18CBF5D318F0281F0036C03B /* TopCell.xib in Resources */,

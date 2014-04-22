@@ -37,10 +37,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x094FA4)];
+    //[[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];//背景
     //屏幕大小适配
     CGSize size_screen = [[UIScreen mainScreen]bounds].size;
     [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
+    
+    [_pwdTextField setSecureTextEntry:YES];
+    [_nameTextField becomeFirstResponder]; //升起键盘
 }
 
 - (IBAction)login:(id)sender {
@@ -92,9 +97,16 @@
 }
 
 - (IBAction)cancel:(id)sender {
+    [_nameTextField resignFirstResponder];
+    [_pwdTextField resignFirstResponder];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)back:(id)sender {
+    [_nameTextField resignFirstResponder];
+    [_pwdTextField resignFirstResponder];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

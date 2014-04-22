@@ -14,6 +14,8 @@
 
 #import "ProgressHUD.h"
 
+static NSString *TMP_UPLOAD_IMG_PATH = @"";
+
 #define XLoc  70
 #define YLoc  70
 
@@ -41,6 +43,7 @@
     if (self) {
         // Custom initialization
         _picArray = [[NSMutableArray alloc]init];
+        _picNameArr = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -57,6 +60,11 @@
     UIBarButtonItem *replyButton =[[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(postTopic:)];
     self.navigationItem.rightBarButtonItem = replyButton;
     replyButton = nil;
+    
+    //设置圆角
+    _postContentView.layer.cornerRadius = 8;
+    _postContentView.layer.borderWidth = 0.8;
+    [_postContentView setText:@"请输入内容:"];
     
     if (_postType == 0) {
         self.title = @"发新帖";
@@ -119,26 +127,66 @@
     [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *dic = responseObject;
+        NSLog(@"dic = %@",dic);
         
         BOOL success = [[dic objectForKey:@"success"] boolValue];
         
+        
+        
         if (success) {
-            [ProgressHUD showSuccess:@"发送成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            //上传图片
+            if([_picArray count] <= 0){
+                [ProgressHUD showSuccess:@"发送成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+                return;
+            }
+            
+            //返回数据解析
+            NSDictionary *dict = [dic objectForKey:@"topic"];
+            
+            //NSURL *filePath = [NSURL fileURLWithPath:TMP_UPLOAD_IMG_PATH];
+            
+            NSString *baseUrl = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/attachment/add.js?token=%@&board=%@&id=%d",[Toolkit getToken],[dict objectForKey:@"board"], [[dict objectForKey:@"id"]intValue]];
+            
+            [manager POST:baseUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                
+                [formData appendPartWithFileData:_picArray[0] name:@"file" fileName:@"image.jpg" mimeType:@"image/png"];
+                
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"upload Success: %@", responseObject);
+                
+                if ([responseObject objectForKey:@"success"]) {
+                    [ProgressHUD showSuccess:@"发送成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+                else
+                    [ProgressHUD showError:@"发送失败"];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+                NSLog(@"upload Error: %@", error);
+                [ProgressHUD showError:@"发送失败"];
+            }];
+            
         }
+        
+        
+        
         else{
             [ProgressHUD showError:@"发送失败"];
         }
         
-        //上传图片
-        if(_picArray == nil)
-            return;
+        
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error!");
         [ProgressHUD showError:@"网络故障"];
     }];
+    
+    
+   
 }
 
 
@@ -217,6 +265,12 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)selectedImage editingInfo:(NSDictionary *)editingInfo {
     
+    NSString *nameStr =  [NSString stringWithFormat:@"%@.jpg",[self generateUuidString]];
+ 
+    [self saveImage:selectedImage WithName:nameStr];
+    //文件名
+    [_picNameArr addObject:TMP_UPLOAD_IMG_PATH];
+    
     //二进制流数据
     NSData *pngData = UIImagePNGRepresentation(selectedImage);
     [_picArray  addObject:pngData];
@@ -246,4 +300,63 @@
     [picker dismissModalViewControllerAnimated:YES];
     
 }
+
+//调整大小
+-(UIImage *) imageWithImageSimple:(UIImage*) image scaledToSize:(CGSize) newSize
+{
+    newSize.height=image.size.height*(newSize.width/image.size.width);
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return  newImage;
+}
+
+- (void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName
+
+{
+    NSLog(@"===TMP_UPLOAD_IMG_PATH===%@",TMP_UPLOAD_IMG_PATH);
+    NSData* imageData = UIImagePNGRepresentation(tempImage);
+    
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    
+    NSString* documentsDirectory = [paths objectAtIndex:0];
+    // Now we get the full path to the file
+    
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    
+    // and then we write it out
+    TMP_UPLOAD_IMG_PATH = fullPathToFile;
+ 
+    //NSLog(@"===TMP_UPLOAD_IMG_PATH===%@",TMP_UPLOAD_IMG_PATH);
+    NSArray *nameAry=[TMP_UPLOAD_IMG_PATH componentsSeparatedByString:@"/"];
+    NSLog(@"===new fullPathToFile===%@",fullPathToFile);
+    NSLog(@"===new FileName===%@",[nameAry objectAtIndex:[nameAry count]-1]);
+    
+    [imageData writeToFile:fullPathToFile atomically:NO];
+    
+}
+
+-(NSString *)documentFolderPath
+{
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+}
+
+- (NSString *)generateUuidString
+{
+    // create a new UUID which you own
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    
+    // create a new CFStringRef (toll-free bridged to NSString)
+    // that you own
+    NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
+    // transfer ownership of the string
+    
+    // release the UUID
+    CFRelease(uuid);
+    
+    return uuidString;
+}
+
+
 @end

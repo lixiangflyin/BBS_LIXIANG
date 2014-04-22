@@ -21,7 +21,7 @@
                             <constraint firstAttribute="width" constant="302" id="wAF-du-HA9"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C954E6A6-A462-4142-8E2E-48E6D9C848F2" translatesAutoresizingMaskIntoConstraints="NO" id="H7N-sv-WfM">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="08DAB8D2-290C-4F09-B5A4-B406074EC7AD" translatesAutoresizingMaskIntoConstraints="NO" id="H7N-sv-WfM">
                         <rect key="frame" x="20" y="11" width="28" height="28"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
@@ -51,7 +51,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="C954E6A6-A462-4142-8E2E-48E6D9C848F2" width="50" height="50">
+        <image name="08DAB8D2-290C-4F09-B5A4-B406074EC7AD" width="50" height="50">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

@@ -12,9 +12,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sectionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *titleImageView;
 
 @property(nonatomic, strong) NSString * section;
 @property(nonatomic, strong) NSString * title;
+@property(nonatomic, strong) NSString * image;
 
 @property(nonatomic, retain) NSMutableArray *array;
 //数据显示在cell

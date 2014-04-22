@@ -180,7 +180,7 @@
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
         
-        [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
+        [cell setBackgroundColor:UIColorFromRGB(0xF1F1F1)];
     }
     
     Topic * topic = [self.singleSectionArr objectAtIndex:indexPath.row];

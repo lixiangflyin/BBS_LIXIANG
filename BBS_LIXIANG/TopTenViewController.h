@@ -27,6 +27,8 @@
 
 @property (nonatomic, strong) NSMutableArray *sectionsArr;
 
+@property (nonatomic, strong) NSArray *pictureArr;
+
 @property (nonatomic, retain) Topic *selectTopic;
 
 @property (nonatomic, assign) id delegate;

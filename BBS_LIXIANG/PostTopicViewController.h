@@ -17,7 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *postContentView;
 @property (weak, nonatomic) IBOutlet UIScrollView *pictureScrollView;
 
-@property(nonatomic, retain)NSMutableArray *picArray;//picture upoaded array
+@property(nonatomic, retain) NSMutableArray *picArray;//picture upoaded array
+@property(nonatomic, strong) NSMutableArray *picNameArr;
 
 @property(nonatomic, strong) Topic * rootTopic;   //传值 话题
 

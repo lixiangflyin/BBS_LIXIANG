@@ -36,13 +36,13 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2h6-th-bea">
-                    <rect key="frame" x="44" y="129" width="233" height="30"/>
+                    <rect key="frame" x="44" y="124" width="233" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQ0-rQ-jcM">
-                    <rect key="frame" x="41" y="187" width="239" height="33"/>
+                    <rect key="frame" x="41" y="164" width="239" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.4274510145" green="0.90980398650000005" blue="0.46666669849999998" alpha="1" colorSpace="deviceRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -54,7 +54,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6S-Fu-vUh">
-                    <rect key="frame" x="41" y="242" width="239" height="33"/>
+                    <rect key="frame" x="41" y="207" width="239" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.97254908080000002" green="0.40392160420000001" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -67,7 +67,7 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

@@ -33,6 +33,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        _pictureArr = @[@"hot1.png",@"hot2.png",@"hot3.png",@"hot4.png",@"hot5.png",@"hot6.png",@"hot7.png",@"hot8.png",@"hot9.png",@"hot1.png",@"hot1.png",@"hot1.png"];
     }
     return self;
 }
@@ -81,7 +83,7 @@
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [_headerView endRefreshing];
         
-        [ProgressHUD showSuccess:@"refreshing"];
+        [ProgressHUD showSuccess:@"刷新成功"];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -141,13 +143,14 @@
         cell = [array objectAtIndex:0];
         cell.selectionStyle = UITableViewCellEditingStyleNone;
         
-        [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
+        [cell setBackgroundColor:UIColorFromRGB(0xF1F1F1)];
     }
         
     Topic * topic = [self.tentopicsArr objectAtIndex:indexPath.row];
     cell.section = topic.board;
     cell.title = topic.title;
     cell.array = _sectionsArr;  //已获取中文名
+    cell.image = _pictureArr[indexPath.row];
         
     [cell setReadyToShow];
     
@@ -167,7 +170,7 @@
     }
     
     UIFont *font = [UIFont systemFontOfSize:15.0];
-    CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 35, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
+    CGSize size1 = [topic.title boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 46, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size;
     
     returnHeight = size1.height  + 35;
     

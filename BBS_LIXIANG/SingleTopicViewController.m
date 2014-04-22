@@ -293,7 +293,7 @@ static int count;
             cell = [array objectAtIndex:0];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
+            [cell setBackgroundColor:UIColorFromRGB(0xF1F1F1)];
         }
         
         
@@ -313,7 +313,7 @@ static int count;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell addTapToImageView];
             
-            [cell setBackgroundColor:UIColorFromRGB(0xD1EEFC)];
+            [cell setBackgroundColor:UIColorFromRGB(0xF1F1F1)];
         }
         
         Topic * topic = [self.topicsArray objectAtIndex:indexPath.row-1];

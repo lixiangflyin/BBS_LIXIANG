@@ -17,25 +17,28 @@
                         <rect key="frame" x="9" y="4" width="302" height="42"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试试看二十五个字怎么样能够放其实二十五" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="4q1-KA-anj">
-                        <rect key="frame" x="15" y="8" width="285" height="18"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试试看二十五个字怎么样能够" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="274" translatesAutoresizingMaskIntoConstraints="NO" id="4q1-KA-anj">
+                        <rect key="frame" x="27" y="8" width="274" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="285" id="pEb-9Q-oPg"/>
+                            <constraint firstAttribute="width" constant="274" id="pEb-9Q-oPg"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体栏目具体栏目" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="104" translatesAutoresizingMaskIntoConstraints="NO" id="fFI-xy-35p">
-                        <rect key="frame" x="187" y="29" width="104" height="16"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="具体栏目具体栏目" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="218" translatesAutoresizingMaskIntoConstraints="NO" id="fFI-xy-35p">
+                        <rect key="frame" x="81" y="29" width="218" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="218" id="r6k-zw-ruk"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THm-54-Sgf">
-                        <rect key="frame" x="18" y="27" width="273" height="1"/>
+                        <rect key="frame" x="26" y="27" width="273" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.88235300779342651" green="0.9490196704864502" blue="0.96862751245498657" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -45,27 +48,33 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hot1.png" translatesAutoresizingMaskIntoConstraints="NO" id="JmF-jc-mLc">
+                        <rect key="frame" x="13" y="12" width="9" height="9"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fFI-xy-35p" firstAttribute="top" secondItem="THm-54-Sgf" secondAttribute="bottom" constant="1" id="5CF-yw-gDO"/>
                     <constraint firstAttribute="trailing" secondItem="3JF-K5-WnL" secondAttribute="trailing" constant="9" id="5dp-zF-7Tn"/>
                     <constraint firstAttribute="bottom" secondItem="fFI-xy-35p" secondAttribute="bottom" constant="7" id="5tv-s4-4wD"/>
                     <constraint firstItem="3JF-K5-WnL" firstAttribute="top" secondItem="1Av-Y9-LGk" secondAttribute="top" constant="4" id="GT7-x2-uVT"/>
-                    <constraint firstItem="4q1-KA-anj" firstAttribute="leading" secondItem="1Av-Y9-LGk" secondAttribute="leading" constant="15" id="MGF-70-ECd"/>
+                    <constraint firstItem="4q1-KA-anj" firstAttribute="leading" secondItem="1Av-Y9-LGk" secondAttribute="leading" constant="27" id="MGF-70-ECd"/>
                     <constraint firstItem="3JF-K5-WnL" firstAttribute="leading" secondItem="1Av-Y9-LGk" secondAttribute="leading" constant="9" id="Uh6-MF-d0Q"/>
-                    <constraint firstAttribute="trailing" secondItem="fFI-xy-35p" secondAttribute="trailing" constant="29" id="VKh-Ow-qqq"/>
-                    <constraint firstAttribute="trailing" secondItem="THm-54-Sgf" secondAttribute="trailing" constant="29" id="l68-TP-5JG"/>
+                    <constraint firstAttribute="trailing" secondItem="fFI-xy-35p" secondAttribute="trailing" constant="21" id="VKh-Ow-qqq"/>
+                    <constraint firstAttribute="trailing" secondItem="THm-54-Sgf" secondAttribute="trailing" constant="21" id="l68-TP-5JG"/>
                     <constraint firstItem="4q1-KA-anj" firstAttribute="top" secondItem="1Av-Y9-LGk" secondAttribute="top" constant="8" id="uCq-wa-nZI"/>
                     <constraint firstAttribute="bottom" secondItem="3JF-K5-WnL" secondAttribute="bottom" constant="6" id="v8p-lI-lS8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="sectionLabel" destination="fFI-xy-35p" id="7jm-8G-M7B"/>
+                <outlet property="titleImageView" destination="JmF-jc-mLc" id="BOT-be-53r"/>
                 <outlet property="titleLabel" destination="4q1-KA-anj" id="X6d-Zr-uWq"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="color_white.png" width="1" height="1"/>
+        <image name="hot1.png" width="34" height="34"/>
     </resources>
 </document>

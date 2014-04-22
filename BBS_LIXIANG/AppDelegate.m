@@ -33,7 +33,7 @@ static const CGFloat kPublicLeftMenuWidth = 260.0f;
                                                            [UIFont systemFontOfSize:18.0], NSFontAttributeName, nil]];
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x094FA4)];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"t2.png"]];
+  
     [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"t2.png"]];
 
     

@@ -226,9 +226,9 @@
 - (void)treeView:(RATreeView *)treeView willDisplayCell:(UITableViewCell *)cell forItem:(id)item treeNodeInfo:(RATreeNodeInfo *)treeNodeInfo
 {
     if (treeNodeInfo.treeDepthLevel == 0) {
-        cell.backgroundColor = UIColorFromRGB(0xD1EEFC);
+        cell.backgroundColor = UIColorFromRGB(0xF1F1F1);
     } else if (treeNodeInfo.treeDepthLevel == 1) {
-        cell.backgroundColor = UIColorFromRGB(0xD1EEFC);
+        cell.backgroundColor = UIColorFromRGB(0xF1F1F1);
     } else if (treeNodeInfo.treeDepthLevel == 2) {
         cell.backgroundColor = UIColorFromRGB(0xE0F8D8);
     }
@@ -243,6 +243,8 @@
     if ([title isEqualToString:@"本站系统"] | [title isEqualToString:@"东南大学"] | [title isEqualToString:@"电脑技术"] | [title isEqualToString:@"学术科学"] | [title isEqualToString:@"艺术文化"] | [title isEqualToString:@"乡情校意"] | [title isEqualToString:@"休闲娱乐"] | [title isEqualToString:@"知性感性"] | [title isEqualToString:@"人文信息"] | [title isEqualToString:@"体坛风暴"] | [title isEqualToString:@"校务信箱"] | [title isEqualToString:@"社团群体"]) {
         
         NSLog(@"do nothing!");
+        
+        //[_treeView reloadData];
     }
     else{
     

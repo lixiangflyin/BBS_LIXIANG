@@ -82,6 +82,8 @@
         [_astro setText:@"保密"];
     }
 
+    _replyMailBtn.hidden = YES;
+    
     if ([Toolkit getUserName] == nil) {
         _replyMailBtn.hidden = YES;
     }

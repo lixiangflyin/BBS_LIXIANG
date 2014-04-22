@@ -22,7 +22,7 @@
 -(void)setReadyToShow
 {
     [_titleLabel setText:_title];
-    //[_sectionLabel setText:_section];
+    [_titleImageView setImage:[UIImage imageNamed:_image]];
     
     //遍历获得中文名
     for(NSArray *arr in _array)
