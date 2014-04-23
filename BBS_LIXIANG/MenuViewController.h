@@ -13,6 +13,8 @@
 #import "InputViewController.h"  //输入搜索文字
 #import "LoginViewController.h"
 
+#import "User.h"
+
 @interface MenuViewController : UITableViewController<InputSearchStrDelegate,LoginDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *headPhotoView;

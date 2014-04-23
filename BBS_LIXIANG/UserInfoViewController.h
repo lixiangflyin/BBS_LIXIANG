@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface UserInfoViewController : UIViewController
 
@@ -25,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *replyMailBtn;
 
 
-@property (nonatomic, strong) NSDictionary *userDictionary;
+@property (nonatomic, strong) User *user;
 
 
 

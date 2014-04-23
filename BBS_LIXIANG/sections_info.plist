@@ -11,27 +11,69 @@
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>Blog天地</string>
+			<string>Blog申请</string>
 			<key>sectionName</key>
-			<string>Blog</string>
+			<string>BlogApply</string>
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>斑竹天地</string>
+			<string>Blog管理</string>
 			<key>sectionName</key>
-			<string>BMHOME</string>
+			<string>BlogManage</string>
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>网友聚会</string>
+			<string>版主培训</string>
 			<key>sectionName</key>
-			<string>Celebrate</string>
+			<string>BMTrain</string>
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>全国转信区</string>
+			<string>版主申请</string>
 			<key>sectionName</key>
-			<string>CNNews</string>
+			<string>BoardApply</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>新版申请</string>
+			<key>sectionName</key>
+			<string>NewBoard</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>虎踞龙蟠站聚</string>
+			<key>sectionName</key>
+			<string>Celebration</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>转信问题讨论区</string>
+			<key>sectionName</key>
+			<string>cnAdmin</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>转信区专用布告栏</string>
+			<key>sectionName</key>
+			<string>cnAnnounce</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>转信管理</string>
+			<key>sectionName</key>
+			<string>cnBM</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>cn.bbs.*新闻组统计列表</string>
+			<key>sectionName</key>
+			<string>cnList</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>全国转信测试版</string>
+			<key>sectionName</key>
+			<string>cnTest</string>
 		</dict>
 		<dict>
 			<key>description</key>
@@ -41,9 +83,39 @@
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>历史发展</string>
+			<string>集思广益</string>
 			<key>sectionName</key>
-			<string>Progress</string>
+			<string>Advice</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>精华文集</string>
+			<key>sectionName</key>
+			<string>Digest</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>龙盘虎踞基金</string>
+			<key>sectionName</key>
+			<string>FundForSBBS</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>龙盘虎踞勋章</string>
+			<key>sectionName</key>
+			<string>Honour</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>本站站史</string>
+			<key>sectionName</key>
+			<string>SBBS_History</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>龙盘虎踞纪念品</string>
+			<key>sectionName</key>
+			<string>Souvenir</string>
 		</dict>
 		<dict>
 			<key>description</key>
@@ -53,9 +125,45 @@
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>网友服务</string>
+			<string>申请和弹劾</string>
 			<key>sectionName</key>
-			<string>Service</string>
+			<string>Appeal</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>BBS使用求助</string>
+			<key>sectionName</key>
+			<string>BBSHelp</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>SBBS祝福</string>
+			<key>sectionName</key>
+			<string>Blessing</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>一起来抓虫</string>
+			<key>sectionName</key>
+			<string>Bug_report</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>投诉与举报</string>
+			<key>sectionName</key>
+			<string>Complain</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>系统美化</string>
+			<key>sectionName</key>
+			<string>SitePrettify</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>新手测试</string>
+			<key>sectionName</key>
+			<string>Test</string>
 		</dict>
 		<dict>
 			<key>description</key>
@@ -65,15 +173,33 @@
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>系统发文</string>
+			<string>本站访问统计与记录</string>
 			<key>sectionName</key>
-			<string>System</string>
+			<string>bbslists</string>
 		</dict>
 		<dict>
 			<key>description</key>
-			<string>新手测试</string>
+			<string>新手上路</string>
 			<key>sectionName</key>
-			<string>Test</string>
+			<string>newcomers</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>酸甜苦辣留言板</string>
+			<key>sectionName</key>
+			<string>notepad</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>热点推荐</string>
+			<key>sectionName</key>
+			<string>Recommend</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>本站各项投票与结果</string>
+			<key>sectionName</key>
+			<string>vote</string>
 		</dict>
 	</array>
 	<array>
@@ -1548,6 +1674,12 @@
 			<string>东南风文学社</string>
 			<key>sectionName</key>
 			<string>Sewind</string>
+		</dict>
+		<dict>
+			<key>description</key>
+			<string>西门子学生圈</string>
+			<key>sectionName</key>
+			<string>SSC</string>
 		</dict>
 		<dict>
 			<key>description</key>

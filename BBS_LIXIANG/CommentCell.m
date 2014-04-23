@@ -8,7 +8,7 @@
 
 #import "CommentCell.h"
 #import "JsonParseEngine.h"
-#import "UIImageView+MJWebCache.h"
+#import "UIImageView+WebCache.h"
 #import "Toolkit.h"
 
 #define EDITTOPIC     200
@@ -66,13 +66,18 @@
 
 -(void)setReadyToShow
 {
+    
     if (_isMan) {
-        [_headPhotoImage setImage:[UIImage imageNamed:@"man_byr.jpg"]];
+        //[_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
+        
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"man_byr.jpg"]];
     }
     else{
-        [_headPhotoImage setImage:[UIImage imageNamed:@"girl_byr.jpg"]];
+        //[_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
+        
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"girl_byr.jpg"]];
     }
-    
+   
     _editButton.hidden = YES;
     if ([_author isEqualToString:[Toolkit getUserName]]) {
         _editButton.hidden = NO;
@@ -135,14 +140,12 @@
     if (_isMan) {
         //[_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
         
-        NSURL *url =[NSURL URLWithString:_headPhotoUrl];
-        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"man_byr.jpg"]];
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"man_byr.jpg"]];
     }
     else{
         //[_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
         
-        NSURL *url =[NSURL URLWithString:_headPhotoUrl];
-        [_headPhotoImage setImageURL:url placeholder:[UIImage imageNamed:@"girl_byr.jpg"]];
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"girl_byr.jpg"]];
     }
     
     _editButton.hidden = YES;
@@ -240,8 +243,6 @@
     }
     
 }
-
-
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -88,6 +88,12 @@
     _footerView = footer;
 }
 
+//重新加载视图
+-(void)reloadSearchView
+{
+    [self refreshViewBeginRefreshing:_headerView];
+}
+
 #pragma mark - 刷新控件的代理方法
 #pragma mark 开始进入刷新状态
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
@@ -117,7 +123,6 @@
         NSDictionary *dic = responseObject;
         
         NSArray * objects = [JsonParseEngine parseSearchTopics:dic];
-        NSLog(@"%@",objects);
         
         if (_isRefreshAgain) {
             [self.searchTopicsArr removeAllObjects];

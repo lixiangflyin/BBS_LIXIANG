@@ -54,28 +54,27 @@
 
 -(void)refreshView
 {
-    NSDictionary *dic = [_userDictionary objectForKey:@"user"];
-    [_ID setText:[dic objectForKey:@"id"]];
-    [_name setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"name"]]];
+    [_ID setText:_user.ID];
+    [_name setText:_user.name];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
     
-    [_level setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"level"]]];
-    [_posts setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"posts"]]];
-    [_perform setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"perform"]]];
-    [_experience setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"experience"]]];
-    [_medals setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"medals"]]];
-    [_logins setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"logins"]]];
-    [_life setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"life"]]];
+    [_level setText:_user.level];
+    [_posts setText:[NSString stringWithFormat:@"%d", _user.posts]];
+    [_perform setText:[NSString stringWithFormat:@"%d", _user.perform]];
+    [_experience setText:[NSString stringWithFormat:@"%d", _user.experience]];
+    [_medals setText:[NSString stringWithFormat:@"%d", _user.medals]];
+    [_logins setText:[NSString stringWithFormat:@"%d", _user.logins]];
+    [_life setText:[NSString stringWithFormat:@"%d", _user.life]];
     
-    if ([dic objectForKey:@"gender"] != NULL) {
-        if([[dic objectForKey:@"gender"] isEqualToString:@"M"])
+    if (_user.gender != NULL) {
+        if([_user.gender isEqualToString:@"M"])
             [_gender setText:[NSString stringWithFormat:@"%@", @"帅哥"]];
         else
             [_gender setText:[NSString stringWithFormat:@"%@", @"美女"]];
         
-        [_astro setText:[NSString stringWithFormat:@"%@", [dic objectForKey:@"astro"]]];
+        [_astro setText: _user.astro];
     }
     else {
         [_gender setText:@"保密"];

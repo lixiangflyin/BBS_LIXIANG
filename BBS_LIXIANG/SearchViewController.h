@@ -20,6 +20,6 @@
 
 @property (nonatomic, retain) Topic *selectTopic;
 
-
+-(void)reloadSearchView;
 
 @end

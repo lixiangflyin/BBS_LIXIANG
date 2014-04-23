@@ -155,9 +155,12 @@ static int count;
                 NSString *response = [request responseString];
                 
                 NSDictionary *dictionary = [response objectFromJSONString];
-                [_usersInfo addObject:dictionary];
+                
+                User *user = [JsonParseEngine parseUserInfo:dictionary];
+                [_usersInfo addObject:user];
             }
             
+            //NSLog(@"usersInfo: %@",_usersInfo);
             request = nil;
         }
         
@@ -341,15 +344,17 @@ static int count;
         else
             cell.num = [NSString stringWithFormat:@"%d楼",(int)indexPath.row -1];
         
-        NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
-        NSDictionary *userDic = [dic objectForKey:@"user"];
-        if ([[userDic objectForKey:@"gender"] isEqualToString:@"M"])
+        User *user = [self.usersInfo objectAtIndex:indexPath.row-1];
+
+        if ([user.gender isEqualToString:@"M"])
             cell.isMan = YES;
         else
             cell.isMan = NO;
         
-        cell.headPhotoUrl = [userDic objectForKey:@"avatar"];
-        cell.name = [userDic objectForKey:@"name"];
+        cell.headPhotoUrl = user.avatar;
+        NSLog(@"photo url: %@",cell.headPhotoUrl);
+        
+        cell.name = user.name;
         
         //楼主特殊
         if (indexPath.row == 1){
@@ -394,9 +399,8 @@ static int count;
             return returnHeight = size1.height + 80 + 30;
         }
         
-        NSDictionary *dic = [self.usersInfo objectAtIndex:indexPath.row-1];
-        NSDictionary *userDic = [dic objectForKey:@"user"];
-        NSString *name = [userDic objectForKey:@"name"];
+        User *user = [self.usersInfo objectAtIndex:indexPath.row-1];
+        NSString *name = user.name;
         UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
         CGSize size2 = [[NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",topic.quoter,name, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
         
@@ -463,7 +467,7 @@ static int count;
 -(void)tapHeadPhoto:(int)indexRow
 {
     UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
-    userInfor.userDictionary = self.usersInfo[indexRow-1];
+    userInfor.user = self.usersInfo[indexRow-1];
     [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
 }
 

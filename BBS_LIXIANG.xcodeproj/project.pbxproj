@@ -768,7 +768,6 @@
 			isa = PBXGroup;
 			children = (
 				189205B518F538880023F993 /* MMDrawerController */,
-				189205BF18F538880023F993 /* SlideSwitch */,
 			);
 			name = Frame;
 			path = BBS_LIXIANG/Frame;
@@ -790,14 +789,15 @@
 			path = MMDrawerController;
 			sourceTree = "<group>";
 		};
-		189205BF18F538880023F993 /* SlideSwitch */ = {
+		189205BF18F538880023F993 /* SlideSwitchView */ = {
 			isa = PBXGroup;
 			children = (
 				189205C018F538880023F993 /* resources */,
 				189205C418F538880023F993 /* SUNSlideSwitchView.h */,
 				189205C518F538880023F993 /* SUNSlideSwitchView.m */,
 			);
-			path = SlideSwitch;
+			name = SlideSwitchView;
+			path = Frame/SlideSwitch;
 			sourceTree = "<group>";
 		};
 		189205C018F538880023F993 /* resources */ = {
@@ -974,6 +974,7 @@
 				18CBF57218F021440036C03B /* AppDelegate.m */,
 				18964FBD18F3EA4600F7ECDB /* LCViewController.h */,
 				18964FBE18F3EA4600F7ECDB /* LCViewController.m */,
+				189205BF18F538880023F993 /* SlideSwitchView */,
 				18A9224318F1478F002D9EAB /* LeftView */,
 				18CBF5B118F0273D0036C03B /* HomeView */,
 				18CBF5B318F027830036C03B /* picture */,

@@ -20,6 +20,7 @@
 #import "Toolkit.h"
 
 #import "UIViewController+MMDrawerController.h"
+#import "UIImageView+WebCache.h"
 
 #import "ProgressHUD.h"
 #import "JsonParseEngine.h"
@@ -92,9 +93,11 @@
     }
     
     UserInfoViewController *userInfor = [[UserInfoViewController alloc]init];
-    [userInfor setUserDictionary:[Toolkit getUserDictionary]];
+    User *myinfo = [JsonParseEngine parseUserInfo:[Toolkit getUserDictionary]];
+    [userInfor setUser:myinfo];
     [self presentPopupViewController:userInfor animationType:MJPopupViewAnimationSlideTopBottom];
     userInfor = nil;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -376,6 +379,7 @@
         //为传数据
         SearchViewController *searchVC = [self.navSearchViewController.viewControllers objectAtIndex:0];
         searchVC.searchString = searchString;
+        [searchVC reloadSearchView];
     }
     
     [self.mm_drawerController setCenterViewController:self.navSearchViewController
@@ -395,45 +399,53 @@
     [_name1Label setText:[Toolkit getID]];
     [_name2Label setText:[Toolkit getName]];
     
-    //通过url来获得JSON数据
-    NSString *str = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",[Toolkit getUserName]];
-    NSURL *myurl = [NSURL URLWithString:str];
-    _request = [ASIFormDataRequest requestWithURL:myurl];
-    [_request setDelegate:self];
-    [_request setDidFinishSelector:@selector(GetResult:)];
-    [_request setDidFailSelector:@selector(GetErr:)];
-    [_request startAsynchronous];
-}
-
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
     
-    [Toolkit saveUserDictionary:dic];
+    NSString * baseurl = [NSString stringWithFormat:@"http://bbs.seu.edu.cn/api/user/%@.json",[Toolkit getUserName]];
     
-    //UI变化
-    NSIndexPath * index = [NSIndexPath indexPathForItem:2 inSection:1];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:index];
-    for(UIView *label in [cell.contentView subviews]){
-        if ([label isKindOfClass:[UILabel class]]) {
-            [(UILabel *)label setText:@"注销"];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseurl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        NSLog(@"dic %@",dic);
+        if ([[dic objectForKey:@"success"] boolValue] == 1) {
+            
+            //保存用户信息
+            [Toolkit saveUserDictionary:dic];
+            
+            NSDictionary *userDic = [dic objectForKey:@"user"];
+            NSString *gender = [userDic objectForKey:@"gender"];
+            if ([gender isEqualToString:@"M"]) {
+                [_headPhotoView setImage:[UIImage imageNamed:@"man.jpg"]];
+                
+            }
+            else{
+                
+                [_headPhotoView setImage:[UIImage imageNamed:@"girl.jpg"]];
+            }
+            
+            //UI变化
+            NSIndexPath * index = [NSIndexPath indexPathForItem:2 inSection:1];
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:index];
+            for(UIView *label in [cell.contentView subviews]){
+                if ([label isKindOfClass:[UILabel class]]) {
+                    [(UILabel *)label setText:@"注销"];
+                }
+            }
+        
         }
-    }
-    
-    //用户类
-    //User * my = [JsonParseEngine parseUserInfo:dic];
-    //NSLog(@"user: %@",my);
-    
-    
+        else{
+            
+            //访问出错
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"error!");
+        
+    }];
     
 }
+
 
 @end

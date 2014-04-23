@@ -44,6 +44,8 @@ static NSString *TMP_UPLOAD_IMG_PATH = @"";
         // Custom initialization
         _picArray = [[NSMutableArray alloc]init];
         _picNameArr = [[NSMutableArray alloc]init];
+        
+        // _postType默认为0
     }
     return self;
 }
@@ -99,7 +101,17 @@ static NSString *TMP_UPLOAD_IMG_PATH = @"";
 #pragma -mark 发送帖子（修改，发新帖，回复）
 -(void)postTopic:(id)sender
 {
-    NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic/post.json?" mutableCopy];
+    [ProgressHUD show:@"正在发送..." Interacton:NO];
+    
+    NSMutableString *baseurl;
+    if (_postType == 2) {   //修改帖子
+        
+        baseurl = [@"http://bbs.seu.edu.cn/api/topic/edit.js?" mutableCopy];
+    }
+    else{
+        baseurl = [@"http://bbs.seu.edu.cn/api/topic/post.json?" mutableCopy];
+    }
+    
     [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
     
     if (_boardName == nil) {
@@ -118,9 +130,10 @@ static NSString *TMP_UPLOAD_IMG_PATH = @"";
     if (_postType == 1) {
         [baseurl appendFormat:@"&reid=%i",_rootTopic.ID];
     }
-    if (_postType == 2) {
-        [baseurl appendFormat:@"&reid=%i",_rootTopic.ID];
+    if (_postType == 2) {  //参数id
+        [baseurl appendFormat:@"&id=%i",_rootTopic.ID];
     }
+    
     [baseurl appendFormat:@"&type=%i",3];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

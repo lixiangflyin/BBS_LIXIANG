@@ -1,9 +1,9 @@
 //
-//  SUNSlideSwitchView.h
-//  SUNCommonComponent
+//  SwitchViewController.h
+//  BBS_LIXIANG
 //
-//  Created by 麦志泉 on 13-9-4.
-//  Copyright (c) 2013年 中山市新联医疗科技有限公司. All rights reserved.
+//  Created by apple on 14-4-8.
+//  Copyright (c) 2014年 apple. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

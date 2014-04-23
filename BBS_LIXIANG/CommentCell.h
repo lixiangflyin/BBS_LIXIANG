@@ -43,7 +43,7 @@
 @property(nonatomic, strong)NSArray * attachments;
 @property(nonatomic, strong)NSMutableArray * attachmentsViewArray;
 
-@property(nonatomic, strong)NSString *headPhotoUrl;
+@property(nonatomic, strong)NSURL *headPhotoUrl;
 
 @property(nonatomic, assign)int indexRow;
 @property(nonatomic, assign)id delegate;
