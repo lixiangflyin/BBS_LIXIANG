@@ -40,7 +40,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="author.png" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-AS-hho">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="man.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="PAY-AS-hho">
                     <rect key="frame" x="20" y="87" width="63" height="62"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -137,7 +137,7 @@
         </view>
     </objects>
     <resources>
-        <image name="author.png" width="120" height="120"/>
+        <image name="man.jpg" width="120" height="120"/>
         <image name="menu_at.png" width="50" height="50"/>
         <image name="menu_comment.png" width="50" height="50"/>
         <image name="menu_mailbox.png" width="50" height="50"/>

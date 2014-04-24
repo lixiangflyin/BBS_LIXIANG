@@ -38,11 +38,15 @@
 {
     [super viewDidLoad];
 
-    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x094FA4)];
-    //[[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];//背景
+    self.title = @"登录";
+    
     //屏幕大小适配
     CGSize size_screen = [[UIScreen mainScreen]bounds].size;
     [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+    
+    self.navigationItem.leftBarButtonItem = backButton;
     
     [_pwdTextField setSecureTextEntry:YES];
     [_nameTextField becomeFirstResponder]; //升起键盘

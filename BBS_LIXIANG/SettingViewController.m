@@ -165,8 +165,31 @@
         //[ASIHTTPRequest clearSession];
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
         
+        [self deleteFiles];
         [ProgressHUD showSuccess:@"清除成功"];
     }
+}
+
+//delete files in document
+-(void)deleteFiles
+{
+    //注释掉的是指删除指定文件
+    //NSString *extension = @"m4r";
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSArray *contents = [fileManager contentsOfDirectoryAtPath:documentsDirectory error:NULL];
+    NSEnumerator *e = [contents objectEnumerator];
+    NSString *filename;
+    while ((filename = [e nextObject])) {
+        
+        //if ([[filename pathExtension] isEqualToString:extension]) {
+        
+        [fileManager removeItemAtPath:[documentsDirectory stringByAppendingPathComponent:filename] error:NULL];
+        //}
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

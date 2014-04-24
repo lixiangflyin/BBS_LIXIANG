@@ -48,7 +48,14 @@
     CGRect size_screen = [[UIScreen mainScreen]bounds];
     [self.view setFrame:CGRectMake(0, 0, size_screen.size.width, size_screen.size.height)];
     
-    _postScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+    
+    UIBarButtonItem *sendButton =[[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(sendMail:)];
+    
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.rightBarButtonItem = sendButton;
+    
+    _postScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64)];
     _postScrollView.contentSize = CGSizeMake(size_screen.size.width, self.view.frame.size.height - 64 + 1);
     _postScrollView.delegate = self;
     
@@ -139,11 +146,16 @@
 
 - (IBAction)sendMail:(id)sender {
     
+    if ([_postUser.text isEqualToString:@""] || [_postTitle.text isEqualToString:@""]) {
+        [ProgressHUD showError:@"信息不完整"];
+        return;
+    }
+    
     //发送情况
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mail/send.json?" mutableCopy];
     [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
     [baseurl appendFormat:@"&user=%@",_postUser.text];
-    [baseurl appendFormat:@"&title=%@",_postTitle.text];
+    [baseurl appendFormat:@"&title=%@",[_postTitle.text URLEncodedString]];
     [baseurl appendFormat:@"&content=%@",[_postContent.text URLEncodedString]];
     if (_rootMail == nil) {
         [baseurl appendFormat:@"&reid=%i",0];
@@ -165,6 +177,8 @@
         
         NSDictionary *dictionary = [response objectFromJSONString];
         
+        NSLog(@"dictor %@",dictionary);
+        
         BOOL success = [[dictionary objectForKey:@"success"] boolValue];
         
         if (success) {
@@ -182,9 +196,6 @@
     _request = nil;
 
 }
-
-
-
 
 
 #pragma mark -

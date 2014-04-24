@@ -53,7 +53,7 @@
 	
     _mailsArr = [[NSMutableArray alloc]init];
     
-    NSLog(@"token: %@",[Toolkit getToken]);
+    //NSLog(@"token: %@",[Toolkit getToken]);
     
     self.title = @"我的信箱";
     UIImage* image= [UIImage imageNamed:@"t1.png"];
@@ -176,39 +176,39 @@
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
-#pragma -mark asi Delegate
-//ASI委托函数，错误处理
--(void) GetErr:(ASIHTTPRequest *)request
-{
-    NSLog(@"error!");
-    [_headerView endRefreshing];
-    [_footerView endRefreshing];
-    [ProgressHUD showError:@"网络故障"];
-}
-
-//ASI委托函数，信息处理
--(void) GetResult:(ASIHTTPRequest *)request
-{
-    NSDictionary *dic = [request.responseString objectFromJSONString];
-    
-    //我的收件箱
-    NSArray * objects = [JsonParseEngine parseMails:dic Type:0];
-    
-    if (_isRefreshAgain) {
-        [self.mailsArr removeAllObjects];
-        [self.mailsArr addObjectsFromArray:objects];
-        
-        [_mailsTableView reloadData];
-        [_headerView endRefreshing];
-    }
-    else{
-        [self.mailsArr addObjectsFromArray:objects];
-        
-        [_mailsTableView reloadData];
-        [_footerView endRefreshing];
-    }
-    
-}
+//#pragma -mark asi Delegate
+////ASI委托函数，错误处理
+//-(void) GetErr:(ASIHTTPRequest *)request
+//{
+//    NSLog(@"error!");
+//    [_headerView endRefreshing];
+//    [_footerView endRefreshing];
+//    [ProgressHUD showError:@"网络故障"];
+//}
+//
+////ASI委托函数，信息处理
+//-(void) GetResult:(ASIHTTPRequest *)request
+//{
+//    NSDictionary *dic = [request.responseString objectFromJSONString];
+//    
+//    //我的收件箱
+//    NSArray * objects = [JsonParseEngine parseMails:dic Type:0];
+//    
+//    if (_isRefreshAgain) {
+//        [self.mailsArr removeAllObjects];
+//        [self.mailsArr addObjectsFromArray:objects];
+//        
+//        [_mailsTableView reloadData];
+//        [_headerView endRefreshing];
+//    }
+//    else{
+//        [self.mailsArr addObjectsFromArray:objects];
+//        
+//        [_mailsTableView reloadData];
+//        [_footerView endRefreshing];
+//    }
+//    
+//}
 
 #pragma mark - 数据源协议
 #pragma mark tableViewDelegate
@@ -266,8 +266,10 @@
 {
     //发邮件
     PostMailViewController *postMailVC = [[PostMailViewController alloc]init];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:postMailVC];
     postMailVC.postType = 0;
-    [self presentViewController:postMailVC animated:YES completion:nil];
+    [self presentViewController:navVC animated:YES completion:nil];
+    //[self.navigationController pushViewController:postMailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -44,6 +44,7 @@
 {
     [super viewDidLoad];
     
+    
     //屏幕大小适配
     CGSize size_screen = [[UIScreen mainScreen]bounds].size;
     [self.view setFrame:CGRectMake(0, 0, size_screen.width, size_screen.height)];
@@ -57,6 +58,12 @@
     [_contentLabel setText:nil];
     [_timeLabel setText:nil];
     
+    [self firstLoadData];
+    
+}
+
+-(void)firstLoadData
+{
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/mail/get.json?" mutableCopy];
     [baseurl appendFormat:@"token=%@",[Toolkit getToken]];
     [baseurl appendFormat:@"&type=%i",_rootMail.type];
@@ -99,7 +106,6 @@
         NSLog(@"error!");
         [ProgressHUD showSuccess:@"网络故障"];
     }];
-    
 }
 
 #pragma -mark 回复邮件
@@ -107,9 +113,13 @@
 {
     //发邮件
     PostMailViewController *postMailVC = [[PostMailViewController alloc]init];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:postMailVC];
     postMailVC.rootMail = _mail;
     postMailVC.postType = 1;
-    [self presentViewController:postMailVC animated:YES completion:nil];
+    
+    navVC.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:navVC animated:YES completion:nil];
+    //[self.navigationController pushViewController:postMailVC animated:YES];
     postMailVC = nil;
 }
 

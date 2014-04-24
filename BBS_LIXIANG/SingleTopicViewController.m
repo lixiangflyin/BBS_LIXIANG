@@ -105,7 +105,7 @@ static int count;
 #pragma mark 开始进入刷新状态
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
-    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    //NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
     NSMutableString * baseurl = [@"http://bbs.seu.edu.cn/api/topic" mutableCopy];
     [baseurl appendFormat:@"/%@",_rootTopic.board];
@@ -352,7 +352,7 @@ static int count;
             cell.isMan = NO;
         
         cell.headPhotoUrl = user.avatar;
-        NSLog(@"photo url: %@",cell.headPhotoUrl);
+        //NSLog(@"photo url: %@",cell.headPhotoUrl);
         
         cell.name = user.name;
         
@@ -399,10 +399,10 @@ static int count;
             return returnHeight = size1.height + 80 + 30;
         }
         
-        User *user = [self.usersInfo objectAtIndex:indexPath.row-1];
-        NSString *name = user.name;
+        //User *user = [self.usersInfo objectAtIndex:indexPath.row-1];
+        //NSString *name = user.name;
         UIFont *font2 = [UIFont boldSystemFontOfSize:13.0];
-        CGSize size2 = [[NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",topic.quoter,name, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
+        CGSize size2 = [[NSString stringWithFormat:@"【在%@的大作中提到:】\n : %@",topic.quoter, topic.quote] boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 34, 1000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font2} context:nil].size;
         
         if (topic.attachments != nil) {
             return returnHeight = size1.height + +size2.height + 80 + (180 * [[self getPicList:topic.attachments] count] + 30);

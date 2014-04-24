@@ -11,6 +11,7 @@
 
 @interface UserInfoViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *ID;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *lastLogin;

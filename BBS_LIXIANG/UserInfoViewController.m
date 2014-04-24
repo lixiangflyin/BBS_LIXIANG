@@ -57,6 +57,14 @@
     [_ID setText:_user.ID];
     [_name setText:_user.name];
     
+    NSArray *picArr = [NSArray arrayWithObjects:@"1212.jpg",@"111.jpg",@"13.jpg",@"12.jpeg", nil];
+    int randomNum = arc4random_uniform(4);
+    NSString *imageStr = picArr[randomNum];
+    
+    NSString *path = [[NSBundle mainBundle] bundlePath];  //获取路径
+    NSString *imagePath = [path stringByAppendingPathComponent:imageStr];
+    [_backgroundImageView setImage:[UIImage imageWithContentsOfFile:imagePath]];
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
     
@@ -89,6 +97,23 @@
     
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    _ID = nil;
+    _name = nil;
+    _logins = nil;
+    _level = nil;
+    _posts = nil;
+    _perform = nil;
+    _experience = nil;
+    _medals = nil;
+    _logins = nil;
+    _life = nil;
+    _gender = nil;
+    _astro = nil;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -97,10 +122,10 @@
 
 - (IBAction)postMail:(id)sender {
     
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
+    //[self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
     
-    PostMailViewController *postMailVC = [[PostMailViewController alloc]init];
-    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postMailVC];
-    //[self presentViewController:postMailVC animated:YES completion:nil];
+//    PostMailViewController *postMailVC = [[PostMailViewController alloc]init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:postMailVC];
+//    [self presentViewController:nav animated:YES completion:nil];
 }
 @end

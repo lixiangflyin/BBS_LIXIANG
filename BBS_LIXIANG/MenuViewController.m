@@ -210,8 +210,9 @@
                 }
                 
                 LoginViewController *login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+                UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:login];
                 login.delegate = self;
-                [self presentViewController:login animated:YES completion:nil];
+                [self presentViewController:navVC animated:YES completion:nil];
                 break;
             }
             default:
@@ -219,6 +220,7 @@
         } //滑动切换视图
     }
 }
+
 
 #pragma action delegate
 //******************************************

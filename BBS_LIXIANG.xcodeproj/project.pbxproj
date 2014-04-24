@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180FC00E1908016E00F92BE0 /* 12.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 180FC00D1908016E00F92BE0 /* 12.jpeg */; };
+		180FC0101908026B00F92BE0 /* 13.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180FC00F1908026B00F92BE0 /* 13.jpg */; };
+		180FC012190802AB00F92BE0 /* 111.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180FC011190802AB00F92BE0 /* 111.jpg */; };
+		180FC014190802D900F92BE0 /* 1212.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 180FC013190802D900F92BE0 /* 1212.jpg */; };
 		181BB66718F58981004DB55E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181BB66618F58981004DB55E /* ImageIO.framework */; };
 		181BB66918F58989004DB55E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181BB66818F58989004DB55E /* MapKit.framework */; };
 		181BB66E18F593E9004DB55E /* HotBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181BB66C18F593E9004DB55E /* HotBoardViewController.m */; };
@@ -128,7 +132,7 @@
 		18A9222D18F0F6CC002D9EAB /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9222B18F0F6CC002D9EAB /* UserInfoViewController.m */; };
 		18A9222E18F0F6CC002D9EAB /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9222C18F0F6CC002D9EAB /* UserInfoViewController.xib */; };
 		18A9223818F0FBBA002D9EAB /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223518F0FBBA002D9EAB /* MJPopupBackgroundView.m */; };
-		18A9223918F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223718F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18A9223918F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223718F0FBBA002D9EAB /* UIViewController+MJPopupViewController.m */; };
 		18A9223E18F138F7002D9EAB /* PostTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9223C18F138F7002D9EAB /* PostTopicViewController.m */; };
 		18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9223D18F138F7002D9EAB /* PostTopicViewController.xib */; };
 		18A9224218F13BE4002D9EAB /* seekImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9224118F13BE4002D9EAB /* seekImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -239,6 +243,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		180FC00D1908016E00F92BE0 /* 12.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 12.jpeg; sourceTree = "<group>"; };
+		180FC00F1908026B00F92BE0 /* 13.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 13.jpg; sourceTree = "<group>"; };
+		180FC011190802AB00F92BE0 /* 111.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 111.jpg; sourceTree = "<group>"; };
+		180FC013190802D900F92BE0 /* 1212.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1212.jpg; sourceTree = "<group>"; };
 		181BB66618F58981004DB55E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		181BB66818F58989004DB55E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		181BB66B18F593E9004DB55E /* HotBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotBoardViewController.h; sourceTree = "<group>"; };
@@ -622,7 +630,6 @@
 				18E64A2F18F7D917004BEFF0 /* HotBoardCell.h */,
 				18E64A3018F7D917004BEFF0 /* HotBoardCell.m */,
 				18E64A3218F7D92A004BEFF0 /* HotBoardCell.xib */,
-				18B245A718FBFEBB00AD86F4 /* color_white.png */,
 			);
 			name = HotBoardViewController;
 			sourceTree = "<group>";
@@ -842,6 +849,10 @@
 				18A9222A18F0F6CC002D9EAB /* UserInfoViewController.h */,
 				18A9222B18F0F6CC002D9EAB /* UserInfoViewController.m */,
 				18A9222C18F0F6CC002D9EAB /* UserInfoViewController.xib */,
+				180FC013190802D900F92BE0 /* 1212.jpg */,
+				180FC011190802AB00F92BE0 /* 111.jpg */,
+				180FC00F1908026B00F92BE0 /* 13.jpg */,
+				180FC00D1908016E00F92BE0 /* 12.jpeg */,
 			);
 			name = userInfoController;
 			sourceTree = "<group>";
@@ -1053,6 +1064,7 @@
 		18CBF5B318F027830036C03B /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				18B245A718FBFEBB00AD86F4 /* color_white.png */,
 				18A49B7F19054F42008A1650 /* new-blue.png */,
 				18A49B8019054F42008A1650 /* reply-blue.png */,
 				18871E891903FBBC00609A71 /* hot1.png */,
@@ -1442,6 +1454,7 @@
 				18A9225318F18A2F002D9EAB /* girl.jpg in Resources */,
 				189205CA18F538880023F993 /* icon_rightarrow.png in Resources */,
 				1899E03118FD0E1B00083AF8 /* NotificationViewController.xib in Resources */,
+				180FC0101908026B00F92BE0 /* 13.jpg in Resources */,
 				185222391902B7F900FE3FAB /* 57.png in Resources */,
 				18AC9F8418F98301001AC520 /* sections_info.plist in Resources */,
 				18871E9A1903FBBC00609A71 /* hot9.png in Resources */,
@@ -1465,10 +1478,12 @@
 				18CBF62E18F033AE0036C03B /* Balloon.png in Resources */,
 				18A49B8119054F42008A1650 /* new-blue.png in Resources */,
 				18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */,
+				180FC00E1908016E00F92BE0 /* 12.jpeg in Resources */,
 				18F04E7A18F2D638007E9373 /* BoardTopicCell.xib in Resources */,
 				1852223D1902BA6100FE3FAB /* Default@2x.png in Resources */,
 				18B2459318FBF5CA00AD86F4 /* select.png in Resources */,
 				185222341902B7F900FE3FAB /* 76.png in Resources */,
+				180FC012190802AB00F92BE0 /* 111.jpg in Resources */,
 				18871E921903FBBC00609A71 /* hot1.png in Resources */,
 				18B245AE18FC050900AD86F4 /* reply.png in Resources */,
 				18B245A818FBFEBB00AD86F4 /* color_white.png in Resources */,
@@ -1482,6 +1497,7 @@
 				18B2459818FBF65200AD86F4 /* menu_search.png in Resources */,
 				1899F99F19011910000D0BD1 /* menu_comment.png in Resources */,
 				18B2459918FBF65200AD86F4 /* menu_section.png in Resources */,
+				180FC014190802D900F92BE0 /* 1212.jpg in Resources */,
 				18CBF5CB18F0280F0036C03B /* CommentCell.xib in Resources */,
 				18A9224A18F147CD002D9EAB /* LoginViewController.xib in Resources */,
 				18871E991903FBBC00609A71 /* hot8.png in Resources */,

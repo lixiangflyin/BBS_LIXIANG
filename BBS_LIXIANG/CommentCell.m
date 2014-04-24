@@ -70,12 +70,12 @@
     if (_isMan) {
         //[_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
         
-        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"man_byr.jpg"]];
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"man.jpg"]];
     }
     else{
         //[_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
         
-        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"girl_byr.jpg"]];
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"girl.jpg"]];
     }
    
     _editButton.hidden = YES;
@@ -93,7 +93,7 @@
 
     [_contentLabel setText:_content];
 
-    NSString *str = [NSString stringWithFormat:@"【在%@(%@)的大作中提到:】\n : %@",_quoter,_name,_quote];
+    NSString *str = [NSString stringWithFormat:@"【在%@的大作中提到:】\n : %@",_quoter,_quote];
     [_commentToLabel setText:str];
     
     //复用问题
@@ -140,12 +140,12 @@
     if (_isMan) {
         //[_headPhotoImage setImage:[UIImage imageNamed:@"man.jpg"]];
         
-        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"man_byr.jpg"]];
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"man.jpg"]];
     }
     else{
         //[_headPhotoImage setImage:[UIImage imageNamed:@"girl.jpg"]];
         
-        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"girl_byr.jpg"]];
+        [_headPhotoImage setImageWithURL:_headPhotoUrl placeholderImage:[UIImage imageNamed:@"girl.jpg"]];
     }
     
     _editButton.hidden = YES;
