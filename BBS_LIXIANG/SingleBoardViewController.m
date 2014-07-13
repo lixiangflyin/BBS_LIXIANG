@@ -11,6 +11,7 @@
 #import "PostTopicViewController.h"
 #import "BoardTopicCell.h"
 #import "ProgressHUD.h"
+#import "Toolkit.h"
 #import "JSONKit.h"
 #import "JsonParseEngine.h"
 #import "MJRefresh.h"
@@ -221,6 +222,12 @@
 #pragma -mark 触发发送新话题
 -(void)postNewTopic:(id)sender
 {
+    //判断是否登录
+    if ([Toolkit getUserName] == nil) {
+        [ProgressHUD showError:@"请先登录"];
+        return;
+    }
+    
     PostTopicViewController *postTopic = [[PostTopicViewController alloc]init];
     [postTopic setBoardName:_boardName];
     [self.navigationController pushViewController:postTopic animated:YES];

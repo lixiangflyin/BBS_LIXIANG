@@ -198,7 +198,7 @@
             case 2:{
                 if ([Toolkit getUserName] != nil) {
                     //注销用户
-                    UIActionSheet *cameraSheet = [[UIActionSheet alloc] initWithTitle:@"登出虎踞龙盘？"
+                    UIActionSheet *cameraSheet = [[UIActionSheet alloc] initWithTitle:@"登出虎踞龙蟠？"
                                                                              delegate:self
                                                                     cancelButtonTitle:@"取消"
                                                                destructiveButtonTitle:nil

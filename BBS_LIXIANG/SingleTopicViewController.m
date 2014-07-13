@@ -155,9 +155,15 @@ static int count;
                 NSString *response = [request responseString];
                 
                 NSDictionary *dictionary = [response objectFromJSONString];
+                //NSLog(@"dic %@",dictionary);
                 
                 User *user = [JsonParseEngine parseUserInfo:dictionary];
-                [_usersInfo addObject:user];
+                if (user == nil) {
+                    User *null_user = [[User alloc]init];
+                    [_usersInfo addObject:null_user];
+                }else{
+                    [_usersInfo addObject:user];
+                }
             }
             
             //NSLog(@"usersInfo: %@",_usersInfo);

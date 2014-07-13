@@ -1,0 +1,25 @@
+body{font-size:14px;-webkit-user-select:none;-webkit-text-size-adjust:none;font-family:helvetica;line-height:130%;background-color:#FFFFFF;color:#000000;margin:0;padding:15px;}
+img {border:0;}
+
+.logo{text-align:center;background-color:#FFFFFF;background-image:url(Icon-1024.png);width:89px;height:1px;-webkit-background-size:89px 89px;background-size:89px 89px;padding-top:89px;margin: 0 auto 0 auto;}
+h3{font-size:18px;}
+.content{clear:both;}
+
+
+
+.developer{text-align:center;background-color:#f9f8f1;background-image:url(developer.png);width:250px;height:51px;-webkit-background-size:250px 141px;background-size:250px 141px;padding-top:91px;margin: 0 auto 0 auto;}
+
+.input-row span,.contact-row span{display:block;}
+.input-row textarea,.contact-row input{width:90%;border:1px solid #d3c8bf;outline:none;border-radius:6px;font-size:14px;padding:6px; -webkit-appearance: none;}
+.button {padding-top:10px;}
+
+.icon{float:left;width:76px;}
+.icon img {height: 57px;width: 57px;}
+h1{font-size:24px;line-height:110%;margin:0;padding:0 0 10px 0;}
+.intro{clear:both;padding:20px 0 20px 0;}
+.download a,.button input{-webkit-border-radius:15px;-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);background: -webkit-gradient(linear, left top, left bottom, from(#57b8ee), to(#298cda));color:#fff;text-decoration:none;border:0 none;outline:none;font-size:14px;padding:4px 20px;}
+.row-line {border-top-width:1px;border-top-style:solid;border-top-color:#eae2db;padding:0 0 20px 0;}
+
+.prompt {	padding: 30px 0 30px 0;	text-align: center;}
+ol{padding-left:20px}
+.paddingleft {padding-left:5px}

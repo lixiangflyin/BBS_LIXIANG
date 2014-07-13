@@ -30,7 +30,9 @@
 {
     self = [super init];
     if (self) {
-        
+        ID = @"保密";
+        level = @"保密";
+        name = @"Annoymous";
     }
     return self;
 }

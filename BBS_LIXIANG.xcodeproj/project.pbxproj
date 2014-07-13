@@ -52,16 +52,12 @@
 		1852222819029FFE00FE3FAB /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221D19029FFE00FE3FAB /* AFURLRequestSerialization.m */; };
 		1852222919029FFE00FE3FAB /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852221F19029FFE00FE3FAB /* AFURLResponseSerialization.m */; };
 		1852222A19029FFE00FE3FAB /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1852222119029FFE00FE3FAB /* AFURLSessionManager.m */; };
-		185222331902B7F900FE3FAB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222B1902B7F900FE3FAB /* icon.png */; };
 		185222341902B7F900FE3FAB /* 76.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222C1902B7F900FE3FAB /* 76.png */; };
 		185222351902B7F900FE3FAB /* 152.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222D1902B7F900FE3FAB /* 152.png */; };
 		185222361902B7F900FE3FAB /* 72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222E1902B7F900FE3FAB /* 72.png */; };
 		185222371902B7F900FE3FAB /* 144.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852222F1902B7F900FE3FAB /* 144.png */; };
 		185222381902B7F900FE3FAB /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 185222301902B7F900FE3FAB /* 114.png */; };
 		185222391902B7F900FE3FAB /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = 185222311902B7F900FE3FAB /* 57.png */; };
-		1852223A1902B7F900FE3FAB /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 185222321902B7F900FE3FAB /* icon@2x.png */; };
-		1852223D1902BA6100FE3FAB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852223B1902BA6100FE3FAB /* Default@2x.png */; };
-		1852223E1902BA6100FE3FAB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852223C1902BA6100FE3FAB /* Default.png */; };
 		18739BB718F689F900DE590A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BB518F689F900DE590A /* SearchViewController.m */; };
 		18739BB818F689F900DE590A /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18739BB618F689F900DE590A /* SearchViewController.xib */; };
 		18739BBC18F6989100DE590A /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18739BBA18F6989100DE590A /* InputViewController.m */; };
@@ -98,6 +94,10 @@
 		18871E981903FBBC00609A71 /* hot7.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E8F1903FBBC00609A71 /* hot7.png */; };
 		18871E991903FBBC00609A71 /* hot8.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E901903FBBC00609A71 /* hot8.png */; };
 		18871E9A1903FBBC00609A71 /* hot9.png in Resources */ = {isa = PBXBuildFile; fileRef = 18871E911903FBBC00609A71 /* hot9.png */; };
+		18889C79192CCAE80054A851 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18889C76192CCAE80054A851 /* AboutViewController.m */; };
+		18889C7A192CCAE80054A851 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 18889C77192CCAE80054A851 /* about.html */; };
+		18889C7D192CD1DE0054A851 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 18889C7C192CD1DE0054A851 /* style.css */; };
+		18889C83192CD51F0054A851 /* Icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 18889C82192CD51F0054A851 /* Icon-1024.png */; };
 		189205C618F538880023F993 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205B718F538880023F993 /* MMDrawerBarButtonItem.m */; };
 		189205C718F538880023F993 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BA18F538880023F993 /* MMDrawerController.m */; };
 		189205C818F538880023F993 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 189205BC18F538880023F993 /* MMDrawerVisualState.m */; };
@@ -160,6 +160,15 @@
 		18B245AE18FC050900AD86F4 /* reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B245AD18FC050900AD86F4 /* reply.png */; };
 		18B245B218FC08F400AD86F4 /* bbs_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B245B118FC08F400AD86F4 /* bbs_section.png */; };
 		18B245B618FC272000AD86F4 /* navigation_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B245B518FC272000AD86F4 /* navigation_color.png */; };
+		18B4EFE0192A25FE0095E8DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B4EFDD192A25FE0095E8DD /* Default-568h@2x.png */; };
+		18B4EFE1192A25FE0095E8DD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B4EFDE192A25FE0095E8DD /* Default.png */; };
+		18B4EFE2192A25FE0095E8DD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B4EFDF192A25FE0095E8DD /* Default@2x.png */; };
+		18B4F011192A36120095E8DD /* 58.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B4F00E192A36120095E8DD /* 58.png */; };
+		18B4F012192A36120095E8DD /* 80.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B4F00F192A36120095E8DD /* 80.png */; };
+		18B4F013192A36120095E8DD /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 18B4F010192A36120095E8DD /* 120.png */; };
+		18BD6CDC192A5263007D1E85 /* 李翔80-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BD6CD9192A5263007D1E85 /* 李翔80-1.png */; };
+		18BD6CDD192A5263007D1E85 /* 李翔120-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BD6CDA192A5263007D1E85 /* 李翔120-1.png */; };
+		18BD6CDE192A5263007D1E85 /* 李翔58-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BD6CDB192A5263007D1E85 /* 李翔58-1.png */; };
 		18CBF56318F021440036C03B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CBF56218F021440036C03B /* Foundation.framework */; };
 		18CBF56518F021440036C03B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CBF56418F021440036C03B /* CoreGraphics.framework */; };
 		18CBF56718F021440036C03B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CBF56618F021440036C03B /* UIKit.framework */; };
@@ -325,16 +334,12 @@
 		1852221F19029FFE00FE3FAB /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		1852222019029FFE00FE3FAB /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		1852222119029FFE00FE3FAB /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		1852222B1902B7F900FE3FAB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		1852222C1902B7F900FE3FAB /* 76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 76.png; sourceTree = "<group>"; };
 		1852222D1902B7F900FE3FAB /* 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152.png; sourceTree = "<group>"; };
 		1852222E1902B7F900FE3FAB /* 72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 72.png; sourceTree = "<group>"; };
 		1852222F1902B7F900FE3FAB /* 144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144.png; sourceTree = "<group>"; };
 		185222301902B7F900FE3FAB /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		185222311902B7F900FE3FAB /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
-		185222321902B7F900FE3FAB /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		1852223B1902BA6100FE3FAB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		1852223C1902BA6100FE3FAB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		18739BB418F689F900DE590A /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		18739BB518F689F900DE590A /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		18739BB618F689F900DE590A /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
@@ -384,6 +389,11 @@
 		18871E8F1903FBBC00609A71 /* hot7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot7.png; sourceTree = "<group>"; };
 		18871E901903FBBC00609A71 /* hot8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot8.png; sourceTree = "<group>"; };
 		18871E911903FBBC00609A71 /* hot9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hot9.png; sourceTree = "<group>"; };
+		18889C75192CCAE80054A851 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		18889C76192CCAE80054A851 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		18889C77192CCAE80054A851 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
+		18889C7C192CD1DE0054A851 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		18889C82192CD51F0054A851 /* Icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-1024.png"; sourceTree = "<group>"; };
 		189205B618F538880023F993 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		189205B718F538880023F993 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		189205B818F538880023F993 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -470,6 +480,15 @@
 		18B245AD18FC050900AD86F4 /* reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reply.png; sourceTree = "<group>"; };
 		18B245B118FC08F400AD86F4 /* bbs_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bbs_section.png; sourceTree = "<group>"; };
 		18B245B518FC272000AD86F4 /* navigation_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation_color.png; sourceTree = "<group>"; };
+		18B4EFDD192A25FE0095E8DD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		18B4EFDE192A25FE0095E8DD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		18B4EFDF192A25FE0095E8DD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		18B4F00E192A36120095E8DD /* 58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58.png; sourceTree = "<group>"; };
+		18B4F00F192A36120095E8DD /* 80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80.png; sourceTree = "<group>"; };
+		18B4F010192A36120095E8DD /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
+		18BD6CD9192A5263007D1E85 /* 李翔80-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "李翔80-1.png"; sourceTree = "<group>"; };
+		18BD6CDA192A5263007D1E85 /* 李翔120-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "李翔120-1.png"; sourceTree = "<group>"; };
+		18BD6CDB192A5263007D1E85 /* 李翔58-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "李翔58-1.png"; sourceTree = "<group>"; };
 		18CBF55F18F021440036C03B /* BBS_LIXIANG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BBS_LIXIANG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CBF56218F021440036C03B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18CBF56418F021440036C03B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -722,6 +741,11 @@
 			children = (
 				1852220B1902604800FE3FAB /* SettingViewController.h */,
 				1852220C1902604800FE3FAB /* SettingViewController.m */,
+				18889C75192CCAE80054A851 /* AboutViewController.h */,
+				18889C76192CCAE80054A851 /* AboutViewController.m */,
+				18889C77192CCAE80054A851 /* about.html */,
+				18889C7C192CD1DE0054A851 /* style.css */,
+				18889C82192CD51F0054A851 /* Icon-1024.png */,
 			);
 			name = SettingViewController;
 			sourceTree = "<group>";
@@ -941,6 +965,19 @@
 			name = SingleMailViewController;
 			sourceTree = "<group>";
 		};
+		18B4EFE3192A2AF90095E8DD /* appIcon */ = {
+			isa = PBXGroup;
+			children = (
+				18BD6CD9192A5263007D1E85 /* 李翔80-1.png */,
+				18BD6CDA192A5263007D1E85 /* 李翔120-1.png */,
+				18BD6CDB192A5263007D1E85 /* 李翔58-1.png */,
+				18B4F00E192A36120095E8DD /* 58.png */,
+				18B4F00F192A36120095E8DD /* 80.png */,
+				18B4F010192A36120095E8DD /* 120.png */,
+			);
+			name = appIcon;
+			sourceTree = "<group>";
+		};
 		18CBF55618F021440036C03B = {
 			isa = PBXGroup;
 			children = (
@@ -998,16 +1035,16 @@
 		18CBF56918F021440036C03B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1852223B1902BA6100FE3FAB /* Default@2x.png */,
-				1852223C1902BA6100FE3FAB /* Default.png */,
-				1852222B1902B7F900FE3FAB /* icon.png */,
+				18B4EFE3192A2AF90095E8DD /* appIcon */,
+				18B4EFDD192A25FE0095E8DD /* Default-568h@2x.png */,
+				18B4EFDE192A25FE0095E8DD /* Default.png */,
+				18B4EFDF192A25FE0095E8DD /* Default@2x.png */,
 				1852222C1902B7F900FE3FAB /* 76.png */,
 				1852222D1902B7F900FE3FAB /* 152.png */,
 				1852222E1902B7F900FE3FAB /* 72.png */,
 				1852222F1902B7F900FE3FAB /* 144.png */,
 				185222301902B7F900FE3FAB /* 114.png */,
 				185222311902B7F900FE3FAB /* 57.png */,
-				185222321902B7F900FE3FAB /* icon@2x.png */,
 				18AC9F8318F98301001AC520 /* sections_info.plist */,
 				18CBF56A18F021440036C03B /* BBS_LIXIANG-Info.plist */,
 				18CBF56B18F021440036C03B /* InfoPlist.strings */,
@@ -1384,6 +1421,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = apple;
 				TargetAttributes = {
+					18CBF55E18F021440036C03B = {
+						DevelopmentTeam = 8MSQ7CSLJJ;
+					};
 					18CBF57918F021440036C03B = {
 						TestTargetID = 18CBF55E18F021440036C03B;
 					};
@@ -1418,11 +1458,12 @@
 				18F04E7F18F2E1CD007E9373 /* PostMailViewController.xib in Resources */,
 				18CBF5BE18F027FF0036C03B /* TopTenCell.xib in Resources */,
 				1830EB6B18F43AC800EB59B2 /* MBProgressHUD.bundle in Resources */,
-				185222331902B7F900FE3FAB /* icon.png in Resources */,
 				18871E961903FBBC00609A71 /* hot5.png in Resources */,
 				18B245B618FC272000AD86F4 /* navigation_color.png in Resources */,
 				1899E02718FCD93600083AF8 /* MySectionCell.xib in Resources */,
+				18B4EFE1192A25FE0095E8DD /* Default.png in Resources */,
 				1899F99E19011910000D0BD1 /* menu_at.png in Resources */,
+				18B4EFE2192A25FE0095E8DD /* Default@2x.png in Resources */,
 				18739BBD18F6989100DE590A /* InputViewController.xib in Resources */,
 				185222361902B7F900FE3FAB /* 72.png in Resources */,
 				18964FC418F3EA9300F7ECDB /* SwitchViewController.xib in Resources */,
@@ -1441,11 +1482,14 @@
 				1899E02B18FD0C6B00083AF8 /* light_green.png in Resources */,
 				18B2459E18FBF7E900AD86F4 /* menu_setting.png in Resources */,
 				18CBF5C918F0280F0036C03B /* SingleTopicCell.xib in Resources */,
+				18BD6CDE192A5263007D1E85 /* 李翔58-1.png in Resources */,
 				185222371902B7F900FE3FAB /* 144.png in Resources */,
 				18824FE61900080F00C296B4 /* game.png in Resources */,
 				18EB8DED18FE9BFC00A6BCC6 /* t1.png in Resources */,
 				18871E981903FBBC00609A71 /* hot7.png in Resources */,
 				1830EB6E18F43AC800EB59B2 /* MJPhotoBrowser.bundle in Resources */,
+				18B4F011192A36120095E8DD /* 58.png in Resources */,
+				18889C7D192CD1DE0054A851 /* style.css in Resources */,
 				189205E518F57C320023F993 /* SingleMailViewController.xib in Resources */,
 				18B245B218FC08F400AD86F4 /* bbs_section.png in Resources */,
 				18B2459C18FBF7D000AD86F4 /* menu_logout.png in Resources */,
@@ -1457,6 +1501,7 @@
 				180FC0101908026B00F92BE0 /* 13.jpg in Resources */,
 				185222391902B7F900FE3FAB /* 57.png in Resources */,
 				18AC9F8418F98301001AC520 /* sections_info.plist in Resources */,
+				18B4F012192A36120095E8DD /* 80.png in Resources */,
 				18871E9A1903FBBC00609A71 /* hot9.png in Resources */,
 				18CBF5AB18F021D00036C03B /* MenuViewController.xib in Resources */,
 				1899E01B18FCD5BA00083AF8 /* MySectionsViewController.xib in Resources */,
@@ -1469,28 +1514,30 @@
 				18B2458E18FBDFDF00AD86F4 /* profile_bg.jpg in Resources */,
 				18A9225118F18A1A002D9EAB /* man.jpg in Resources */,
 				187FFDF518FACE8000E5731F /* SectionCell.xib in Resources */,
-				1852223A1902B7F900FE3FAB /* icon@2x.png in Resources */,
 				18E64A2E18F7CC00004BEFF0 /* MenuCell.xib in Resources */,
 				18A9225C18F19658002D9EAB /* MailCell.xib in Resources */,
 				1852220A190259D200FE3FAB /* HotBoardViewController.xib in Resources */,
-				1852223E1902BA6100FE3FAB /* Default.png in Resources */,
 				18824FF2190020AF00C296B4 /* main2_msg.png in Resources */,
 				18CBF62E18F033AE0036C03B /* Balloon.png in Resources */,
 				18A49B8119054F42008A1650 /* new-blue.png in Resources */,
 				18A9223F18F138F7002D9EAB /* PostTopicViewController.xib in Resources */,
 				180FC00E1908016E00F92BE0 /* 12.jpeg in Resources */,
 				18F04E7A18F2D638007E9373 /* BoardTopicCell.xib in Resources */,
-				1852223D1902BA6100FE3FAB /* Default@2x.png in Resources */,
+				18889C83192CD51F0054A851 /* Icon-1024.png in Resources */,
+				18BD6CDC192A5263007D1E85 /* 李翔80-1.png in Resources */,
 				18B2459318FBF5CA00AD86F4 /* select.png in Resources */,
 				185222341902B7F900FE3FAB /* 76.png in Resources */,
 				180FC012190802AB00F92BE0 /* 111.jpg in Resources */,
 				18871E921903FBBC00609A71 /* hot1.png in Resources */,
 				18B245AE18FC050900AD86F4 /* reply.png in Resources */,
+				18B4F013192A36120095E8DD /* 120.png in Resources */,
 				18B245A818FBFEBB00AD86F4 /* color_white.png in Resources */,
+				18BD6CDD192A5263007D1E85 /* 李翔120-1.png in Resources */,
 				18CBF57518F021440036C03B /* Images.xcassets in Resources */,
 				18824FE81900081B00C296B4 /* science.png in Resources */,
 				18B245A018FBFD2F00AD86F4 /* blue.png in Resources */,
 				18EB8DEF18FE9E2500A6BCC6 /* t2.png in Resources */,
+				18B4EFE0192A25FE0095E8DD /* Default-568h@2x.png in Resources */,
 				18A9222E18F0F6CC002D9EAB /* UserInfoViewController.xib in Resources */,
 				18871E931903FBBC00609A71 /* hot2.png in Resources */,
 				18824FE018FF70FC00C296B4 /* fasion.png in Resources */,
@@ -1506,6 +1553,7 @@
 				18CBF5D318F0281F0036C03B /* TopCell.xib in Resources */,
 				1899F9A019011910000D0BD1 /* menu_mailbox.png in Resources */,
 				187FFDEC18FA77DE00E5731F /* MJRefresh.bundle in Resources */,
+				18889C7A192CCAE80054A851 /* about.html in Resources */,
 				18824FEA1900082500C296B4 /* society.png in Resources */,
 				18824FF4190020B400C296B4 /* main2_user.png in Resources */,
 				189205CC18F538880023F993 /* red_line_and_shadow@2x.png in Resources */,
@@ -1618,6 +1666,7 @@
 				1852222619029FFE00FE3FAB /* AFSecurityPolicy.m in Sources */,
 				18CBF5C818F0280F0036C03B /* SingleTopicCell.m in Sources */,
 				18CBF5CE18F028160036C03B /* AllSectionTopViewController.m in Sources */,
+				18889C79192CCAE80054A851 /* AboutViewController.m in Sources */,
 				189205CD18F538880023F993 /* SUNSlideSwitchView.m in Sources */,
 				18CBF62818F029190036C03B /* RATreeView+TableViewDelegate.m in Sources */,
 				1830EB7518F43AC800EB59B2 /* NSData+GIF.m in Sources */,
@@ -1699,7 +1748,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 亚宇 黎 (W45S79857Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 亚宇 黎 (W45S79857Y)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1739,7 +1789,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 亚宇 黎 (W45S79857Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 亚宇 黎 (W45S79857Y)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1760,7 +1811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yayu Li (W45S79857Y)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BBS_LIXIANG/BBS_LIXIANG-Prefix.pch";
 				INFOPLIST_FILE = "BBS_LIXIANG/BBS_LIXIANG-Info.plist";
@@ -1774,7 +1825,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yayu Li (W45S79857Y)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BBS_LIXIANG/BBS_LIXIANG-Prefix.pch";
 				INFOPLIST_FILE = "BBS_LIXIANG/BBS_LIXIANG-Info.plist";

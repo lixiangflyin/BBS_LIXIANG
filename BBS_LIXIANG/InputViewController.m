@@ -31,7 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    //[self.view setCenter:CGPointMake(160, 200)];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

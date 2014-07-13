@@ -39,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //iOS7的特性
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
@@ -54,7 +55,7 @@
                                  initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = leftButton;
     
-    self.title = @"虎踞龙盘";
+    self.title = @"虎踞龙蟠";
     self.slideSwitchView.slideSwitchViewDelegate = self;
     
     self.slideSwitchView.tabItemNormalColor = [SUNSlideSwitchView colorFromHexRGB:@"868686"];

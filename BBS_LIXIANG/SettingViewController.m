@@ -11,6 +11,7 @@
 #import "Toolkit.h"
 #import "SDImageCache.h"
 #import "ProgressHUD.h"
+#import "AboutViewController.h"
 
 @interface SettingViewController ()
 
@@ -63,7 +64,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == 0){
-        return 3;
+        return 2;
     }
     if(section == 1){
         return 2;
@@ -116,15 +117,15 @@
                     cell.detailTextLabel.text = @"Version 1.0";
                     break;
                 }
-                case 2:
-                {
-                    cell.textLabel.text = @"开发者";
-                    cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16];
-                    cell.detailTextLabel.font = cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16];
-                    [cell setAccessoryType:UITableViewCellAccessoryNone];
-                    cell.detailTextLabel.text = @"李翔(lixiangflyin@163.com)";
-                    break;
-                }
+//                case 2:
+//                {
+//                    cell.textLabel.text = @"开发者";
+//                    cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16];
+//                    cell.detailTextLabel.font = cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16];
+//                    [cell setAccessoryType:UITableViewCellAccessoryNone];
+//                    cell.detailTextLabel.text = @"李翔(lixiangflyin@163.com)";
+//                    break;
+//                }
                 default:
                     break;
             }
@@ -158,6 +159,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     if(indexPath.section == 1 && indexPath.row == 0){
         [[SDImageCache sharedImageCache] cleanDisk];
         [[SDImageCache sharedImageCache] clearDisk];
@@ -167,6 +170,12 @@
         
         [self deleteFiles];
         [ProgressHUD showSuccess:@"清除成功"];
+    }
+    
+    if(indexPath.section == 1 && indexPath.row == 1){
+        
+        AboutViewController *about =[[AboutViewController alloc]init];
+        [self.navigationController pushViewController:about animated:YES];
     }
 }
 
